@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "./reset.css";
+
+// Angular material
+@import url('https://fonts.googleapis.com/css?family=Material+Icons');
+@import '~@angular/material/core/theming/prebuilt/indigo-pink.css';
+
+// CodeMirror
+@import '~codemirror/lib/codemirror.css';
+
+// App styles
+@import 'app/shared/styles/index';
+
+// @import "../node_modules/bulma/sass/utilities/_all";
+// @import "../node_modules/bulma/sass/base/_all";
+// @import "../node_modules/bulma/sass/grid/columns";
+// @import "../node_modules/bulma/sass/layout/hero";

@@ -1,3 +1,10 @@
-<h1>
-  {{title}}
-</h1>
+<div class="columns fullheight">
+  <app-page-editor class="column content"></app-page-editor>
+  <app-code-editor class="column content"></app-code-editor>
+  <div class="content centered">
+    <button md-fab color="primary" mdTooltip="Run">
+      <md-icon>play_arrow</md-icon>
+    </button>
+  </div>
+  <app-player class="column content"></app-player>
+</div>
