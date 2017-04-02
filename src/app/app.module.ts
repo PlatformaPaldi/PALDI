@@ -1,3 +1,4 @@
+import { StateService } from './core/state.service';
 import { SharedModule } from './shared/shared.module';
 import { CodeEditorModule } from './code-editor/code-editor.module';
 import { PageEditorModule } from './page-editor/page-editor.module';
@@ -22,7 +23,9 @@ import { AppComponent } from './app.component';
     CodeEditorModule,
     PlayerModule
   ],
-  providers: [],
+  providers: [
+    StateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

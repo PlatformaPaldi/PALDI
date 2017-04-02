@@ -1,3 +1,3 @@
-.code-editor {
-  border: 1px solid #eee;
+:host {
+  border: 1px solid #aaa;
 }

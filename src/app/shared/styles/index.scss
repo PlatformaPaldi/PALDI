@@ -1,4 +1,9 @@
 
 @import 'variables';
 @import 'utilities';
-@import 'code-editor';
+
+body {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  overflow-x: hidden;  
+  height: 100%;  
+}

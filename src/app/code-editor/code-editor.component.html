@@ -1,5 +1,10 @@
-<div class="full-container">
-  <div class="full-content code-editor">
-    <textarea #editor></textarea>
+<div class="full-container" #container (window:resize)="height = container.getBoundingClientRect().height">
+  <div class="full-content">
+    <ace-editor #editor
+      [style.height.px]="height || container.getBoundingClientRect().height"
+      [(text)]="code"
+      [mode]="'javascript'"
+      [options]="options">
+    </ace-editor>
   </div>
 </div>

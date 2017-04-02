@@ -1,0 +1,21 @@
+<div>
+  <div #gadgetHolder></div>
+  <div class="controls" [hidden]="!show">
+    <div class="left">
+      <button class="btn-up" md-icon-button (click)="onUp.emit()">
+        <md-icon>keyboard_arrow_up</md-icon>
+      </button>
+      <button class="btn-down" md-icon-button (click)="onDown.emit()">
+        <md-icon>keyboard_arrow_down</md-icon>
+      </button>    
+    </div>
+    <div class="right">
+      <button class="btn-delete" md-icon-button (click)="onDelete.emit()">
+        <md-icon>clear</md-icon>
+      </button>    
+    </div>
+    <div class="down">
+      <div #boardHolder></div>
+    </div>
+  </div>
+</div>

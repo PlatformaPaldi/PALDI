@@ -1,0 +1,66 @@
+$bar-size: 8px;
+$button-size: 40px;
+
+:host {
+  position: relative;
+
+}
+
+.controls {
+  position: absolute;
+  pointer-events: none;
+  top: -$bar-size;
+  left: -$bar-size;
+  right: -$bar-size;
+  bottom: -$bar-size;
+  border: $bar-size solid #aaa;
+  z-index: 2;
+
+  .left {
+    position: absolute;
+    pointer-events: auto;
+    top: -$bar-size;
+    left: -$button-size;
+    width: $button-size;
+
+    .btn-up {
+      border-radius: 0%;
+      background-color: #aaa;
+      border-top-left-radius: 50%;    
+    }
+
+    .btn-down {
+      background-color: #aaa;
+      border-radius: 0%;
+      border-bottom-left-radius: 50%;    
+    }
+  }
+
+  .right {
+    position: absolute;
+    pointer-events: auto;
+    top: -$bar-size;
+    right: -$button-size;
+    width: $button-size;
+
+    .btn-delete {
+      background-color: #aaa;
+      border-top-left-radius: 0%;
+      border-bottom-left-radius: 0%;
+    }
+  }
+
+  .down {
+    position: absolute;
+    pointer-events: auto;
+    top: 100%;
+    left: -$bar-size;
+    right: -$bar-size;
+    background-color: #aaa;
+    padding: $bar-size;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+}
+
+
