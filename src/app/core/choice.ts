@@ -10,7 +10,7 @@ export class Choice extends Gadget {
   options: IOption[] = [];
 
   constructor() {
-    super('choice');
+    super('choice', 'Escolha de uma opção');
   }
 
   add(option: IOption) {

@@ -1,0 +1,9 @@
+.gadget-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll {
+  overflow-y: auto;
+  height: 100%;
+}

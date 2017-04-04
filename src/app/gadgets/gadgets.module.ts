@@ -5,7 +5,9 @@ import { GadgetsComponent } from './gadgets.component';
 import { ChoiceComponent } from './choice/choice.component';
 import { ChoiceBoardComponent } from './choice/choice-board.component';
 import { InputComponent } from './input/input.component';
-import { InputBoardComponent } from "app/gadgets/input/input-board.component";
+import { InputBoardComponent } from "./input/input-board.component";
+import { TextComponent } from './text/text.component';
+import { TextBoardComponent } from "./text/text-board.component";
 
 @NgModule({
   imports: [
@@ -16,13 +18,17 @@ import { InputBoardComponent } from "app/gadgets/input/input-board.component";
     ChoiceBoardComponent,
     ChoiceComponent,
     InputComponent,
-    InputBoardComponent
-  ],
+    InputBoardComponent,
+    TextComponent,
+    TextBoardComponent
+],
   entryComponents: [
     ChoiceComponent,
     ChoiceBoardComponent,
     InputComponent,
-    InputBoardComponent
+    InputBoardComponent,
+    TextComponent,
+    TextBoardComponent
   ],
   providers: [
     GadgetService

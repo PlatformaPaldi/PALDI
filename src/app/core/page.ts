@@ -1,5 +1,6 @@
 import { Choice } from './choice';
 import { Input } from './input';
+import { Text } from './text';
 import { Gadget, GadgetType } from './gadget';
 
 export class Page {
@@ -17,6 +18,9 @@ export class Page {
         break;
       case 'choice':
         this.gadgets.splice(index, 0, new Choice());
+        break;
+      case 'text':
+        this.gadgets.splice(index, 0, new Text());
         break;
     }
   }

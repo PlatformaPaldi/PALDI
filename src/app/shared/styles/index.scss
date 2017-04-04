@@ -7,3 +7,50 @@ body {
   overflow-x: hidden;  
   height: 100%;  
 }
+
+
+// quilljs hack
+
+.ql-container.ql-snow {
+  border: 0 !important;
+}
+
+.ql-font-satisfy {
+  font-family: "Satisfy", cursive;
+}
+.ql-font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+.ql-font-josefin {
+  font-family: "Josefin Sans", sans-serif;
+}
+.ql-font-arvo {
+  font-family: "Arvo", serif;
+}
+.ql-font-macondo {
+  font-family: "Macondo", cursive;
+}
+
+.ql-toolbar .ql-font span[data-value="satisfy"]::before {
+  font-family: "Satisfy";
+  content: "Satisfy" !important;
+}
+
+.ql-toolbar .ql-font span[data-value="roboto"]::before {
+  font-family: "Roboto";
+  content: "Roboto" !important;
+}
+
+.ql-toolbar .ql-font span[data-value="josefin"]::before {
+  font-family: "Josefin Sans";
+  content: "Josefin Sans" !important;
+}
+
+.ql-toolbar .ql-font span[data-value="arvo"]::before {
+  font-family: "Arvo";
+  content: "Arvo" !important;
+}
+.ql-toolbar .ql-font span[data-value="macondo"]::before {
+  font-family: "Macondo";
+  content: "Macondo" !important;
+}

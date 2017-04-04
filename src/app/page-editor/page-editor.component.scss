@@ -1,3 +1,13 @@
+.scroll {
+  overflow-y: auto;
+  padding: 10px 40px;
+  // height: 100%;
+}
+
+.border {
+  border: 1px solid #aaa;
+}
+
 .code-container {
   position: relative;
   width: 100%;
@@ -13,13 +23,14 @@
   left: 0;
 }
 
-.ctrl-hover {
-  border: 1px dashed transparent;
+.ctrl {
+  border-left: 1px dashed #ccc;
+  border-right: 1px dashed #ccc;
 }
 
-.ctrl-hover:hover {
-  border-color: #ccc;
-}
+// .ctrl-hover:hover {
+//   border-color: #ccc;
+// }
 
 .gadget-items {
   display: flex;
@@ -30,6 +41,7 @@
   height: 1px;
   position: relative;
   z-index: 2;
+  border-top: 1px dashed #ccc;
 }
 
 // .active {

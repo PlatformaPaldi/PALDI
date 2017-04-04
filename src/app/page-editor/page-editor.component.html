@@ -1,39 +1,45 @@
 <div class="full-container">
   <div class="full-content">
-    <ui-mobile-frame class="full-height" (window:click)="hide()" >
-      <div class="gadget-items" *ngFor="let gadget of state.page.gadgets; index as i">
-        <div class="add" *ngIf="selected == undefined">
-          <div class="add-button" (click)="showItems(i)">
+      <!--<ui-mobile-frame class="full-height" (window:click)="hide()" >-->
+      <!--</ui-mobile-frame>-->
+      <div class="scroll border" (window:click)="hide()" #scroll [style.height.px]="scroll.offsetParent.getBoundingClientRect().height - 20">
+      <!--<div #scroll [style.height.px]="scroll.offsetParent.getBoundingClientRect().height">-->
+        <div class="gadget-items" *ngFor="let gadget of state.page.gadgets; index as i">
+          <!--<div class="add" *ngIf="selected == undefined">-->
+          <div class="add">
+            <div class="add-button" (click)="showItems(i)">
+              <md-icon>add</md-icon>
+            </div>
+          </div>
+          <app-item-bar
+            class="item-bar"
+            [ngClass]="{ active: itemButtons == i }"
+            (addItem)="add(i, $event)">
+          </app-item-bar>
+          <app-controls class="ctrl"
+            [gadget]="gadget"
+            [edition]="true"
+            [show]="selected == i"
+            (click)="select(i)"
+            (onUp)="swapUp(i)"
+            (onDown)="swapDown(i)"
+            (onDelete)="delete(i)"
+            >
+          </app-controls>
+        </div>
+        <div class="add">
+          <div class="add-button" (click)="showItems(state.page.gadgets.length)">
             <md-icon>add</md-icon>
+          </div>
+          <div class="add-items">
           </div>
         </div>
         <app-item-bar
           class="item-bar"
-          [ngClass]="{ active: itemButtons == i }"
-          (addItem)="add(i, $event)">
+          [ngClass]="{ active: (itemButtons == state.page.gadgets.length || state.page.gadgets.length == 0) }"
+          (addItem)="add(state.page.gadgets.length, $event)">
         </app-item-bar>
-        <app-controls class="ctrl-hover"
-          [gadget]="gadget"
-          [show]="selected == i"
-          (click)="select(i)"
-          (onUp)="swapUp(i)"
-          (onDown)="swapDown(i)"
-          (onDelete)="delete(i)"
-          >
-        </app-controls>
       </div>
-      <div class="add" *ngIf="selected == undefined">
-        <div class="add-button" (click)="showItems(state.page.gadgets.length)">
-          <md-icon>add</md-icon>
-        </div>
-        <div class="add-items">
-        </div>
-      </div>
-      <app-item-bar
-        class="item-bar"
-        [ngClass]="{ active: (itemButtons == state.page.gadgets.length || state.page.gadgets.length == 0) }"
-        (addItem)="add(state.page.gadgets.length, $event)">
-      </app-item-bar>
-    </ui-mobile-frame>
+    <!--</ui-mobile-frame>-->
   </div>
 </div>

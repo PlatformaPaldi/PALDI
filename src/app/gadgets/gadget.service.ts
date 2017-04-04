@@ -5,6 +5,8 @@ import { ChoiceComponent } from './choice/choice.component';
 import { ChoiceBoardComponent } from './choice/choice-board.component';
 import { InputComponent } from './input/input.component';
 import { InputBoardComponent } from "app/gadgets/input/input-board.component";
+import { TextComponent } from './text/text.component';
+import { TextBoardComponent } from "./text/text-board.component";
 
 @Injectable()
 export class GadgetService {
@@ -17,28 +19,34 @@ export class GadgetService {
     let component = container.createComponent(factory);
     component.instance.gadget = gadget;
     component.changeDetectorRef.detectChanges();
+    return component;
   }
 
-  createComponent (gadget: Gadget, componentContainer: ViewContainerRef, boardContainer?: ViewContainerRef) {
-    let component: Type<any>;
-    let board: Type<any>;
+  createComponent (gadget: Gadget, edition: boolean, componentContainer: ViewContainerRef, boardContainer?: ViewContainerRef) {
+    let componentType: Type<any>;
+    let boardType: Type<any>;
 
     switch (gadget.type) {
-      case 'text':   // TODO
+      case 'text':
+        componentType = TextComponent;
+        boardType = TextBoardComponent;
         break;
       case 'choice':
-        component = ChoiceComponent;
-        board = ChoiceBoardComponent;
+        componentType = ChoiceComponent;
+        boardType = ChoiceBoardComponent;
         break;
       case 'input':
-        component = InputComponent;
-        board = InputBoardComponent;
+        componentType = InputComponent;
+        boardType = InputBoardComponent;
         break;
     }
-    this._createComponent(component, componentContainer, gadget);
-    if (boardContainer) {
-      this._createComponent(board, boardContainer, gadget);
+    let component = this._createComponent(componentType, componentContainer, gadget);
+    component.instance.edition = edition;
+    if (edition && boardContainer && boardType) {
+      let board = this._createComponent(boardType, boardContainer, gadget);
+      if (component.instance.setBoard) {
+        component.instance.setBoard(board);
+      }
     }
-
   }
 }

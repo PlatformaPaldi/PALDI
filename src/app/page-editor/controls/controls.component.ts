@@ -12,6 +12,7 @@ import { Gadget } from "app/core/gadget";
 export class ControlsComponent implements OnInit {
   @Input() show: boolean;
   @Input() gadget: Gadget;
+  @Input() edition: boolean = false;
 
   @Output() onUp = new EventEmitter();
   @Output() onDown = new EventEmitter();
@@ -23,11 +24,10 @@ export class ControlsComponent implements OnInit {
   @ViewChild('gadgetHolder', { read: ViewContainerRef })
   gadgetHolder: ViewContainerRef;
   
-
   constructor(private gadgetServ: GadgetService) { }
 
   ngOnInit() {
-    this.gadgetServ.createComponent(this.gadget, this.gadgetHolder, this.boardHolder);
+    this.gadgetServ.createComponent(this.gadget, this.edition, this.gadgetHolder, this.boardHolder);
   }
 
 

@@ -1,5 +1,5 @@
 <div>
-  <div #gadgetHolder></div>
+  <div #gadgetHolder class="gadget-label" [hidden]="!edition">{{ gadget.description }}</div>
   <div class="controls" [hidden]="!show">
     <div class="left">
       <button class="btn-up" md-icon-button (click)="onUp.emit()">

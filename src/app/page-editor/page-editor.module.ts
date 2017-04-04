@@ -21,7 +21,10 @@ import { ItemBarComponent } from './item-bar/item-bar.component';
     PageEditorComponent,
     ControlsComponent,
     ItemBarComponent
-],
-  exports: [PageEditorComponent]
+  ],
+  exports: [
+    PageEditorComponent,
+    ControlsComponent
+  ]
 })
 export class PageEditorModule { }

@@ -6,6 +6,6 @@ export class Input extends Gadget {
   help: string= '';
 
   constructor() {
-    super('input');
+    super('input', 'Entrada de dados');
   }
 }

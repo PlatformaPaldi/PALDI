@@ -2,9 +2,15 @@
 
 @import "./reset.css";
 
-// Angular material
-@import url('https://fonts.googleapis.com/css?family=Material+Icons');
+// Editor fonts and material icons
+@import url('https://fonts.googleapis.com/css?family=Satisfy|Josefin+Sans|Roboto|Arvo|Macondo|Material+Icons');
+
+// Angular material theme
 @import '~@angular/material/core/theming/prebuilt/indigo-pink.css';
+
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css';
+@import '~quill/dist/quill.bubble.css';
 
 // App styles
 @import 'app/shared/styles/index';

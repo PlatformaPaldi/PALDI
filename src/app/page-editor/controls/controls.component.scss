@@ -6,6 +6,14 @@ $button-size: 40px;
 
 }
 
+.gadget-label {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 10px;
+  color: #ccc;
+}
+
 .controls {
   position: absolute;
   pointer-events: none;
@@ -14,7 +22,7 @@ $button-size: 40px;
   right: -$bar-size;
   bottom: -$bar-size;
   border: $bar-size solid #aaa;
-  z-index: 2;
+  z-index: 3;
 
   .left {
     position: absolute;
