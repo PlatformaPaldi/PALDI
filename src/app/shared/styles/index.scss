@@ -9,6 +9,24 @@ body {
 }
 
 
+var {
+  font-family: Courier New, Courier, monospace;
+  font-style: normal;
+  background-color: #ff0;
+  border-radius: 5px;
+  padding: 0 4px;
+}
+
+// .ql-container.ql-snow.player {
+  var.player {
+    font-family: inherit;
+    font-style: inherit;
+    background-color: inherit;
+    border-radius: inherit;
+    padding: inherit;
+  }
+// }
+
 // quilljs hack
 
 .ql-container.ql-snow {

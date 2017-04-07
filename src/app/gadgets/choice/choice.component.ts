@@ -8,7 +8,7 @@ import { Choice } from "app/core/choice";
 })
 export class ChoiceComponent implements OnInit {
   @Input() gadget: Choice;
-  answer: string;
+  // answer: string;
 
   constructor() {
   }

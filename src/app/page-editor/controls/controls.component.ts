@@ -30,6 +30,4 @@ export class ControlsComponent implements OnInit {
     this.gadgetServ.createComponent(this.gadget, this.edition, this.gadgetHolder, this.boardHolder);
   }
 
-
-
 }

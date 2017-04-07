@@ -2,9 +2,9 @@
   <app-page-editor class="column content"></app-page-editor>
   <app-code-editor class="column content"></app-code-editor>
   <div class="content centered">
-    <button md-fab color="primary" mdTooltip="Run">
+    <button md-fab color="primary" mdTooltip="Compila" (click)="player.run()">
       <md-icon>play_arrow</md-icon>
     </button>
   </div>
-  <app-player class="column content"></app-player>
+  <app-player #player class="column content"></app-player>
 </div>

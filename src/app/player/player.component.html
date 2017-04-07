@@ -1,15 +1,10 @@
 <div class="full-container">
   <div class="full-content">
     <ui-mobile-frame class="full-height" >
-        <!--[style.height.px]="scroll.offsetParent.getBoundingClientRect().height"-->
-      <!--<div class="scroll" #scroll [style.height.px]="scroll.offsetParent.getBoundingClientRect().height">-->
       <div class="scroll">
-      <!--<div #scroll
-        ui-scroll [options]="opts"
-        [style.height.px]="height"
-        >-->
+
         <div class="container">
-          <div class="gadget-items" *ngFor="let gadget of state.page.gadgets; index as i">
+          <div class="gadget-items" *ngFor="let gadget of contentState?.page.gadgets; index as i">
             <app-controls
               [gadget]="gadget"
               [show]="false"
@@ -19,6 +14,18 @@
         </div>
 
       </div>
+
+      <app-intervention>
+        <div class="gadget-items" *ngFor="let gadget of interventionState?.page.gadgets; index as i">
+          <app-controls
+            [gadget]="gadget"
+            [show]="false"
+            >
+          </app-controls>
+        </div>
+      </app-intervention>
+
+      <app-next-button (onNext)="nextState()"></app-next-button>
     </ui-mobile-frame>
   </div>
 </div>

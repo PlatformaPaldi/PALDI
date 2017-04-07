@@ -2,9 +2,7 @@ import { Gadget } from './gadget';
 
 export class Text extends Gadget {
 
-  content: string;
-
-  constructor() {
+  constructor(public content?: string) {
     super('text', 'Texto formatado');
   }
 }

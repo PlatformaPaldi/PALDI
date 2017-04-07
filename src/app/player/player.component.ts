@@ -1,3 +1,4 @@
+import { InterventionComponent } from './intervention/intervention.component';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { StateService } from 'app/core/state.service';
 import { State } from "app/core/state";
@@ -10,37 +11,37 @@ import { ISlimScrollOptions } from 'ng2-slimscroll';
 })
 export class PlayerComponent implements OnInit {
   @ViewChild('scroll') scrollRef: ElementRef;
+  @ViewChild(InterventionComponent) intervention: InterventionComponent;
+
   height: number;
   width: number;
 
-  state: State;
-  opts: ISlimScrollOptions;
+  contentState: State;
+  interventionState: State;
 
   constructor(private stateServ: StateService) {
-    this.state = this.stateServ.current;
+    stateServ.current$.subscribe(state => {
+      if (state.type == 'content') {
+        this.contentState = state;
+        this.intervention.hide();
+      }
+      else if (state.type == 'intervention') {
+        this.interventionState = state;
+        this.intervention.show();
+      }
+    });
   }
 
   ngOnInit() {
-    this.opts = {
-      // position: 'right',
-      // barOpacity: '0.3',
-      // barWidth: '6',
-      // barMargin: '0 -10px',
-      // gridMargin: '0 -10px'
-    };
-    this.resize();
   }
 
-  resize() {
-    // let scrollElm: HTMLElement = this.scrollRef.nativeElement;
-    // let parent: HTMLElement = scrollElm.parentElement;
-    // let height = parent.offsetParent.getBoundingClientRect().height;
-    // this.width = scrollElm.offsetParent.getBoundingClientRect().width;
-    // this.height = height;
-    // this.height = scrollElm.offsetParent.getBoundingClientRect().height;
-    // this.width = scrollElm.offsetParent.getBoundingClientRect().width;
-    // console.log(this.height, this.width);
-    
+  nextState() {
+    this.stateServ.next();
+  }
+
+  run() {
+    console.log('run');
+    State.updateBehaviors();
   }
 
 }

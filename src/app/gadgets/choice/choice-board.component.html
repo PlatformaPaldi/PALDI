@@ -20,7 +20,7 @@
     </div>
     <div class="text">
       <md-input-container class="full-width" floatPlaceholder="always">
-        <input mdInput placeholder="Texto da opção" [(ngModel)]="_newText" (blur)="onBlur()" (keyup)="onKeyPress($event)">
+        <input mdInput placeholder="Texto da opção" [(ngModel)]="_newText" (blur)="onBlur()" (keydown)="onKeyDown($event)" (keyup)="onKeyPress($event)">
       </md-input-container>      
     </div>
   </div>

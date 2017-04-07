@@ -4,7 +4,49 @@ import { Text } from './text';
 import { Gadget, GadgetType } from './gadget';
 
 export class Page {
-  gadgets: Gadget[] = [];
+  gadgets: Gadget[];
+
+  constructor(gadgets: Gadget[] = []) {
+    this.gadgets = [];
+    for (let gadget of gadgets) {
+      switch (gadget.type) {
+        case 'text':
+          let text = gadget as Text;
+          this.gadgets.push(new Text(text.content));
+          break;
+        case 'choice':
+          let choice = gadget as Choice;
+          this.gadgets.push(new Choice(choice.options));
+          break;
+        case 'input':
+          let input = gadget as Input;
+          this.gadgets.push(new Input(input.value, input.description, input.help));
+          break;
+      }
+    }
+  }
+
+  get(id: number | GadgetType): Gadget | Gadget[] {
+    if (typeof id == 'number') {
+      // consider id as an index
+      if (id >= 0 && id < this.gadgets.length) {
+        return this.gadgets[id];
+      }
+      else {
+        return undefined;
+      }
+    }
+    else {
+      // consider id as a string (GadgetType)
+      let gadgets = this.gadgets.filter(gadget => gadget.type == id);
+      if (gadgets.length == 1) {
+        return gadgets[0];
+      }
+      else  {
+        return gadgets;
+      }
+    }
+  }
 
   /**
    * Insert a new gadget in a given position of the page.

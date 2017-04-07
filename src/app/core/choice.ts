@@ -6,10 +6,10 @@ interface IOption {
 }
 
 export class Choice extends Gadget {
-  answer: string = '';
-  options: IOption[] = [];
 
-  constructor() {
+  public answer: string;
+
+  constructor(public options: IOption[] = []) {
     super('choice', 'Escolha de uma opção');
   }
 
@@ -23,5 +23,9 @@ export class Choice extends Gadget {
 
   get(index: number) {
     return this.options[index];
+  }
+
+  get isAnswered(): boolean {
+    return this.answer != undefined && this.answer.length > 0;
   }
 }

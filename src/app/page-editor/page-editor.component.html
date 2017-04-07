@@ -4,7 +4,7 @@
       <!--</ui-mobile-frame>-->
       <div class="scroll border" (window:click)="hide()" #scroll [style.height.px]="scroll.offsetParent.getBoundingClientRect().height - 20">
       <!--<div #scroll [style.height.px]="scroll.offsetParent.getBoundingClientRect().height">-->
-        <div class="gadget-items" *ngFor="let gadget of state.page.gadgets; index as i">
+        <div class="gadget-items" *ngFor="let gadget of state?.page.gadgets; index as i">
           <!--<div class="add" *ngIf="selected == undefined">-->
           <div class="add">
             <div class="add-button" (click)="showItems(i)">
@@ -28,7 +28,7 @@
           </app-controls>
         </div>
         <div class="add">
-          <div class="add-button" (click)="showItems(state.page.gadgets.length)">
+          <div class="add-button" (click)="showItems(state?.page.gadgets.length)">
             <md-icon>add</md-icon>
           </div>
           <div class="add-items">
@@ -36,8 +36,8 @@
         </div>
         <app-item-bar
           class="item-bar"
-          [ngClass]="{ active: (itemButtons == state.page.gadgets.length || state.page.gadgets.length == 0) }"
-          (addItem)="add(state.page.gadgets.length, $event)">
+          [ngClass]="{ active: (itemButtons == state?.page.gadgets.length || state?.page.gadgets.length == 0) }"
+          (addItem)="add(state?.page.gadgets.length, $event)">
         </app-item-bar>
       </div>
     <!--</ui-mobile-frame>-->

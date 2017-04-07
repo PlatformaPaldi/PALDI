@@ -2,7 +2,7 @@
   <div class="full-content">
     <ace-editor #editor
       [style.height.px]="height || container.getBoundingClientRect().height"
-      [(text)]="code"
+      [(text)]="state?.behavior.code"
       [mode]="'javascript'"
       [options]="options">
     </ace-editor>

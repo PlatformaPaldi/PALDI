@@ -47,7 +47,20 @@ export class ChoiceBoardComponent {
     }
   }
 
+  onKeyDown(event: KeyboardEvent) {
+    console.log('onKeyDown');
+    console.log(this._newValue);
+    console.log(this._newText);
+    
+  }
+
   onKeyPress(event: KeyboardEvent) {
+    console.log('onKeyUp');
+    // console.log(event.key);
+    console.log(this._newValue);
+    console.log(this._newText);
+    
+
     if ((event.key == 'Enter' || event.key == 'Tab') &&
         (this._newValue != undefined && this._newValue.length > 0) &&
         (this._newText != undefined && this._newText.length > 0)) {

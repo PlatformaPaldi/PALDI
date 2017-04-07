@@ -1,11 +1,11 @@
 import { Gadget } from './gadget';
 
 export class Input extends Gadget {
-  value: string= '';
-  description: string= '';
-  help: string= '';
+  // value: string= '';
+  // description: string= '';
+  // help: string= '';
 
-  constructor() {
+  constructor(public value = '', public description = '', public help = '') {
     super('input', 'Entrada de dados');
   }
 }

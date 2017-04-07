@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "type": "content",
+    "label": "s0",
+    "page": {
+      "gadgets": [
+        {
+          "type": "text",
+          "content": "<h1><span class=\"ql-font-macondo\">Instruções iniciais</span></h1><p><br></p><p>Nesse teste, há 3 estados: s0, s1 e s2. Esse é o estado s0.</p><p><br></p><p>Cada estado possui uma página, na qual há elementos de interação (como este texto), e um código, que define o comportamento do estado.</p><p><br></p><p>É possível criar novos elementos na página e alterar o código do estado. Porém, para as alterações no código terem efeito, é necessário clicar no botão de \"compilação\" (ícone de play).</p><p><br></p><p>Clique no botão 'Next' (ícone de seta à direita no smartphone) para ter mais informações sobre as possíveis alterações do código.</p>"
+        }
+      ]
+    },
+    "outedges": [
+      { "label": "s1", "to": "s1" }
+    ],
+    "behavior": {
+      "code": "// Quando o usuário-leitor clicar no botão 'next',\n// o livro irá ao próximo estado (independente de qual seja)\n\nfunction onNext() {\n  state.next();\n}"
+    }
+  },
+  {
+    "id": 2,
+    "type": "content",
+    "label": "s1",
+    "page": {
+      "gadgets": [
+        {
+          "type": "text",
+          "content": "<h1><span class=\"ql-font-macondo\">Alterações sobre o código</span></h1><p><br></p><p>Para definir o comportamento de um estado, pode-se definir duas funções, onEnter() e onNext(), que definem respectivamente as operações a serem realizadas no início do estado e antes de sair do estado.</p><p><br></p><p>O acesso às operações e dados do estado é realizado através da variável 'state'.</p><p><br></p><p>Pode-se então pedir para o próximo estado, usando 'state.next()' ou consultar os elementos de interação usando 'state.get()'.</p><p><br></p><p>Clique no botão 'Next' para ver um exemplo de acesso aos elementos de interação.</p>"
+        }
+      ]
+    },
+    "outedges": [
+      { "label": "s2", "to": "s2" }
+    ],
+    "behavior": {
+      "code": "// Quando o usuário-leitor clicar no botão 'next',\n// o livro irá ao próximo estado (independente de qual seja)\n\nfunction onNext() {\n  state.next();\n}"
+    }
+  },
+  {
+    "id": 3,
+    "type": "intervention",
+    "label": "s2",
+    "page": {
+      "gadgets": [
+        {
+          "type": "text",
+          "content": "Esse estado é uma intervenção, na qual o leitor poderá interagir e não afetar o texto principal.<br>Selecione uma das opções a seguir:"
+        },
+        {
+          "type": "choice",
+          "options": [
+            { "value": "s0", "text": "Voltar para o estado s0." },
+            { "value": "s1", "text": "Voltar para o estado s1." }
+          ]
+        }
+      ]
+    },
+    "outedges": [
+      { "label": "s0",  "to": "s0" },
+      { "label": "s1",  "to": "s1" }
+    ],
+    "behavior": {
+      "code": "// O presente estado possui um elemento 'choice'. Assim,\n// quando o usuário clicar no botão 'next', ele deve ir\n// para a escolha selecionada. Se o usuário não tiver\n// escolhido, nada será feito.\n\nfunction onNext() {\n  let choice = state.page.get('choice');\n  if (choice.isAnswered) {\n    return state.next(choice.answer);\n  }\n}"
+    }
+  }
+]
