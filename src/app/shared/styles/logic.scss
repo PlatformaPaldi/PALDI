@@ -1,0 +1,29 @@
+
+// .logic {
+//   display: flex;
+//   flex-grow: 1;
+//   flex-direction: column;
+
+//   md-tab-group {
+//     flex-grow: 1;
+//   }
+
+//   .mat-tab-body-wrapper, .mat-tab-body-content {
+//     flex-grow: 1;
+//   }
+
+//   .mat-tab-body {
+//     display: flex !important;
+//   }
+
+//   .mat-tab-body-content {
+//     display: flex;
+//   }
+// }
+
+.logic {
+  &, md-tab-group, .mat-tab-body-wrapper, .mat-tab-body-content {
+    height: 100%;
+
+  }
+}

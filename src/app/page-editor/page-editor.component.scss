@@ -5,7 +5,9 @@
 }
 
 .border {
-  border: 1px solid #aaa;
+  // border: 1px solid #aaa;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;  
 }
 
 .code-container {

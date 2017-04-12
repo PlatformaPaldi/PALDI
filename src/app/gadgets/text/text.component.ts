@@ -1,3 +1,4 @@
+import { StateService } from 'app/core/state.service';
 import { State } from 'app/core/state';
 import { Text } from 'app/core/text';
 import { Gadget } from 'app/core/gadget';
@@ -29,7 +30,13 @@ export class TextComponent implements OnInit, AfterViewInit {
 
   private quill: Quill.Quill;
 
-  constructor() { }
+  constructor(stateServ: StateService) {
+    stateServ.current$.subscribe(() => {
+      console.log('got here');
+      let withVar = this.contentToVar(this.gadget.content);
+      this.gadget.content = this.varToContent(withVar);
+    });
+  }
 
   ngOnInit() {
     // let toolbar = [
@@ -53,7 +60,6 @@ export class TextComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log('ngAfterViewInit', this.editor);
     if (!this.edition) {
       this.gadget.content = this.varToContent(this.gadget.content);
     }
@@ -77,10 +83,9 @@ export class TextComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private varToContent(html: string) {
+  private varToContent(html: string = '') {
     var varRegex = /<var>[\w]+<\/var>/g;
     var matches = html.match(varRegex);
-    console.log(matches);
     
     if (matches) {
       var vars = matches.map(match => match.substring(5, match.length - 6));

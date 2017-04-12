@@ -2,10 +2,14 @@ import { Gadget } from './gadget';
 
 export class Input extends Gadget {
   // value: string= '';
-  // description: string= '';
+  // info: string= '';
   // help: string= '';
 
-  constructor(public value = '', public description = '', public help = '') {
+  constructor(public value = '', public info = '', public help = '') {
     super('input', 'Entrada de dados');
+  }
+
+  get isAnswered(): boolean {
+    return this.value != undefined && this.value.length > 0;
   }
 }

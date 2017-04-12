@@ -7,7 +7,7 @@
       "gadgets": [
         {
           "type": "text",
-          "content": "<h1><span class=\"ql-font-macondo\">Instruções iniciais</span></h1><p><br></p><p>Nesse teste, há 3 estados: s0, s1 e s2. Esse é o estado s0.</p><p><br></p><p>Cada estado possui uma página, na qual há elementos de interação (como este texto), e um código, que define o comportamento do estado.</p><p><br></p><p>É possível criar novos elementos na página e alterar o código do estado. Porém, para as alterações no código terem efeito, é necessário clicar no botão de \"compilação\" (ícone de play).</p><p><br></p><p>Clique no botão 'Next' (ícone de seta à direita no smartphone) para ter mais informações sobre as possíveis alterações do código.</p>"
+          "content": "<h1><span class=\"ql-font-macondo\">Instruções iniciais</span></h1><p><br></p><p><span class=\"ql-size-large\">Nesse teste, há 4 estados: s0, s1 s2 e s3. Esse é o estado inicial, s0.</span></p><p><br></p><p><span class=\"ql-size-large\">Cada estado possui uma página, na qual há elementos de interação (como este texto), e um código, que define o comportamento do estado.</span></p><p><br></p><p><span class=\"ql-size-large\">É possível criar novos elementos na página e alterar o código do estado. Porém, para as alterações no código terem efeito, é necessário clicar no botão de 'compilação' (ícone de play).</span></p><p><br></p><p><span class=\"ql-size-large\">Mas antes de continuarmos, preciso saber quem é você.</span></p>"
         }
       ]
     },
@@ -20,38 +20,64 @@
   },
   {
     "id": 2,
-    "type": "content",
+    "type": "intervention",
     "label": "s1",
     "page": {
       "gadgets": [
         {
           "type": "text",
-          "content": "<h1><span class=\"ql-font-macondo\">Alterações sobre o código</span></h1><p><br></p><p>Para definir o comportamento de um estado, pode-se definir duas funções, onEnter() e onNext(), que definem respectivamente as operações a serem realizadas no início do estado e antes de sair do estado.</p><p><br></p><p>O acesso às operações e dados do estado é realizado através da variável 'state'.</p><p><br></p><p>Pode-se então pedir para o próximo estado, usando 'state.next()' ou consultar os elementos de interação usando 'state.get()'.</p><p><br></p><p>Clique no botão 'Next' para ver um exemplo de acesso aos elementos de interação.</p>"
+          "content": "<p><span class=\"ql-size-large\">Qual o seu nome?</p>"
+        },
+        {
+          "type": "input",
+          "info": "Nome"
         }
       ]
     },
     "outedges": [
-      { "label": "s2", "to": "s2" }
+      {
+        "label": "s2",
+        "to": "s2"
+      }
+    ],
+    "behavior": {
+      "code": "// Quando o usuário digitar o nome, ele será\n// armazenado na variável global 'name'.\n// Assim, poderá ser utilizado em outros\n// estados.\n\nfunction onNext() {\n  var input = state.page.get('input');\n  if (input.isAnswered) {\n    globals.name = input.value;\n    return state.next();\n  }\n}"
+    }
+  },
+  {
+    "id": 3,
+    "type": "content",
+    "label": "s2",
+    "page": {
+      "gadgets": [
+        {
+          "type": "text",
+          "content": "<h1><span class=\"ql-font-macondo\">Variáveis</span></h1><p><br></p><p><span class=\"ql-size-large\">Olá <var>name</var>,</span></p><p><br></p><p><span class=\"ql-size-large\">Um texto pode ter marcações que definem onde valores de variáveis serão inseridas. O presente texto, por exemplo, irá substituir </span><strong class=\"ql-size-large\">name</strong><span class=\"ql-size-large\"> pelo valor inserido na intervenção anterior.</span></p><p><br></p><p><span class=\"ql-size-large\">Para criar uma marcação de variável no texto, clique no botão 'V' da barra de ferramentas e digite o nome da variável desejada.</span></p><p><br></p><p><span class=\"ql-size-large\">Novamente, pode ir para o próximo estado clicando no botão 'next'.</span></p>"
+        }
+      ]
+    },
+    "outedges": [
+      { "label": "s3", "to": "s3" }
     ],
     "behavior": {
       "code": "// Quando o usuário-leitor clicar no botão 'next',\n// o livro irá ao próximo estado (independente de qual seja)\n\nfunction onNext() {\n  state.next();\n}"
     }
   },
   {
-    "id": 3,
+    "id": 4,
     "type": "intervention",
-    "label": "s2",
+    "label": "s3",
     "page": {
       "gadgets": [
         {
           "type": "text",
-          "content": "Esse estado é uma intervenção, na qual o leitor poderá interagir e não afetar o texto principal.<br>Selecione uma das opções a seguir:"
+          "content": "<p><span class=\"ql-size-large\">Agora, diga-me o que deseja fazer.</span></p>"
         },
         {
           "type": "choice",
           "options": [
-            { "value": "s0", "text": "Voltar para o estado s0." },
-            { "value": "s1", "text": "Voltar para o estado s1." }
+            { "value": "s0", "text": "Voltar para o estado inicial." },
+            { "value": "s1", "text": "Digitar um novo nome." }
           ]
         }
       ]
@@ -61,7 +87,7 @@
       { "label": "s1",  "to": "s1" }
     ],
     "behavior": {
-      "code": "// O presente estado possui um elemento 'choice'. Assim,\n// quando o usuário clicar no botão 'next', ele deve ir\n// para a escolha selecionada. Se o usuário não tiver\n// escolhido, nada será feito.\n\nfunction onNext() {\n  let choice = state.page.get('choice');\n  if (choice.isAnswered) {\n    return state.next(choice.answer);\n  }\n}"
+      "code": "// O presente estado possui um elemento 'choice'. Assim,\n// quando o usuário clicar no botão 'next', ele deve ir\n// para a escolha selecionada. Se o usuário não tiver\n// escolhido, nada será feito.\n\nfunction onNext() {\n  var choice = state.page.get('choice');\n  if (choice.isAnswered) {\n    return state.next(choice.answer);\n  }\n}"
     }
   }
 ]

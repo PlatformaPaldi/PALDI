@@ -1,3 +1,5 @@
+@import 'src/app/shared/styles/theme';
+
 $bar-size: 8px;
 $button-size: 40px;
 
@@ -21,8 +23,12 @@ $button-size: 40px;
   left: -$bar-size;
   right: -$bar-size;
   bottom: -$bar-size;
-  border: $bar-size solid #aaa;
+  border: $bar-size solid $purple-light;
   z-index: 3;
+
+  .bg {
+    background-color: $purple-light;
+  }
 
   .left {
     position: absolute;
@@ -33,12 +39,10 @@ $button-size: 40px;
 
     .btn-up {
       border-radius: 0%;
-      background-color: #aaa;
       border-top-left-radius: 50%;    
     }
 
     .btn-down {
-      background-color: #aaa;
       border-radius: 0%;
       border-bottom-left-radius: 50%;    
     }
@@ -52,7 +56,6 @@ $button-size: 40px;
     width: $button-size;
 
     .btn-delete {
-      background-color: #aaa;
       border-top-left-radius: 0%;
       border-bottom-left-radius: 0%;
     }
@@ -64,7 +67,6 @@ $button-size: 40px;
     top: 100%;
     left: -$bar-size;
     right: -$bar-size;
-    background-color: #aaa;
     padding: $bar-size;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;

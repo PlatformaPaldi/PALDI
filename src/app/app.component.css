@@ -1,3 +1,16 @@
+
+.sequence-pane {
+  position: relative;
+}
+
+.play-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 5;
+}
+
+
 .fullheight {
   min-height: 100vh;
 }
@@ -20,9 +33,21 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  margin: 25px;
+  /*margin: 25px;*/
 }
 
 .centered {
   justify-content: center;
+}
+
+.code-button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 5;
+}
+
+
+.main-container {
+  display: flex;
 }

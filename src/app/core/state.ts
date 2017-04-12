@@ -11,6 +11,7 @@ export interface IOutEdge {
 }
 
 export interface IBehavior {
+  type: 'block' | 'code';
   code: string;
   onEnter?: Function;
   onNext?: Function;
@@ -43,6 +44,7 @@ export class State implements IState {
   page: Page = new Page();
   outedges: IOutEdge[] = [];
   behavior: IBehavior = {
+    type: 'block',
     code: '',
     onEnter: doNothing,
     onNext: doNothing
@@ -93,6 +95,7 @@ export class State implements IState {
     if (nextState) {
       this._next.next(nextState);
       nextState.behavior.onEnter();
+      nextState.page.update();
     }
     else {
       // TODO send error: there is no outedge with the given 'to' label
@@ -107,5 +110,9 @@ export class State implements IState {
     for(let state of State._states) {
       state.updateBehavior();
     }
+  }
+
+  static getStates(): string[] {
+    return State._states.map(s => s.label);
   }
 }

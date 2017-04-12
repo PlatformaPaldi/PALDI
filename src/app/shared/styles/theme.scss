@@ -1,0 +1,33 @@
+@import '~@angular/material/core/theming/all-theme';
+
+@include mat-core();
+
+// indigo
+$indigo-dark:   #303F9F;
+$indigo:        #3F51B5;
+$indigo-light:  #C5CAE9;
+$accent-color:         #536DFE;
+
+// orange
+$orange-dark:   #E64A19;
+$orange:        #ff7f00;
+$orange-light:  #ff9933;
+
+// purple
+$purple-dark:   #512DA8;
+$purple:        #673AB7;
+$purple-light:  #9e7ea5;
+
+// green
+$green-dark:   #388E3C;
+$green:        #4CAF50;
+$green-light:  #C8E6C9;
+
+
+$primary: mat-palette($mat-indigo);
+$accent: mat-palette($mat-green);
+$warn: mat-palette($mat-red, 600);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);

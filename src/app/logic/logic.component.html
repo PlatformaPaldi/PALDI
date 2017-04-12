@@ -1,0 +1,31 @@
+<!--<ui-pane>
+  <ui-pane-title>
+    <span>Lógica</span>
+    <ui-pane-tools>
+      <button md-icon-button>
+        <md-icon>developer_mode</md-icon>
+      </button>
+    </ui-pane-tools>
+  </ui-pane-title>
+  <ui-pane-content>-->
+  <!--<div class="logic">-->
+  <div class="logic">
+    <md-tab-group (selectedIndexChange)="indexChange($event)">
+      <md-tab>
+        <template md-tab-label>
+          Bloco
+          <md-icon *ngIf="state?.behavior.type === 'block'">check</md-icon>
+        </template>
+        <app-block-editor></app-block-editor>
+      </md-tab>
+      <md-tab>
+        <template md-tab-label>
+          Código
+          <md-icon *ngIf="state?.behavior.type === 'code'">check</md-icon>
+        </template>
+        <app-code-editor></app-code-editor>
+      </md-tab>
+    </md-tab-group>
+  </div>
+  <!--</ui-pane-content>
+</ui-pane>-->

@@ -20,9 +20,15 @@ export class Page {
           break;
         case 'input':
           let input = gadget as Input;
-          this.gadgets.push(new Input(input.value, input.description, input.help));
+          this.gadgets.push(new Input(input.value, input.info, input.help));
           break;
       }
+    }
+  }
+
+  update() {
+    for(let gadget of this.gadgets) {
+      gadget.update();
     }
   }
 

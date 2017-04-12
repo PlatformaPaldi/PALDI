@@ -64,4 +64,15 @@ export class StateService {
     return this._currentState;
   }
 
+  changeTo(stateLabel: string) {
+    let state = State.getStateByLabel(stateLabel);
+    if (state) {
+      this.changeState(state);
+    }
+  }
+
+  getStates(): string[] {
+    return State.getStates();
+  }
+
 }

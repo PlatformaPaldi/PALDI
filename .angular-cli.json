@@ -19,9 +19,11 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "assets/droplet/droplet.css"
       ],
       "scripts": [
+        "assets/droplet/droplet-full.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
