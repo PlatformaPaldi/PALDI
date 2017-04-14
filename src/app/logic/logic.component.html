@@ -10,7 +10,7 @@
   <ui-pane-content>-->
   <!--<div class="logic">-->
 
-<button class="toggle" md-mini-fab (click)="selected = (selected + 1) % 2" mdTooltip="Altera o modo de programação">
+<button class="toggle" md-mini-fab (click)="toogleCodeMode()" [mdTooltip]="tootipMsg[selected]">
   <md-icon *ngIf="selected == 0">subject</md-icon>
   <md-icon *ngIf="selected == 1">extension</md-icon>
 </button>
@@ -29,7 +29,7 @@
           Código
           <md-icon *ngIf="state?.behavior.type === 'code'">check</md-icon>
         </template>
-        <app-code-editor></app-code-editor>
+        <app-code-editor [code]="state?.behavior.code" ></app-code-editor>
       </md-tab>
     </md-tab-group>
   </div>

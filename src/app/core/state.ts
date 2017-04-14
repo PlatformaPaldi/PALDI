@@ -69,7 +69,7 @@ export class State implements IState {
     State._idCount++;
   }
 
-  private updateBehavior() {
+  updateBehavior() {
     if (this.behavior.type == 'block') {
       if (this.behavior.block != undefined && this.behavior.block.length > 1) {
         let workspace = new Blockly.Workspace();

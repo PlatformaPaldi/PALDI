@@ -1,7 +1,8 @@
+import { CodeEditorComponent } from './code-editor/code-editor.component';
 import { State } from 'app/core/state';
 import { StateService } from 'app/core/state.service';
 import { BlockEditorComponent } from './block-editor/block-editor.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-logic',
@@ -9,19 +10,29 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./logic.component.scss']
 })
 export class LogicComponent implements OnInit {
+  @ViewChild(CodeEditorComponent) codeEditor: CodeEditorComponent;
   state: State;
-  selected = 0;
+  selected: number;
 
-  constructor(private stateServ: StateService) {
-    stateServ.current$.subscribe(state => setTimeout(_ => this.state = state));
+  private tootipMsg: string[] = [
+    'Altera para programação textual',
+    'Altera para programação em blocos'
+  ];
+
+  constructor(private stateServ: StateService, private changeDetector: ChangeDetectorRef) {
+    this.selected = 0;
+    stateServ.current$.subscribe(state => {
+      this.state = state;
+    });
   }
 
   ngOnInit() {
   }
 
-  indexChange(e) {
-    if (e == 1) { // second in the order (code)
+  toogleCodeMode() {
+    this.selected = (this.selected + 1) % 2;
+    if (this.selected == 1) {
+      this.codeEditor.focus();
     }
   }
-
 }

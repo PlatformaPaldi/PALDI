@@ -37,13 +37,19 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
     readOnly: true
   };
 
-  constructor(private stateServ: StateService) {
-    stateServ.current$.subscribe(state => setTimeout(_ => {
-      // state.updateBehavior();  // update onEnter() and onNext() before changing the state
-      this.state = state;
-      // this.droplet.setValue(this.state.behavior.code);
-    }));
+  constructor() {
   }
+
+  focus() {
+    this.editor.getEditor().clearSelection();
+    this.editor.getEditor().focus();
+  }
+
+  // constructor(private stateServ: StateService) {
+    // stateServ.current$.subscribe(state => setTimeout(_ => {
+    //   this.state = state;
+    // }));
+  // }
 
 /*
 Funções usadas com o droplet

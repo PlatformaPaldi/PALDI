@@ -5,7 +5,7 @@
   <!--<div class="full-content">-->
     <ace-editor #editor
       [style.height.px]="height || container.getBoundingClientRect().height"
-      [text]="state?.behavior.code"
+      [text]="_code"
       [mode]="'javascript'"
       [options]="options">
     </ace-editor>
