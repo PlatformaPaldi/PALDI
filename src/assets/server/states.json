@@ -7,7 +7,7 @@
       "gadgets": [
         {
           "type": "text",
-          "content": "<h1><span class=\"ql-font-macondo\">Instruções iniciais</span></h1><p><br></p><p><span class=\"ql-size-large\">Nesse teste, há 4 estados: s0, s1 s2 e s3. Esse é o estado inicial, s0.</span></p><p><br></p><p><span class=\"ql-size-large\">Cada estado possui uma página, na qual há elementos de interação (como este texto), e um código, que define o comportamento do estado.</span></p><p><br></p><p><span class=\"ql-size-large\">É possível criar novos elementos na página e alterar o código do estado. Porém, para as alterações no código terem efeito, é necessário clicar no botão de 'compilação' (ícone de play).</span></p><p><br></p><p><span class=\"ql-size-large\">Mas antes de continuarmos, preciso saber quem é você.</span></p>"
+          "content": "<h1><span class=\"ql-font-macondo\">Instruções iniciais</span></h1><p><br></p><p>Nesse teste, há 4 estados: s0, s1 s2 e s3. Esse é o estado inicial, s0.</p><p><br></p><p>Cada estado possui uma página, na qual há elementos de interação (como este texto), e um código, que define o comportamento do estado.</p><p><br></p><p>É possível criar novos elementos na página e alterar o código do estado. Porém, para as alterações no código terem efeito, é necessário clicar no botão de 'compilação' (ícone de play).</p><p><br></p><p>Mas antes de continuarmos, preciso saber quem é você.</p>"
         }
       ]
     },
@@ -15,7 +15,8 @@
       { "label": "s1", "to": "s1" }
     ],
     "behavior": {
-      "code": "// Quando o usuário-leitor clicar no botão 'next',\n// o livro irá ao próximo estado (independente de qual seja)\n\nfunction onNext() {\n  state.next();\n}"
+      "type": "block",
+      "block": "<xml><block type=\"onnext\" x=\"15\" y=\"38\"><statement name=\"COMMANDS\"><block type=\"nextpage\"></block></statement></block></xml>"
     }
   },
   {
@@ -26,7 +27,7 @@
       "gadgets": [
         {
           "type": "text",
-          "content": "<p><span class=\"ql-size-large\">Qual o seu nome?</p>"
+          "content": "<p>Qual o seu nome?</p>"
         },
         {
           "type": "input",
@@ -41,7 +42,8 @@
       }
     ],
     "behavior": {
-      "code": "// Quando o usuário digitar o nome, ele será\n// armazenado na variável global 'name'.\n// Assim, poderá ser utilizado em outros\n// estados.\n\nfunction onNext() {\n  var input = state.page.get('input');\n  if (input.isAnswered) {\n    globals.name = input.value;\n    return state.next();\n  }\n}"
+      "type": "block",
+      "block": "<xml><block type=\"onnext\" x=\"33\" y=\"63\"><statement name=\"COMMANDS\"><block type=\"variables_set\"><field name=\"VAR\">name</field><value name=\"VALUE\"><block type=\"getgadgetvalue\"><field name=\"GADGET_TYPE\">input</field></block></value><next><block type=\"nextpage\"></block></next></block></statement></block></xml>"
     }
   },
   {
@@ -52,7 +54,7 @@
       "gadgets": [
         {
           "type": "text",
-          "content": "<h1><span class=\"ql-font-macondo\">Variáveis</span></h1><p><br></p><p><span class=\"ql-size-large\">Olá <var>name</var>,</span></p><p><br></p><p><span class=\"ql-size-large\">Um texto pode ter marcações que definem onde valores de variáveis serão inseridas. O presente texto, por exemplo, irá substituir </span><strong class=\"ql-size-large\">name</strong><span class=\"ql-size-large\"> pelo valor inserido na intervenção anterior.</span></p><p><br></p><p><span class=\"ql-size-large\">Para criar uma marcação de variável no texto, clique no botão 'V' da barra de ferramentas e digite o nome da variável desejada.</span></p><p><br></p><p><span class=\"ql-size-large\">Novamente, pode ir para o próximo estado clicando no botão 'next'.</span></p>"
+          "content": "<h1><span class=\"ql-font-macondo\">Variáveis</span></h1><p><br></p><p>Olá <var>name</var>,</p><p><br></p><p>Um texto pode ter marcações que definem onde valores de variáveis serão inseridas. O presente texto, por exemplo, irá substituir <strong class=\"ql-size-large\">name</strong> pelo valor inserido na intervenção anterior.</p><p><br></p><p>Para criar uma marcação de variável no texto, clique no botão 'V' da barra de ferramentas e digite o nome da variável desejada.</p><p><br></p><p>Novamente, pode ir para o próximo estado clicando no botão 'next'.</p>"
         }
       ]
     },
@@ -60,7 +62,8 @@
       { "label": "s3", "to": "s3" }
     ],
     "behavior": {
-      "code": "// Quando o usuário-leitor clicar no botão 'next',\n// o livro irá ao próximo estado (independente de qual seja)\n\nfunction onNext() {\n  state.next();\n}"
+      "type": "block",
+      "block": "<xml><block type=\"onnext\" x=\"15\" y=\"38\"><statement name=\"COMMANDS\"><block type=\"nextpage\"></block></statement></block></xml>"
     }
   },
   {
@@ -71,7 +74,7 @@
       "gadgets": [
         {
           "type": "text",
-          "content": "<p><span class=\"ql-size-large\">Agora, diga-me o que deseja fazer.</span></p>"
+          "content": "<p>Agora, diga-me o que deseja fazer.</p>"
         },
         {
           "type": "choice",
@@ -87,7 +90,8 @@
       { "label": "s1",  "to": "s1" }
     ],
     "behavior": {
-      "code": "// O presente estado possui um elemento 'choice'. Assim,\n// quando o usuário clicar no botão 'next', ele deve ir\n// para a escolha selecionada. Se o usuário não tiver\n// escolhido, nada será feito.\n\nfunction onNext() {\n  var choice = state.page.get('choice');\n  if (choice.isAnswered) {\n    return state.next(choice.answer);\n  }\n}"
+      "type": "block",
+      "block": "<xml><block type=\"onnext\" x=\"15\" y=\"24\"><statement name=\"COMMANDS\"><block type=\"controls_if\"><value name=\"IF0\"><block type=\"isanswered\"><field name=\"GADGET_TYPE\">choice</field></block></value><statement name=\"DO0\"><block type=\"nexttransition\"><value name=\"TRANSITION\"><block type=\"getgadgetvalue\"><field name=\"GADGET_TYPE\">choice</field></block></value></block></statement></block></statement></block></xml>"
     }
   }
 ]

@@ -1,6 +1,8 @@
 import { Subject } from 'rxjs/Subject';
 import { Page } from './page';
 
+declare const Blockly: any;
+
 let doNothing = () => { }
 
 export type StateType = 'content' | 'content-add' | 'intervention';
@@ -13,6 +15,7 @@ export interface IOutEdge {
 export interface IBehavior {
   type: 'block' | 'code';
   code: string;
+  block?: string;
   onEnter?: Function;
   onNext?: Function;
 }
@@ -59,7 +62,7 @@ export class State implements IState {
         this.page = new Page(state.page.gadgets);
       }
       if (state.behavior) {
-        this.updateBehavior();
+        setTimeout(_ => this.updateBehavior());
       }
     }
     State._states.push(this);
@@ -67,6 +70,14 @@ export class State implements IState {
   }
 
   private updateBehavior() {
+    if (this.behavior.type == 'block') {
+      if (this.behavior.block != undefined && this.behavior.block.length > 1) {
+        let workspace = new Blockly.Workspace();
+        let dom = Blockly.Xml.textToDom(this.behavior.block);
+        Blockly.Xml.domToWorkspace(dom, workspace);
+        this.behavior.code = Blockly.JavaScript.workspaceToCode(workspace);
+      }
+    }
     if (this.behavior.code) {
       let code = `
         (function(state, globals) {
@@ -110,6 +121,10 @@ export class State implements IState {
     for(let state of State._states) {
       state.updateBehavior();
     }
+  }
+
+  static getInitialState(): State {
+    return State._states[0];
   }
 
   static getStates(): string[] {

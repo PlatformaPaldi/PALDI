@@ -32,31 +32,12 @@ export class TextComponent implements OnInit, AfterViewInit {
 
   constructor(stateServ: StateService) {
     stateServ.current$.subscribe(() => {
-      console.log('got here');
       let withVar = this.contentToVar(this.gadget.content);
       this.gadget.content = this.varToContent(withVar);
     });
   }
 
   ngOnInit() {
-    // let toolbar = [
-    //   [{ header: [1, 2, false] }],
-    //   ['bold', 'italic', 'underline'],
-    //   [{ 'font': [] }],
-    //   // [{ 'font': ['sans-serif', 'satisfy', 'roboto', 'josefin', 'arvo', 'macondo'] }],
-    //   [{ 'align': [] }],
-    //   [{ list: 'ordered' }, { list: 'bullet' }],
-    //   [{ 'color': [] }, { 'background': [] }],
-    // ];
-
-    // this.quill = new Quill(this.editor.nativeElement, {
-    //   modules: {
-    //     toolbar: toolbar
-    //   },
-    //   theme: 'snow'
-    // });
-    console.log('ngInit', this.editor);
-    
   }
 
   ngAfterViewInit() {
@@ -94,8 +75,6 @@ export class TextComponent implements OnInit, AfterViewInit {
         varsObj[v] = true; // to be unique
       }
       for (let v in varsObj) {
-        console.log(v);
-        console.log(State.globals);
         if (State.globals[v]) {
           let reg = new RegExp(`<var>${v}</var>`, 'g');
           let rep = `<var name="${v}" class="player">${State.globals[v]}</var>`;

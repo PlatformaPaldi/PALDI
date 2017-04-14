@@ -16,32 +16,40 @@ export class PlayerComponent implements OnInit {
   height: number;
   width: number;
 
-  contentState: State;
-  interventionState: State;
+  contentState: Readonly<State>;
+  interventionState: Readonly<State>;
 
   constructor(private stateServ: StateService) {
-    stateServ.current$.subscribe(state => {
-      if (state.type == 'content') {
-        this.contentState = state;
-        this.intervention.hide();
-      }
-      else if (state.type == 'intervention') {
-        this.interventionState = state;
-        this.intervention.show();
-      }
-    });
+    stateServ.current$.subscribe(_ => setTimeout(_ => this.updateInternalState()));
   }
 
   ngOnInit() {
+    this.run();
   }
 
   nextState() {
     this.stateServ.next();
   }
 
+  private updateInternalState() {
+    let state = this.stateServ.current;
+    if (state.type == 'content') {
+      this.contentState = state;
+      this.intervention.hide();
+    }
+    else if (state.type == 'intervention') {
+      this.interventionState = state;
+      this.intervention.show();
+    }
+  }
+
   run() {
-    console.log('run');
-    State.updateBehaviors();
+    let start = this.stateServ.initial;
+    if (start) {
+      State.updateBehaviors();
+      this.stateServ.changeTo(start.label);
+      // this.updateInternalState();
+    }
   }
 
 }

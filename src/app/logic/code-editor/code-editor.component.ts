@@ -18,30 +18,31 @@ import commandPalette from './commands';
   styleUrls: ['./code-editor.component.css']
 })
 export class CodeEditorComponent implements OnInit, AfterViewInit {
-  // @ViewChild('editor') editor: AceEditorComponent;
-  @ViewChild('droplet') dropletRef: ElementRef;
+  @ViewChild('editor') editor: AceEditorComponent;
+  // @ViewChild('droplet') dropletRef: ElementRef;
   droplet;
 
   state: State;
 
-  // private _code: string;
-  // @Input() get code() { return this._code; }
-  // @Output() codeChange = new EventEmitter<string>();
-  // set code(rawCode: string) {
-  //   this._code = rawCode;
-  //   this.codeChange.emit(this._code);
-  // }
+  private _code: string;
+  @Input() get code() { return this._code; }
+  @Output() codeChange = new EventEmitter<string>();
+  set code(rawCode: string) {
+    this._code = rawCode;
+    this.codeChange.emit(this._code);
+  }
 
-  // options: any = {
-  //   printMargin: false
-  // };
+  options: any = {
+    printMargin: false,
+    readOnly: true
+  };
 
   constructor(private stateServ: StateService) {
-    stateServ.current$.subscribe(state => {
+    stateServ.current$.subscribe(state => setTimeout(_ => {
       // state.updateBehavior();  // update onEnter() and onNext() before changing the state
       this.state = state;
-      this.droplet.setValue(this.state.behavior.code);
-    });
+      // this.droplet.setValue(this.state.behavior.code);
+    }));
   }
 
 /*
@@ -94,16 +95,23 @@ Editor::toggleBlocks(callback)
 
 
   ngOnInit() {
-    this.droplet = new droplet.Editor(this.dropletRef.nativeElement, commandPalette);
-    this.droplet.setEditorState(false);
+    // this.droplet = new droplet.Editor(this.editor.getEditor(), commandPalette);
+    // this.droplet.toggleBlocks();
+    // this.droplet.on('keydown', () => {
+    //   console.log('keydown');
+      
+    //   this.state.behavior.code = this.droplet.getValue();
+    // })
+    // this.droplet.setEditorState(false);
   }
 
   ngAfterViewInit() {
+    // this.droplet.redrawMain();
     // this.editor.getEditor().clearSelection();
-    // this.editor.getEditor().$blockScrolling = Infinity;
+    this.editor.getEditor().$blockScrolling = Infinity;
   }
 
   toggleCodeMode() {
-    this.droplet.toggleBlocks();
+    // this.droplet.toggleBlocks();
   }
 }

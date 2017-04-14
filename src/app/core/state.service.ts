@@ -64,6 +64,10 @@ export class StateService {
     return this._currentState;
   }
 
+  get initial(): Readonly<State> {
+    return State.getInitialState();
+  }
+
   changeTo(stateLabel: string) {
     let state = State.getStateByLabel(stateLabel);
     if (state) {

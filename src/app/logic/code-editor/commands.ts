@@ -17,7 +17,7 @@ export default {
   modeOptions: {
     functions: {
       onEnter: { command: true, color: 'red' },
-      rt: { command: true, color: 'blue' },
+      next: { command: true, color: 'blue' },
       sin: { command: false, value: true, color: 'green' }
     },
     categories: {
@@ -28,23 +28,28 @@ export default {
   },
   palette: [
     {
-      name: 'Controle',
-      color: 'orange',
+      name: 'Eventos',
+      color: 'green',
       blocks: filterblocks([
         {
           block: 'function onEnter() {\n  __\n}\n\n',
           title: 'Define o que ser realizado quando entrar no estado.'
         }, {
-          block: 'while (__ < __) {\n  __\n}',
-          title: '  Repeat while a condition is true'
+          block: 'function onNext() {\n  __\n}\n\n',
+          title: 'O que fazer quando o usuário pedir para seguir adiante'
+        }
+      ])
+    },
+    {
+      name: 'Transição',
+      color: 'brown',
+      blocks: filterblocks([
+        {
+          block: 'next();\n',
+          title: 'Segue para a próxima página.'
         }, {
-          block: 'if (__ === __) {\n  __\n}',
-          title: 'Do something only if a condition is true'
-        }, {
-          block: 'if (__ === __) {\n  __\n} else {\n  __\n}',
-          title:
-          'Do something if a condition is true, otherwise something else',
-          id: 'ifelse'
+          block: 'next(__);\n',
+          title: 'Segue a transição passada.'
         }
       ])
     }

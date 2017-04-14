@@ -9,22 +9,18 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./logic.component.scss']
 })
 export class LogicComponent implements OnInit {
-  @ViewChild(BlockEditorComponent) block: BlockEditorComponent;
-
   state: State;
-
+  selected = 0;
 
   constructor(private stateServ: StateService) {
-    stateServ.current$.subscribe(state => this.state = state);
+    stateServ.current$.subscribe(state => setTimeout(_ => this.state = state));
   }
 
   ngOnInit() {
-
   }
 
   indexChange(e) {
-    if (e == 1) { // second in the order (block)
-      // this.block.injectBlockly();
+    if (e == 1) { // second in the order (code)
     }
   }
 

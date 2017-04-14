@@ -24,6 +24,13 @@
 .logic {
   &, md-tab-group, .mat-tab-body-wrapper, .mat-tab-body-content {
     height: 100%;
-
   }
+
+  .mat-tab-header {
+    height: 0;
+  }
+}
+
+.ace_editor {
+  font-size: 14px !important;
 }

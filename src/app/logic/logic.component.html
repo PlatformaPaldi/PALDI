@@ -9,8 +9,14 @@
   </ui-pane-title>
   <ui-pane-content>-->
   <!--<div class="logic">-->
+
+<button class="toggle" md-mini-fab (click)="selected = (selected + 1) % 2" mdTooltip="Altera o modo de programação">
+  <md-icon *ngIf="selected == 0">subject</md-icon>
+  <md-icon *ngIf="selected == 1">extension</md-icon>
+</button>
+    
   <div class="logic">
-    <md-tab-group (selectedIndexChange)="indexChange($event)">
+    <md-tab-group [(selectedIndex)]="selected" (selectedIndexChange)="indexChange($event)">
       <md-tab>
         <template md-tab-label>
           Bloco
@@ -29,3 +35,4 @@
   </div>
   <!--</ui-pane-content>
 </ui-pane>-->
+

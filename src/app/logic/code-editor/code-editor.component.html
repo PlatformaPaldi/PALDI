@@ -3,18 +3,17 @@
 
 <div class="full-container" #container>
   <!--<div class="full-content">-->
-    <!--<ace-editor #editor
-      [style.height.px]="height || container.getBoundingClientRect().height / 2"
-      [(text)]="state?.behavior.code"
+    <ace-editor #editor
+      [style.height.px]="height || container.getBoundingClientRect().height"
+      [text]="state?.behavior.code"
       [mode]="'javascript'"
       [options]="options">
-      [style.height.px]="height || container.getBoundingClientRect().height">
-    </ace-editor>-->
-    <div #droplet
+    </ace-editor>
+    <!--<div #droplet
     >
-    </div>
-    <button class="toggle" md-mini-fab (click)="toggleCodeMode()">
+    </div>-->
+    <!--<button class="toggle" md-mini-fab (click)="toggleCodeMode()">
       <md-icon>code</md-icon>
-    </button>
+    </button>-->
   <!--</div>-->
 </div>

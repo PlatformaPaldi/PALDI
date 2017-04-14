@@ -16,7 +16,7 @@ export class PageEditorComponent implements OnInit {
   private _clickedOnItem: boolean;
 
   constructor (private stateServ: StateService) {
-    stateServ.current$.subscribe(state => this.state = state);
+    stateServ.current$.subscribe(state => setTimeout(_ => this.state = state));
   }
 
   ngOnInit() {

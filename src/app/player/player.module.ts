@@ -22,6 +22,9 @@ import { InterventionComponent } from './intervention/intervention.component';
 ],
   exports: [
     PlayerComponent
+  ],
+  entryComponents: [
+    PlayerComponent
   ]
 })
 export class PlayerModule { }

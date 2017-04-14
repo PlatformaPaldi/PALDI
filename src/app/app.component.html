@@ -42,7 +42,7 @@
             {{ state }}
           </md-list-item>
         </md-nav-list>
-        <button md-fab class="play-button" (click)="logic.toggle()" >
+        <button md-fab class="play-button" (click)="openPlayer()" >
           <md-icon>play_arrow</md-icon>
         </button>
       </ui-pane-content>
@@ -59,7 +59,7 @@
       </ui-pane-title>
       <ui-pane-content fxFlex="grow">
         <md-sidenav-container fxFill>
-          <md-sidenav #logic mode="side" align="end" [style.width]="50 + '%'" >
+          <md-sidenav #logic mode="side" align="end" style="width: 60%">
             <app-logic fxFill></app-logic>
           </md-sidenav>
           <app-page-editor></app-page-editor>
