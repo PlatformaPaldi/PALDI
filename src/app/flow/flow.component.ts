@@ -396,11 +396,14 @@ export class FlowComponent implements OnInit {
 
   private createState(type: string) {
 
-    let stateCreation = (title: string, creationFunc: Function) => {
+    let stateCreation = (title: string, creationFunc: Function, hasVar?: boolean) => {
       let dlg = this.dialog.open(TextPageDialogComponent);
       dlg.componentInstance.title = title;
       dlg.componentInstance.placeHolder = 'Nome da página';
-      dlg.componentInstance.hint = "(opcional) Caso queira guardar a resposta em uma variável";
+      if (hasVar) {
+        dlg.componentInstance.varName = '';
+        dlg.componentInstance.hint = "(opcional) Caso queira guardar a resposta em uma variável";
+      }
       dlg.afterClosed().subscribe(data => {
         if (data && data.name) {
           let state = creationFunc(nextId++, data.name, data.varName);
@@ -417,62 +420,15 @@ export class FlowComponent implements OnInit {
 
     switch (type) {
       case 'content':
-        let emptyDlg = this.dialog.open(RenameDialog);
-        emptyDlg.componentInstance.message = 'Nome da nova página';
-        emptyDlg.afterClosed().subscribe(label => {
-          if (label) {
-            EMPTY_PAGE.id = nextId++;
-            EMPTY_PAGE.label = label;
-            this.sectionServ.createState(EMPTY_PAGE);
-            this._nodes.add({
-              id: EMPTY_PAGE.id,
-              label: EMPTY_PAGE.label,
-              group: EMPTY_PAGE.type
-            });
-            // TODO update section
-          }
-        });
+        stateCreation('Página em branco', StateGenerator.createEmpty);
         break;
 
       case 'choice':
-        stateCreation('Pergunta com opções', StateGenerator.createChoice);
-        // let textDlg = this.dialog.open(TextPageDialogComponent);
-        // textDlg.componentInstance.title = 'Pergunta com opções';
-        // textDlg.componentInstance.placeHolder = 'Nome da página';
-        // textDlg.componentInstance.hint = "(opcional) Caso queira guardar a resposta em uma variável";
-        // textDlg.afterClosed().subscribe(data => {
-        //   if (data && data.name) {
-        //     let state = StateGenerator.createChoice(nextId++, data.name, data.varName);
-        //     this.sectionServ.createState(state);
-        //     this._nodes.add({
-        //       id: state.id,
-        //       label: state.label,
-        //       group: state.type
-        //     });
-        //   }
-        // });
-
-
-
-        // let choiceDlg = this.dialog.open(RenameDialog);
-        // choiceDlg.componentInstance.message = 'Nome da nova página';
-        // choiceDlg.afterClosed().subscribe(label => {
-        //   if (label) {
-        //     CHOICE_PAGE.id = nextId++;
-        //     CHOICE_PAGE.label = label;
-        //     this.sectionServ.createState(CHOICE_PAGE);
-        //     this._nodes.add({
-        //       id: CHOICE_PAGE.id,
-        //       label: CHOICE_PAGE.label,
-        //       group: CHOICE_PAGE.type
-        //     });
-        //     // TODO update section
-        //   }
-        // });
+        stateCreation('Pergunta com opções', StateGenerator.createChoice, true);
         break;
         
       case 'input':
-        stateCreation('Pergunta com entrada de texto', StateGenerator.createInput);
+        stateCreation('Pergunta com entrada de texto', StateGenerator.createInput, true);
         break;
     }
   }

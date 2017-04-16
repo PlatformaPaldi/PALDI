@@ -1,6 +1,33 @@
 
 export class StateGenerator {
 
+  // -----------------------------------------------------------------------------------------------------
+  static createEmpty(id: number, label: string) {
+    let state: any = {
+      id: id,
+      label: label,
+      type: "content",
+      page: {
+        gadgets: [
+          { type: "text", content: "" }
+        ]
+      },
+      behavior: {
+        type: "block",
+        block: `
+          <xml>
+            <block type=\"onnext\" x=\"10\" y=\"10\">
+              <statement name=\"COMMANDS\">
+                <block type=\"nextpage\"></block>
+              </statement>
+            </block>
+          </xml>`
+      }
+    };
+    return state;
+  }
+
+  // -----------------------------------------------------------------------------------------------------
   static createInput(id: number, label: string, varName: string) {
     let state: any = {
       id: id,
@@ -41,6 +68,7 @@ export class StateGenerator {
     return state;
   }
 
+  // -----------------------------------------------------------------------------------------------------
   static createChoice(id: number, label: string, varName: string) {
     let state: any = {
       id: id,

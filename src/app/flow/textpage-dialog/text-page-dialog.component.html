@@ -3,7 +3,7 @@
   <md-input-container class="full-width">
     <input mdInput [(ngModel)]="name" [placeholder]="placeHolder" (keyup.enter)="confirm()">
   </md-input-container>
-  <md-input-container  class="full-width" [hintLabel]="hint">
+  <md-input-container *ngIf="varName != undefined" class="full-width" [hintLabel]="hint">
     <input mdInput [(ngModel)]="varName" placeholder="Nome da variável" (keyup.enter)="confirm()">
   </md-input-container>
 </md-dialog-content>
