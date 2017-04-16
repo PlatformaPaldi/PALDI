@@ -1,0 +1,20 @@
+.separator {
+  margin-left: 15px;
+  margin-right: 15px;
+  border: 1px solid rgba(255,255,255, 0.3);
+  height: 100%;
+}
+
+.title {
+  margin-left: 15px;
+}
+
+.subtitle {
+  font-size: small;
+  margin-bottom: -4px;
+}
+
+.subtitle:before {
+  content: "»";
+  margin: 0 8px;
+}

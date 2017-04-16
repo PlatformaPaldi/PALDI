@@ -1,3 +1,4 @@
+import { LayoutModule } from './layout/layout.module';
 import { SectionService } from 'app/core/section.service';
 import { FlowModule } from './flow/flow.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,6 +27,7 @@ import 'hammerjs';
     FormsModule,
     HttpModule,
     SharedModule,
+    LayoutModule,
     PageEditorModule,
     LogicModule,
     PlayerModule,

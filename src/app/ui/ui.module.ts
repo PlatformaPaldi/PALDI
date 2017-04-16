@@ -8,6 +8,7 @@ import { PaneTitleComponent } from './pane/pane-title.component';
 import { PaneToolsComponent } from './pane/pane-tools.component';
 import { PaneComponent } from './pane/pane.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   imports: [
@@ -20,8 +21,9 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     PaneToolsComponent,
     PaneContentComponent,
     ScrollDirective,
-    ConfirmDialogComponent
-  ],
+    ConfirmDialogComponent,
+    ToolbarComponent
+],
   entryComponents: [
     ConfirmDialogComponent
   ],
@@ -31,7 +33,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     PaneTitleComponent,
     PaneToolsComponent,
     PaneContentComponent,
-    ScrollDirective
+    ScrollDirective,
+    ToolbarComponent
   ]
 })
 export class UiModule { }

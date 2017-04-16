@@ -11,6 +11,10 @@ import { PlayerComponent } from "app/player/player.component";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  bookTitle = 'Livro';
+  sectionTitle = 'Section';
+
   private _player: MdDialogRef<PlayerComponent>;
   private state: State;
   private states: string[] = [];
