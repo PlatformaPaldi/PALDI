@@ -34,6 +34,14 @@ export class Section implements ISection {
     if (index >= 0) {
       this.states.splice(index, 1);
     }
+    // remove all the transitions to the state
+    for (let s of this.states) {
+      let index = s.outedges.findIndex(edge => edge.to == state.label);
+      while (index >= 0) {
+        s.outedges.splice(index, 1);
+        index = s.outedges.findIndex(edge => edge.to == state.label);
+      }
+    }
   }
 
   getStateByLabel(label: string) {
@@ -48,6 +56,10 @@ export class Section implements ISection {
     return this.getStateById(this.initialState);
   }
 
-
+  updateStateBehaviors() {
+    for (let state of this.states) {
+      state.updateBehavior();
+    }
+  }
 
 }

@@ -83,6 +83,10 @@ export class SectionService {
     }
   }
 
+  get current() {
+    return this._currentSection;
+  }
+
   get currentState() {
     return this._currentState;
   }
@@ -92,6 +96,13 @@ export class SectionService {
     this._currentSection.addState(state);
     this.setCurrentState(state);
   }
+
+  nextState() {
+    if (this._currentState.behavior.onNext) {
+      this._currentState.behavior.onNext();
+    }
+  }
+
 
 
 }

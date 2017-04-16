@@ -252,20 +252,26 @@ export class FlowComponent implements OnInit {
       if (node) {
         let dlg = this.dialog.open(ConfirmDialogComponent);
         let label = node.label ? `"${node.label}"` : '';
-        dlg.componentInstance.message = `Confirma a remoção da página ${label} ?`;
+        dlg.componentInstance.message = `Quer mesmo remover a página ${label} ?`;
         dlg.afterClosed().subscribe(answer => {
           if (answer == 'ok') {
-            let state = this.section.getStateById(this.selected);
-            state.outedges.forEach(outedge => this._edges.remove(outedge.id));
-            this._nodes.remove(state.id);
-            this.section.removeState(state);
-            // TODO update the other states which point to the node
-            console.log(this.section);
+            // remove the node and its adjacent edges
+            let toRemove =[];
+            this._edges.forEach(edge => {
+              if (edge.from == this.selected || edge.to == this.selected) {
+                toRemove.push(edge.id);
+              }
+            });
+            this._edges.remove(toRemove);
+            this._nodes.remove(this.selected);
 
-            // TODO update section
+            // remove the state (and its from and to transitions)
+            let state = this.section.getStateById(this.selected);
+            this.section.removeState(state);
+            this.mode = 'normal';
+            this.selected = undefined;
           }
         });
-        // TODO update section (spread event)
       }
     }
   }
@@ -317,7 +323,7 @@ export class FlowComponent implements OnInit {
       if (edge) {
         let dlg = this.dialog.open(ConfirmDialogComponent);
         let label = edge['label'] ? `"${edge['label']}"` : '';
-        dlg.componentInstance.message = `Confirma a remoção da transição ${label} ?`;
+        dlg.componentInstance.message = `Quer mesmo remover a transição ${label} ?`;
         dlg.afterClosed().subscribe(answer => {
           if (answer == 'ok') {
             let fromState = this.section.getStateById(edge.from as number);
