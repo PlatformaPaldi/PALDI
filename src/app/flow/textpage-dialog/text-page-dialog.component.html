@@ -1,0 +1,12 @@
+<h2 md-dialog-title>{{ title }}</h2>
+<md-dialog-content>
+  <md-input-container class="full-width">
+    <input mdInput [(ngModel)]="name" [placeholder]="placeHolder" (keyup.enter)="confirm()">
+  </md-input-container>
+  <md-input-container  class="full-width" [hintLabel]="hint">
+    <input mdInput [(ngModel)]="varName" placeholder="Nome da variável" (keyup.enter)="confirm()">
+  </md-input-container>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-raised-button color="primary" (click)="confirm()">Ok</button>
+</md-dialog-actions>

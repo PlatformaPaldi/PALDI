@@ -1,3 +1,4 @@
+import { TextPageDialogComponent } from './textpage-dialog/textpage-dialog.component';
 import { ConfirmDialogComponent } from './../ui/confirm-dialog/confirm-dialog.component';
 import { SectionService } from 'app/core/section.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -5,9 +6,11 @@ import { MdMenuTrigger, MdMenu, MdDialog } from "@angular/material";
 import { Network, DataSet, Node, Edge, IdType } from 'vis';
 import { Section } from "app/core/section";
 import { RenameDialog } from './rename-dialog.component';
+import { StateGenerator } from './state-generator'
 
 import EMPTY_PAGE from './states/empty';
 import CHOICE_PAGE from './states/choice';
+import INPUT_PAGE from './states/input';
 
 
 const TERMINAL_GRP = 'terminal';
@@ -155,21 +158,12 @@ export class FlowComponent implements OnInit {
       edges: this.resetEdges()
     };
     this._graph = new Network(this._container.nativeElement, data, this._graphOptions);
-    // this._graph.on('click', (params) => this.click(params));
-    // this._graph.on('selectNode', (params) => this.selectNode(params));
-    // this._graph.on('deselectNode', (params) => this.deselectNode(params));
-    // this._graph.on('selectEdge', (params) => this.selectEdge(params));
-    // this._graph.on('release', (params) => this.release(params));
-
-    // this._graph.on('selectNode', (params) => setTimeout(_ => this.mode = 'editNode'));
-    // this._graph.on('selectEdge', (params) => setTimeout(_ => this.mode = 'editEdge'));
     this._graph.on('selectNode',   params => this.selectNode(params));
     this._graph.on('selectEdge', params => this.selectEdge(params));
     this._graph.on('deselectNode', params => this.deselectNode(params));
     this._graph.on('deselectEdge', params => this.deselectEdge(params));
     this._graph.on('dragStart', params => this.dragStart(params));
     this._graph.on('dragEnd', params => this.dragEnd(params));
-    // this._graph.on('release', (params) => this.release(params));
   }
 
   private selectNode(params) {
@@ -286,6 +280,11 @@ export class FlowComponent implements OnInit {
         renameDlg.afterClosed().subscribe(label => {
           if (label) {
             let fromState = this.section.getStateById(edge.from as number);
+
+            console.log(fromState);
+            console.log(this.selected);
+            
+            
             let transition = fromState.getTransition(this.selected);
             transition.label = label;
 
@@ -377,14 +376,18 @@ export class FlowComponent implements OnInit {
     let fromState = this.section.getStateById(edgeData.from);
     let toState = this.section.getStateById(edgeData.to);
     if (fromState && toState) {
+      let id = nextId++;
       fromState.addTransition({
-        id: nextId++,
+        id: id,
         to: toState.label,
         label: undefined
       });
-      callback(edgeData);
-      console.log(fromState);
-      console.log(toState);
+      this._edges.add({
+        id: id,
+        from: fromState.id,
+        to: toState.id
+      });
+      callback();
     }
   }
 
@@ -392,6 +395,26 @@ export class FlowComponent implements OnInit {
 //-------------------------------------------------
 
   private createState(type: string) {
+
+    let stateCreation = (title: string, creationFunc: Function) => {
+      let dlg = this.dialog.open(TextPageDialogComponent);
+      dlg.componentInstance.title = title;
+      dlg.componentInstance.placeHolder = 'Nome da página';
+      dlg.componentInstance.hint = "(opcional) Caso queira guardar a resposta em uma variável";
+      dlg.afterClosed().subscribe(data => {
+        if (data && data.name) {
+          let state = creationFunc(nextId++, data.name, data.varName);
+          this.sectionServ.createState(state);
+          this._nodes.add({
+            id: state.id,
+            label: state.label,
+            group: state.type
+          });
+        }
+      });
+
+    }
+
     switch (type) {
       case 'content':
         let emptyDlg = this.dialog.open(RenameDialog);
@@ -409,27 +432,47 @@ export class FlowComponent implements OnInit {
             // TODO update section
           }
         });
-
-
         break;
+
       case 'choice':
-        let choiceDlg = this.dialog.open(RenameDialog);
-        choiceDlg.componentInstance.message = 'Nome da nova página';
-        choiceDlg.afterClosed().subscribe(label => {
-          if (label) {
-            CHOICE_PAGE.id = nextId++;
-            CHOICE_PAGE.label = label;
-            this.sectionServ.createState(CHOICE_PAGE);
-            this._nodes.add({
-              id: CHOICE_PAGE.id,
-              label: CHOICE_PAGE.label,
-              group: CHOICE_PAGE.type
-            });
-            // TODO update section
-          }
-        });
+        stateCreation('Pergunta com opções', StateGenerator.createChoice);
+        // let textDlg = this.dialog.open(TextPageDialogComponent);
+        // textDlg.componentInstance.title = 'Pergunta com opções';
+        // textDlg.componentInstance.placeHolder = 'Nome da página';
+        // textDlg.componentInstance.hint = "(opcional) Caso queira guardar a resposta em uma variável";
+        // textDlg.afterClosed().subscribe(data => {
+        //   if (data && data.name) {
+        //     let state = StateGenerator.createChoice(nextId++, data.name, data.varName);
+        //     this.sectionServ.createState(state);
+        //     this._nodes.add({
+        //       id: state.id,
+        //       label: state.label,
+        //       group: state.type
+        //     });
+        //   }
+        // });
+
+
+
+        // let choiceDlg = this.dialog.open(RenameDialog);
+        // choiceDlg.componentInstance.message = 'Nome da nova página';
+        // choiceDlg.afterClosed().subscribe(label => {
+        //   if (label) {
+        //     CHOICE_PAGE.id = nextId++;
+        //     CHOICE_PAGE.label = label;
+        //     this.sectionServ.createState(CHOICE_PAGE);
+        //     this._nodes.add({
+        //       id: CHOICE_PAGE.id,
+        //       label: CHOICE_PAGE.label,
+        //       group: CHOICE_PAGE.type
+        //     });
+        //     // TODO update section
+        //   }
+        // });
         break;
-      case 'text':
+        
+      case 'input':
+        stateCreation('Pergunta com entrada de texto', StateGenerator.createInput);
         break;
     }
   }
