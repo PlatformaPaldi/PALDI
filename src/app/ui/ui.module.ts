@@ -7,6 +7,7 @@ import { PaneContentComponent } from './pane/pane-content.component';
 import { PaneTitleComponent } from './pane/pane-title.component';
 import { PaneToolsComponent } from './pane/pane-tools.component';
 import { PaneComponent } from './pane/pane.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,11 @@ import { PaneComponent } from './pane/pane.component';
     PaneTitleComponent,
     PaneToolsComponent,
     PaneContentComponent,
-    ScrollDirective
+    ScrollDirective,
+    ConfirmDialogComponent
+  ],
+  entryComponents: [
+    ConfirmDialogComponent
   ],
   exports: [
     MobileFrameComponent,

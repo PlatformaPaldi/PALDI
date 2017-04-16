@@ -8,9 +8,15 @@ interface IOption {
 export class Choice extends Gadget {
 
   public value: string;
+  public options: IOption[];
 
-  constructor(public options: IOption[] = []) {
+  constructor(options: IOption[] = []) {
     super('choice', 'Escolha de uma opção');
+    this.options = [];
+    options.forEach(option => this.options.push({
+      value: option.value,
+      text: option.text
+    }));
   }
 
   add(option: IOption) {

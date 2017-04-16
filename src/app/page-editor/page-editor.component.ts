@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StateService } from 'app/core/state.service';
 import { State } from "app/core/state";
 import { GadgetType } from "app/core/gadget";
+import { SectionService } from "app/core/section.service";
 
 @Component({
   selector: 'app-page-editor',
@@ -15,8 +16,8 @@ export class PageEditorComponent implements OnInit {
   private _clickedOnGadget: boolean;
   private _clickedOnItem: boolean;
 
-  constructor (private stateServ: StateService) {
-    stateServ.current$.subscribe(state => setTimeout(_ => this.state = state));
+  constructor (private sectionServ: SectionService) {
+    sectionServ.currentState$.subscribe(state => setTimeout(_ => this.state = state));
   }
 
   ngOnInit() {

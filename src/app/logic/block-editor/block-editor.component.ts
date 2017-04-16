@@ -1,3 +1,4 @@
+import { SectionService } from 'app/core/section.service';
 import { StateService } from 'app/core/state.service';
 import { State } from 'app/core/state';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
@@ -17,8 +18,8 @@ export class BlockEditorComponent implements OnInit, AfterViewInit, AfterViewChe
   private workspace: any;
   state: State;
 
-  constructor(private stateServ: StateService) {
-    stateServ.current$.subscribe(state => setTimeout(_ => {
+  constructor(private sectionServ: SectionService) {
+    sectionServ.currentState$.subscribe(state => setTimeout(_ => {
       this.state = state;
       this.updateBlocks();
     }));

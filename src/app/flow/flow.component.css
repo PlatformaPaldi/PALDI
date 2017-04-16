@@ -1,0 +1,19 @@
+
+.controls {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 40px;
+  color: #ccc;
+}
+
+.message {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #ccc;
+}
+
+.separator {
+  border-top: 1px solid #ccc;
+}

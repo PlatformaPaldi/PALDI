@@ -8,6 +8,7 @@ let doNothing = () => { }
 export type StateType = 'content' | 'content-add' | 'intervention';
 
 export interface IOutEdge {
+  id?: number;  
   label: string;
   to: string;
 }
@@ -96,20 +97,38 @@ export class State implements IState {
     }
   }
 
-  next(to?: string) {
-    if (!to && this.outedges.length > 0) {
+  next(edgeLabel?: string) {
+    if (!edgeLabel && this.outedges.length > 0) {
       let len = this.outedges.length;
       let randomIndex = Math.floor(Math.random() * len);
-      to = this.outedges[randomIndex].to;
+      edgeLabel = this.outedges[randomIndex].label;
     }
-    let nextState = State.getStateByLabel(to);
-    if (nextState) {
-      this._next.next(nextState);
-      nextState.behavior.onEnter();
-      nextState.page.update();
+    // let nextState = State.getStateByLabel(to);
+    let edge = this.outedges.find(edge => edge.label == edgeLabel);
+    if (edge) {
+      let nextState = State.getStateByLabel(edge.to);
+      if (nextState) {
+        this._next.next(nextState);
+        nextState.behavior.onEnter();
+        nextState.page.update();
+        return;
+      }
     }
-    else {
-      // TODO send error: there is no outedge with the given 'to' label
+    // TODO if get here, send error: there is no outedge with the given 'to' label
+  }
+
+  addTransition(edge: IOutEdge) {
+    this.outedges.push(edge);
+  }
+
+  getTransition(id: number) {
+    return this.outedges.find(edge => edge.id == id);
+  }
+
+  removeTransition(id: number) {
+    let index = this.outedges.findIndex(edge => edge.id == id);
+    if (index >= 0) {
+      this.outedges.splice(index, 1);
     }
   }
 

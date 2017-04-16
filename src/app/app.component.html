@@ -1,30 +1,7 @@
-<!--<div class="content centered">
-  <button md-fab color="primary" mdTooltip="Compila" (click)="player.run()">
-    <md-icon>play_arrow</md-icon>
-  </button>
-</div>-->
-<!--<div class="columns fullheight">
-  <md-nav-list>
-    <h3 md-subheader>Estados</h3>
-    <md-list-item *ngFor="let state of states" (click)="showState(state)">
-      {{ state }}
-    </md-list-item>
-    <h3 md-subheader>Ações</h3>
-    <md-list-item>
-      Simular
-    </md-list-item>
-  </md-nav-list>
-  <app-page-editor class="column content"></app-page-editor>
-  <app-logic class="column content"></app-logic>-->
-  <!--<app-code-editor class="column content"></app-code-editor>-->
-  <!--<app-player #player class="column content"></app-player>-->
-<!--</div>-->
-
-<!--<div>-->
-
 <div fxLayout="column" fxFill>
   <md-toolbar color="primary">
     <div fxLayout="row" fxFlex fxLayoutAlign="space-between center">
+      <md-icon>import_contacts</md-icon>
       <span>Livro</span>
       <button md-icon-button>
         <md-icon>user</md-icon>
@@ -35,13 +12,11 @@
   <div fxLayout="row" fxFlex="grow">
 
     <ui-pane fxFlex="1 1 auto" fxLayout="column" class="sequence-pane">
-      <ui-pane-title fxFlex="48px">Sequência</ui-pane-title>
+      <ui-pane-title fxFlex="48px">
+        <div class="title">Sequência de páginas</div>
+      </ui-pane-title>
       <ui-pane-content fxFlex="grow">
-        <md-nav-list>
-          <md-list-item *ngFor="let state of states" (click)="showState(state)">
-            {{ state }}
-          </md-list-item>
-        </md-nav-list>
+        <app-flow></app-flow>
         <button md-fab class="play-button" (click)="openPlayer()" >
           <md-icon>play_arrow</md-icon>
         </button>
@@ -50,7 +25,7 @@
 
     <ui-pane fxFlex="2 1 auto" fxLayout="column">
       <ui-pane-title class="light" fxFlex="48px">
-        Página
+        <div class="title">Página "{{ state?.label }}"</div>
         <ui-pane-tools>
           <button md-icon-button (click)="logic.toggle()">
             <md-icon>code</md-icon>
@@ -69,49 +44,3 @@
   </div>
 
 </div>
-
-<!--
-<div #container class="main-container" (window:resize)="height = container.offsetParent.getBoundingClientRect().height - 64" >
-  <ui-pane [height]="height || container.offsetParent.getBoundingClientRect().height - 64">
-    <ui-pane-title>
-      <span>Fluxo</span>
-    </ui-pane-title>
-    <ui-pane-content>
-    </ui-pane-content>
-  </ui-pane>-->
-
-  <!--<md-sidenav-container [style.height.px]="height || container.offsetParent.getBoundingClientRect().height - 64">
-
-    
-    <md-sidenav mode="side" align="start" opened="true">
-      <md-nav-list>
-        <h3 md-subheader>Páginas</h3>
-        <md-list-item *ngFor="let state of states" (click)="showState(state)">
-          {{ state }}
-        </md-list-item>
-        <h3 md-subheader>Ações</h3>
-        <md-list-item>
-          Simular
-        </md-list-item>
-      </md-nav-list>
-    </md-sidenav>-->
-
-    <!--<ui-pane [height]="height || container.offsetParent.getBoundingClientRect().height - 64">
-        <ui-pane-title>
-          <span>Página</span>
-        </ui-pane-title>
-        <ui-pane-content>
-          <md-sidenav-container [style.height.px]="height -48 || container.offsetParent.getBoundingClientRect().height - 64 - 48">
-            <md-sidenav #logic mode="side" align="end">
-              <app-logic></app-logic>
-            </md-sidenav>
-            <app-page-editor></app-page-editor>
-            <button md-fab class="code-button" (click)="logic.toggle()" >
-              <md-icon>code</md-icon>
-            </button>
-          </md-sidenav-container>          
-        </ui-pane-content>
-    </ui-pane>-->
-
-  <!--</md-sidenav-container>-->
-<!--</div>-->

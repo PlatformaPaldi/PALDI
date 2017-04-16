@@ -1,3 +1,5 @@
+import { SectionService } from 'app/core/section.service';
+import { FlowModule } from './flow/flow.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -27,10 +29,12 @@ import 'hammerjs';
     PageEditorModule,
     LogicModule,
     PlayerModule,
+    FlowModule,
     UiModule
   ],
   providers: [
-    StateService
+    StateService,
+    SectionService
   ],
   bootstrap: [AppComponent]
 })

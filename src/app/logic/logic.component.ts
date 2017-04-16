@@ -1,8 +1,7 @@
+import { SectionService } from 'app/core/section.service';
 import { CodeEditorComponent } from './code-editor/code-editor.component';
 import { State } from 'app/core/state';
-import { StateService } from 'app/core/state.service';
-import { BlockEditorComponent } from './block-editor/block-editor.component';
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-logic',
@@ -19,9 +18,9 @@ export class LogicComponent implements OnInit {
     'Altera para programação em blocos'
   ];
 
-  constructor(private stateServ: StateService, private changeDetector: ChangeDetectorRef) {
+  constructor(private sectionServ: SectionService) {
     this.selected = 0;
-    stateServ.current$.subscribe(state => {
+    sectionServ.currentState$.subscribe(state => {
       this.state = state;
     });
   }
