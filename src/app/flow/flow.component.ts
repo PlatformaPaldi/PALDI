@@ -13,6 +13,7 @@ import CHOICE_PAGE from './states/choice';
 import INPUT_PAGE from './states/input';
 
 
+const UPDATE_FLAG = ' updating';
 const TERMINAL_GRP = 'terminal';
 const TEMP_ID = 20000;
 const EDGE_ID_START = 10000;
@@ -40,7 +41,7 @@ function noise(size) {
 @Component({
   selector: 'app-flow',
   templateUrl: './flow.component.html',
-  styleUrls: ['./flow.component.css']
+  styleUrls: ['./flow.component.scss']
 })
 export class FlowComponent implements OnInit {
   @ViewChild('graph') private _container: ElementRef;
@@ -54,12 +55,13 @@ export class FlowComponent implements OnInit {
 
   private mode: string;
   private selected: number;
+  private pos: { x: number; y: number };
   private message: string;
 
   /** Vis network definitions */
   private _graphOptions = {
     nodes: {
-      labelHighlightBold: true
+      labelHighlightBold: false
     },
     edges: {
       arrows: 'to',
@@ -87,12 +89,16 @@ export class FlowComponent implements OnInit {
     manipulation: {
       enabled: true,
       controlNodeStyle: {
+        shape: 'dot',
+        size: 5,
+        borderWidth: 1,
+        borderWidthSelected: 1,
         color: {
           background: '#fff',
-          border: '#928f7e',
+          border: '#aaa',
           highlight: {
             background: '#fff',
-            border: '#928f7e'
+            border: '#aaa'
           }
         },
       },
@@ -103,6 +109,7 @@ export class FlowComponent implements OnInit {
       start: { shape: 'box', color: { border: '#4caf50', background: '#b8e0b9', highlight: { border: '#4caf50', background: '#b8e0b9' } } },
       content: { shape: 'box', color: { border: '#ff7f00', background: '#ffb266', highlight: { border: '#ff7f00', background: '#ffb266' } } },
       intervention: { shape: 'box', color: { border: '#3f51b5', background: '#b4bbe4', highlight: { border: '#3f51b5', background: '#b4bbe4' } } },
+      temp: { shape: 'dot', physics: false, size: 5, color: { border: '#aaa', background: '#fff' } },
       terminal: { shape: 'circle', label: ' + ', margin: 1, font: { face: 'courier', size: 12 }, color: { border: '#dedac1', background: '#ffffff', highlight: { border: '#dedac1', background: '#ffffff' } }, shapeProperties: { borderDashes: [2, 2] } }
     }
   };
@@ -164,14 +171,30 @@ export class FlowComponent implements OnInit {
     this._graph.on('deselectEdge', params => this.deselectEdge(params));
     this._graph.on('dragStart', params => this.dragStart(params));
     this._graph.on('dragEnd', params => this.dragEnd(params));
+    this._graph.on('click', params => this.click(params));
+    this._graph.on('release', params => this.release(params));
+  }
+
+  // =========================================================================================
+
+  /** Show action buttons when the user selects a node */
+  private showNodeButtons(id: number) {
+    let box = this._graph.getBoundingBox(id);
+    let pos = this._graph.canvasToDOM({ x: box.left, y: box.top });
+    this.pos = {
+      x: pos.x - 26, // the size of the button is 24x24
+      y: pos.y - 26
+    };
   }
 
   private selectNode(params) {
-    if (params.nodes.length > 0) {
+    if (params.nodes.length > 0 && params.nodes[0] != TEMP_ID) {
       this.mode = 'editNode';
       this.selected = params.nodes[0];
-      let node = this.section.getStateById(this.selected);
-      this.sectionServ.selectState(node.label);
+      this.showNodeButtons(this.selected);
+      
+      let state = this.section.getStateById(this.selected);
+      this.sectionServ.selectState(state.label);
     }
   }
 
@@ -179,19 +202,36 @@ export class FlowComponent implements OnInit {
     if (params.edges.length > 0) {
       this.mode = 'editEdge';
       this.selected = params.edges[0];
+      let edge = this._edges.get(this.selected) as Edge;
+      let positions = this._graph.getPositions([edge.from, edge.to]);
+      console.log(edge.from, edge.to);
+      
+      let domPos = this._graph.canvasToDOM({
+        x: (positions[edge.from].x + positions[edge.to].x) / 2,
+        y: (positions[edge.from].y + positions[edge.to].y) / 2
+      });
+      this.pos = {
+        x: domPos.x - 12, // half size of the rename button
+        y: domPos.y - 12,
+      }
+
+      if (edge) {
+        this._graph.editEdgeMode();
+      }
     }    
   }
+
+  
 
   private dragStart(params) {
     if (params.nodes.length > 0) {
       this.selectNode(params);
     }    
+    this.mode = 'dragging';
   }
 
   private dragEnd(params) {
-    if (this.mode == 'cancel') {
-      this.cancelEdition();
-    }
+    this.cancelEdition();
   }
 
   private deselectNode(params) {
@@ -204,7 +244,7 @@ export class FlowComponent implements OnInit {
   private deselectEdge(params) {
     if (this.mode == 'editEdge') {
       this.mode = 'normal';
-      this.selected = undefined;    
+      this.selected = undefined;
     }
   }
 
@@ -227,12 +267,44 @@ export class FlowComponent implements OnInit {
     }
   }
 
+
+  renameEdge() {
+    if (this.selected) {
+      let edge = this._edges.get(this.selected) as Edge;
+      if (edge) {
+        let renameDlg = this.dialog.open(RenameDialog);
+        renameDlg.componentInstance.label = edge['label'];
+        renameDlg.afterClosed().subscribe(label => {
+          if (label) {
+            let fromState = this.section.getStateById(edge.from as number);
+            let transition = fromState.getTransition(this.selected);
+            transition.label = label;
+            this._edges.update([{ id: this.selected, label: label }]);
+          }
+        });
+      }
+    }
+  }
+
+  renameElm() {
+    if (this.selected) {
+      if (this.mode == 'editNode') {
+        this.renameNode();
+      }
+      else if (this.mode == 'editEdge') {
+        this.renameEdge();
+      }
+    }    
+  }  
+
   setAsStartNode() {
     if (this.selected) {
       let node = this._nodes.get(this.selected) as Node;
       if (node) {
         let initialState = this.section.getInitialState();
-        this._nodes.update({ id: initialState.id , group: initialState.type });
+        if (initialState) {
+          this._nodes.update({ id: initialState.id , group: initialState.type });
+        }
         this._nodes.update({ id: this.selected, group: 'start' });
         this.section.initialState = this.selected;
         // TODO update section (spread event)
@@ -270,42 +342,131 @@ export class FlowComponent implements OnInit {
     }
   }
 
+//-------------------------------------------------------
 
-  renameEdge() {
-    if (this.selected) {
-      let edge = this._edges.get(this.selected) as Edge;
-      if (edge) {
-        let renameDlg = this.dialog.open(RenameDialog);
-        renameDlg.componentInstance.label = edge['label'];
-        renameDlg.afterClosed().subscribe(label => {
-          if (label) {
-            let fromState = this.section.getStateById(edge.from as number);
 
-            console.log(fromState);
-            console.log(this.selected);
-            
-            
-            let transition = fromState.getTransition(this.selected);
-            transition.label = label;
+  createEdge(from, to) {
+    let fromState = this.section.getStateById(from);
+    let toState = this.section.getStateById(to);
+    if (fromState && toState) {
+      let id = nextId++;
+      fromState.addTransition({
+        id: id,
+        to: toState.label,
+        label: undefined
+      });
+      this._edges.add({
+        id: id,
+        from: fromState.id,
+        to: toState.id
+      });
+    }
+  }
 
-            // fromState.removeTransition(this.selected);
-            console.log(fromState);
-            
-            this._edges.update([{ id: this.selected, label: label }]);
-            // this.section.
-            // TODO update section
-          }
-        });
+  click(params) {
+    if (this.mode == 'createEdge') {
+      this.mode = 'normal';
+      this._nodes.remove(TEMP_ID);
+      this._edges.remove(TEMP_ID);
+      let toId = this._graph.getNodeAt(params.pointer.DOM);
+      if (toId) {
+        this.createEdge(this.selected, toId);
       }
     }
   }
 
-  createEdgeMode() {
-    this._graph.addEdgeMode();
-    this.message = "Clique em uma página e arraste até outra para criar uma transição entre elas.";
-    this.mode = 'cancel';    
+  private isOverNode(pos: { x: number, y: number }) {
+    let over = false;
+    this._nodes.forEach((node: Node) => {
+      let bounds = this._graph.getBoundingBox(node.id);
+      if (bounds.left <= pos.x && pos.x <= bounds.right && bounds.top <= pos.y && pos.y <= bounds.bottom) {
+        over = true;
+      }
+    });
+    return over;
   }
 
+  private release(params) {
+    console.log('release');
+    
+    if (this.mode == 'editEdge') {
+      let clickOverEdge = this._graph.getEdgeAt(params.pointer.DOM);
+      // discart release events over the selected edge (when the edge is selected a release event is triggered, so let's discard it),
+      if (clickOverEdge && clickOverEdge == this.selected) {
+        return;
+      }
+
+      let clickOverNode = this._graph.getNodeAt(params.pointer.DOM);
+      if (!clickOverNode) {
+        this.cancelEdition();
+      }
+      else if (!this.isOverNode(params.pointer.canvas)) {
+        let edge = this._edges.get(this.selected) as Edge;
+        let fromState = this.section.getStateById(edge.from as number);
+        fromState.removeTransition(this.selected);
+        this.cancelEdition();
+        this._edges.remove(edge.id);
+      }
+    }
+  }
+
+    // if (this.mode == 'editEdge' && !this.isOverNode(params.pointer.canvas)) {
+      // this.cancelEdition();
+      
+      // let edgeId = this._graph.getEdgeAt(params.pointer.DOM);
+      // console.log(edgeId);
+      
+      // // discart release events over the selected edge (when the edge is selected a release event is triggered, so let's discard it),
+      // if (edgeId && edgeId == this.selected) {
+      //   return;
+      // }
+      // if (!edgeId) {
+      //   let edge = this._edges.get(this.selected) as Edge;
+      //   if (edge) {
+      //     console.log('release', this.selected);
+          
+      //     let fromState = this.section.getStateById(edge.from as number);
+      //     fromState.removeTransition(this.selected);
+      //     this._edges.remove(this.selected);
+      //     this.cancelEdition();
+      //   }
+      // }
+  //   }
+  // }
+
+  mouseMove(event: MouseEvent) {
+    if (this._graph && this.mode == 'createEdge') {
+      let canvas = this._graph.DOMtoCanvas({
+        x: event.x,
+        y: event.y - 112 // size of the pane header and navbar
+      });
+      this._nodes.update([{
+        id: TEMP_ID,
+        x: canvas.x,
+        y: canvas.y,
+        physics: false
+      }]);
+    }
+  }
+
+  createEdgeMode(event: MouseEvent) {
+    this.mode = 'createEdge';
+    this._nodes.add({
+      id: TEMP_ID,
+      x: event.x,
+      y: event.y,
+      group: 'temp'
+    });
+    this._edges.add([{
+      id: TEMP_ID,
+      from: this.selected,
+      to: TEMP_ID,
+      physics: false,
+      smooth: false
+    }]);
+  }
+
+// =====================================================================
   editEdge() {
     if (this.selected) {
       let edge = this._edges.get(this.selected) as Edge;
@@ -345,9 +506,19 @@ export class FlowComponent implements OnInit {
   }
 
   private editEdgeConcluded(edgeData, callback) {
-    if (this.selected) {
+    console.log(edgeData);
+
+    if (this.mode == 'editEdge' && this.selected) {
       let edge = this._edges.get(this.selected) as Edge;
       if (edge) {
+
+        
+        // if (!this.isOverNode(params.pointer.canvas)) {
+
+        // }
+        console.log('here');
+        
+
         let fromState = this.section.getStateById(edge.from as number);
         let toNode = this._nodes.get(edgeData.to) as Node;
         // if the origin has not changed, just update the 'to' field
@@ -424,11 +595,11 @@ export class FlowComponent implements OnInit {
         break;
 
       case 'choice':
-        stateCreation('Pergunta com opções', StateGenerator.createChoice, true);
+        stateCreation('Página com pergunta e opções', StateGenerator.createChoice, true);
         break;
         
       case 'input':
-        stateCreation('Pergunta com entrada de texto', StateGenerator.createInput, true);
+        stateCreation('Página com pergunta e entrada de texto', StateGenerator.createInput, true);
         break;
     }
   }

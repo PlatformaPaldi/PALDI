@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import { Gadget } from 'app/core/gadget';
 import { Choice } from "app/core/choice";
 

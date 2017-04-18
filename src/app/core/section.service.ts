@@ -12,7 +12,7 @@ import 'rxjs/add/operator/catch';
 import { HttpUtils } from '../common/http-utils';
 
 
-const url = 'assets/server/section-01.json';
+const urlPath = 'assets/server/';
 
 @Injectable()
 export class SectionService {
@@ -31,10 +31,16 @@ export class SectionService {
 
 
   constructor(private _http: Http) {
-    this.load();
+    this.reset();
   }
 
-  load() {
+  reset() {
+    this.changeSection(new Section());
+    this.setCurrentState(null);
+  }
+
+  load(file: string) {
+    let url = urlPath + file;
     this._http.get(url)
       .map(HttpUtils.extractData)
       .catch(HttpUtils.handleError)
@@ -52,10 +58,10 @@ export class SectionService {
   }
 
   private setCurrentState(state: State) {
-    if (state) {
+    // if (state) {
       this._currentState = state;
       this._currentStateSource.next(this._currentState);
-    }
+    // }
   }
 
 

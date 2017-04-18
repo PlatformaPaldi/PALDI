@@ -16,12 +16,17 @@ import { UiModule } from 'app/ui/ui.module';
 
 import { AppComponent } from './app.component';
 
+import { BookListComponent } from './book-list/book-list.component';
+import { BookItemComponent } from './book-list/book-item.component';
+
 import 'hammerjs';
 
 @NgModule({
   declarations: [
-    AppComponent
-  ],
+    AppComponent,
+    BookListComponent,
+    BookItemComponent
+],
   imports: [
     BrowserModule,
     FormsModule,

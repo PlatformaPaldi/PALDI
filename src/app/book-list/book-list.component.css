@@ -1,0 +1,8 @@
+.book-item {
+  cursor: pointer;
+}
+
+.book-item:hover {
+  color: white;
+  background-color: #8f99d6;
+}

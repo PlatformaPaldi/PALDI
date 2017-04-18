@@ -27,7 +27,7 @@
             >
           </app-controls>
         </div>
-        <div class="add">
+        <div class="add" *ngIf="state">
           <div class="add-button" (click)="showItems(state?.page.gadgets.length)">
             <md-icon>add</md-icon>
           </div>
@@ -35,6 +35,7 @@
           </div>
         </div>
         <app-item-bar
+          *ngIf="state"
           class="item-bar"
           [ngClass]="{ active: (itemButtons == state?.page.gadgets.length || state?.page.gadgets.length == 0) }"
           (addItem)="add(state?.page.gadgets.length, $event)">

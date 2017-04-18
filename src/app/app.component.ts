@@ -1,7 +1,7 @@
 import { SectionService } from 'app/core/section.service';
 import { State } from 'app/core/state';
 import { StateService } from './core/state.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MdDialogRef, MdDialog } from "@angular/material";
 import { PlayerComponent } from "app/player/player.component";
 
@@ -10,7 +10,7 @@ import { PlayerComponent } from "app/player/player.component";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   bookTitle = 'Livro';
   sectionTitle = 'Section';
@@ -21,6 +21,10 @@ export class AppComponent {
 
   constructor(private sectionServ: SectionService, private dialog: MdDialog) {
     sectionServ.currentState$.subscribe(state => setTimeout(_ => this.state = state));
+  }
+
+  ngOnInit() {
+    setTimeout(_ => this.sectionServ.reset());
   }
 
   openPlayer() {

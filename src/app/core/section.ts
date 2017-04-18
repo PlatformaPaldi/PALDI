@@ -8,10 +8,10 @@ export interface ISection {
 }
 
 export class Section implements ISection {
-  title: string;
-  states: State[];
-  properties: Object;
-  initialState: number;
+  title: string = '';
+  states: State[] = [];
+  properties: Object = {};
+  initialState: number = 0;
 
   constructor(sectionData?: Partial<ISection>) {
     if (sectionData) {

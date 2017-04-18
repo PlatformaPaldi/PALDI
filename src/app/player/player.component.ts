@@ -63,6 +63,7 @@ export class PlayerComponent implements OnInit {
       if (start) {
         this.section.updateStateBehaviors(); // compile
         this.updateInternalState(start);
+        // console.log(JSON.stringify(this.section))
       }
     }
   }

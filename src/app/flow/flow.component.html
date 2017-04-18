@@ -6,54 +6,49 @@
   <div class="separator">
   </div>
   <button md-menu-item (click)="createState('choice')">
-      <span>Pergunta com opções</span>
+      <span>Página com pergunta e opções</span>
     </button>
   <button md-menu-item (click)="createState('input')">
-      <span>Pergunta com entrada de dados</span>
+      <span>Página com pergunta e entrada de dados</span>
     </button>
-
 </md-menu>
+
 <div class="full-container">
-  <div class="full-content" id="graph" #graph>
+  <div class="full-content" id="graph" #graph (mousemove)="mouseMove($event)" >
   </div>
 
-  <div class="controls" *ngIf="mode == 'normal'">
+  <div class="controls">
     <button md-icon-button mdTooltip="Nova página" mdTooltipPosition="right" [mdMenuTriggerFor]="newPageMenu">
       <md-icon>web_asset</md-icon>
     </button>
-    <button md-icon-button mdTooltip="Nova transição" mdTooltipPosition="right" (click)="createEdgeMode()">
-      <md-icon>arrow_forward</md-icon>
-    </button>
-  </div>
+    <div class="node-controls" *ngIf="mode == 'editNode'"
+        [style.left.px]="pos?.x"
+        [style.top.px]="pos?.y">
 
-  <div class="controls" *ngIf="mode == 'editNode'">
-    <button md-icon-button mdTooltip="Renomear página" mdTooltipPosition="right" (click)="renameNode()">
-      <md-icon>mode_edit</md-icon>
-    </button>
-    <button md-icon-button mdTooltip="Definir como página inicial" mdTooltipPosition="right" (click)="setAsStartNode()">
-      <md-icon>launch</md-icon>
-    </button>
-    <button md-icon-button mdTooltip="Remove página" mdTooltipPosition="right" (click)="removeNode()">
-      <md-icon>delete_forever</md-icon>
-    </button>
-  </div>
+      <button class="arrow" md-icon-button mdTooltip="Nova transição" mdTooltipPosition="below" (click)="createEdgeMode($event)">
+        <md-icon>arrow_back</md-icon>
+      </button>
 
-  <div class="controls" *ngIf="mode == 'editEdge'">
-    <button md-icon-button mdTooltip="Renomear transição" mdTooltipPosition="right" (click)="renameEdge()">
-      <md-icon>mode_edit</md-icon>
-    </button>
-    <button md-icon-button mdTooltip="Alterar origem ou destino" mdTooltipPosition="right" (click)="editEdge()">
-      <md-icon>call_split</md-icon>
-    </button>
-    <button md-icon-button mdTooltip="Remover transição" mdTooltipPosition="right" (click)="removeEdge()">
-      <md-icon>delete_forever</md-icon>
-    </button>
-  </div>
+      <div class="tools">
+        <button md-icon-button mdTooltip="Renomear" mdTooltipPosition="above" (click)="renameNode()">
+          <md-icon>mode_edit</md-icon>
+        </button>
+        <button md-icon-button mdTooltip="Definir como página inicial" mdTooltipPosition="above" (click)="setAsStartNode()">
+          <md-icon>launch</md-icon>
+        </button>
+        <button md-icon-button mdTooltip="Remover" mdTooltipPosition="above" (click)="removeNode()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <div class="node-controls" *ngIf="mode == 'editEdge'"
+        [style.left.px]="pos?.x"
+        [style.top.px]="pos?.y">
+      <button class="___" md-icon-button mdTooltip="Renomear" mdTooltipPosition="above" (click)="renameEdge()">
+        <md-icon>mode_edit</md-icon>
+      </button>
+    </div>
 
-  <div class="controls" *ngIf="mode == 'cancel'">
-    <button md-icon-button mdTooltip="Sai do modo de edição" mdTooltipPosition="right" (click)="cancelEdition()">
-      <md-icon>close</md-icon>
-    </button>
   </div>
 
   <div class="message" *ngIf="message">

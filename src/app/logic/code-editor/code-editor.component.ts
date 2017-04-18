@@ -34,7 +34,7 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
 
   options: any = {
     printMargin: false,
-    readOnly: true
+    // readOnly: true
   };
 
   constructor() {

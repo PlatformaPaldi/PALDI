@@ -1,16 +1,9 @@
+<md-sidenav-container fxFill>
+  <md-sidenav class="books-sidenav" #sidenav>
+    <app-book-list (select)="sidenav.close()"></app-book-list>
+  </md-sidenav>
 <div fxLayout="column" fxFill>
-  <app-navbar [title]="bookTitle" [subtitle]="sectionTitle"></app-navbar>
-
-  <!--<md-toolbar color="primary">
-    <div fxLayout="row" fxFlex fxLayoutAlign="space-between center">
-      <md-icon>import_contacts</md-icon>
-      <span>Livro</span>
-      <button md-icon-button>
-        <md-icon>user</md-icon>
-      </button>
-    </div>
-  </md-toolbar>-->
-
+  <app-navbar logo="import_contacts" [title]="bookTitle" [subtitle]="sectionTitle" (select)="sidenav.toggle()"></app-navbar>
   <div fxLayout="row" fxFlex="grow">
 
     <ui-pane fxFlex="1 1 auto" fxLayout="column" class="sequence-pane">
@@ -19,7 +12,7 @@
       </ui-pane-title>
       <ui-pane-content fxFlex="grow">
         <app-flow></app-flow>
-        <button md-fab class="play-button" (click)="openPlayer()" >
+        <button md-fab class="play-button" (click)="openPlayer()">
           <md-icon>play_arrow</md-icon>
         </button>
       </ui-pane-content>
@@ -46,3 +39,6 @@
   </div>
 
 </div>
+
+
+</md-sidenav-container>
