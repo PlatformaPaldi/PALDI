@@ -18,9 +18,10 @@ export class PlayerComponent implements OnInit {
 
   height: number;
   width: number;
+  error: string;
 
   section: Section;
-  lastState: Readonly<State>;
+  currentState: Readonly<State>;
   contentState: Readonly<State>;
   interventionState: Readonly<State>;
   private subscription: Subscription;  // to listen to state transitions (onNext())
@@ -34,26 +35,45 @@ export class PlayerComponent implements OnInit {
   }
 
   nextState() {
-    if (this.lastState.behavior.onNext) {
-      this.lastState.behavior.onNext();
+    if (this.currentState && this.currentState.behavior.onNext) {
+      this.currentState.behavior.onNext();
     }    
   }
 
   private updateInternalState(state: State) {
-    this.lastState = state;
-    if (state.type == 'content') {
-      this.contentState = state;
-      this.intervention.hide();
+    if (state) {
+      this.currentState = state; // save the reference to call 'onNext()'
+
+      // call behavior and update page elements
+      if (state.behavior.onEnter) {
+        state.behavior.onEnter();
+      }
+      state.page.update();
+
+      console.log(State.globals);
+      
+      
+      // set up the correct var to in the player
+      if (state.type == 'content') {
+        this.contentState = state;
+        this.intervention.hide();
+      }
+      else if (state.type == 'intervention') {
+        this.interventionState = state;
+        this.intervention.show();
+      }
+      // remove the event subscription from the previous event and creates a new one with the new event.
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
+      this.subscription = state.next$.subscribe(s => this.updateInternalState(s));
     }
-    else if (state.type == 'intervention') {
-      this.interventionState = state;
-      this.intervention.show();
+    else {
+      // TODO the book end up in a final state
+      // what to do: close the player? or show a pre-defined page
+      console.log('book finished');
+      
     }
-    // remove the event subscription from the previous event and creates a new one with the new event.
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-    this.subscription = state.next$.subscribe(s => this.updateInternalState(s));
   }
 
 
@@ -63,7 +83,10 @@ export class PlayerComponent implements OnInit {
       if (start) {
         this.section.updateStateBehaviors(); // compile
         this.updateInternalState(start);
-        // console.log(JSON.stringify(this.section))
+        this.sectionServ.save();
+      }
+      else {
+        this.error = 'Página inicial não definida';
       }
     }
   }

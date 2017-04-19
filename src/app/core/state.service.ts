@@ -25,21 +25,21 @@ export class StateService {
   }
 
   load() {
-    this._http.get(url)
-      .map(HttpUtils.extractData)
-      .catch(HttpUtils.handleError)
-      .subscribe(
-        data => {
-          let stateJson = data as State[];
-          if (stateJson.length > 0) {
-            let stateObjs = stateJson.map(state => new State(state));
-            this.changeState(stateObjs[0]); // initial state
-          }
-        },
-        error => {
-          console.log('error: ', error);
-        }
-      );    
+    // this._http.get(url)
+    //   .map(HttpUtils.extractData)
+    //   .catch(HttpUtils.handleError)
+    //   .subscribe(
+    //     data => {
+    //       let stateJson = data as State[];
+    //       if (stateJson.length > 0) {
+    //         let stateObjs = stateJson.map(state => new State(state));
+    //         this.changeState(stateObjs[0]); // initial state
+    //       }
+    //     },
+    //     error => {
+    //       console.log('error: ', error);
+    //     }
+    //   );    
   }
 
   private changeState(newState: State) {
@@ -64,19 +64,19 @@ export class StateService {
     return this._currentState;
   }
 
-  get initial(): Readonly<State> {
-    return State.getInitialState();
-  }
+  // get initial(): Readonly<State> {
+  //   return State.getInitialState();
+  // }
 
-  changeTo(stateLabel: string) {
-    let state = State.getStateByLabel(stateLabel);
-    if (state) {
-      this.changeState(state);
-    }
-  }
+  // changeTo(stateLabel: string) {
+  //   let state = State.getStateByLabel(stateLabel);
+  //   if (state) {
+  //     this.changeState(state);
+  //   }
+  // }
 
-  getStates(): string[] {
-    return State.getStates();
-  }
+  // getStates(): string[] {
+  //   return State.getStates();
+  // }
 
 }

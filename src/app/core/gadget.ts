@@ -11,4 +11,7 @@ export abstract class Gadget {
 
   // abstract update method
   update() {}
+
+  abstract get data();
+
 }

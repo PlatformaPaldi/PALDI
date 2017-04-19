@@ -1,4 +1,4 @@
-import { State } from './state';
+import { State, IState } from './state';
 
 export interface ISection {
   title: string;
@@ -19,14 +19,16 @@ export class Section implements ISection {
       this.initialState = sectionData.initialState || 0;
       this.properties = sectionData.properties || {};
       if (Array.isArray(sectionData.states)) {
-        this.states = sectionData.states.map(state => new State(state));
+        this.states = sectionData.states.map(state => new State(this, state));
       }
     }
   }
 
-  addState(state: State) {
+  createState(stateData: IState): State {
+    let state = new State(this, stateData);
     // TODO check id duplication
     this.states.push(state);
+    return state;
   }
 
   removeState(state: State) {
@@ -57,9 +59,42 @@ export class Section implements ISection {
   }
 
   updateStateBehaviors() {
+    State.globals = {};
     for (let state of this.states) {
       state.updateBehavior();
     }
+  }
+
+  toJson() {
+    return JSON.stringify({
+      title: this.title,
+      initialState: this.initialState,
+      states: this.states.map(state => {
+        return {
+          id: state.id,
+          type: state.type,
+          label: state.label,
+          outedges: state.outedges.map(edge => {
+            return {
+              label: edge.label,
+              to: edge.to
+            }
+          }),
+          page: {
+            gadgets: state.page.gadgets.map(gadget => {
+              let gdt = gadget.data;
+              gdt.type = gadget.type;
+              return gdt;
+            })
+          },
+          behavior: {
+            type: state.behavior.type,
+            code: state.behavior.code,
+            block: state.behavior.block
+          }
+        }
+      })
+    });
   }
 
 }

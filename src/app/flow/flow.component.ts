@@ -17,7 +17,7 @@ const UPDATE_FLAG = ' updating';
 const TERMINAL_GRP = 'terminal';
 const TEMP_ID = 20000;
 const EDGE_ID_START = 10000;
-let nextId = EDGE_ID_START;
+let nextEdgeId = EDGE_ID_START;
 
 /** Return a random value in the range [-size; size]. Used to put a graph node in a random position. */
 function noise(size) {
@@ -143,7 +143,7 @@ export class FlowComponent implements OnInit {
     let edges = [];
     for (let state of this.section.states) {
       for (let edge of state.outedges) {
-        edge.id = nextId++;   // insert id int he state edge to be able to get it back when necessary
+        edge.id = nextEdgeId++;   // insert id int the state edge to be able to get it back when necessary
         let to = this.section.states.find(state => state.label == edge.to);
         if (to) {
           edges.push({
@@ -349,7 +349,7 @@ export class FlowComponent implements OnInit {
     let fromState = this.section.getStateById(from);
     let toState = this.section.getStateById(to);
     if (fromState && toState) {
-      let id = nextId++;
+      let id = nextEdgeId++;
       fromState.addTransition({
         id: id,
         to: toState.label,
@@ -547,7 +547,7 @@ export class FlowComponent implements OnInit {
     let fromState = this.section.getStateById(edgeData.from);
     let toState = this.section.getStateById(edgeData.to);
     if (fromState && toState) {
-      let id = nextId++;
+      let id = nextEdgeId++;
       fromState.addTransition({
         id: id,
         to: toState.label,
@@ -577,8 +577,7 @@ export class FlowComponent implements OnInit {
       }
       dlg.afterClosed().subscribe(data => {
         if (data && data.name) {
-          let state = creationFunc(nextId++, data.name, data.varName);
-          this.sectionServ.createState(state);
+          let state = this.sectionServ.createState(creationFunc(data.name, data.varName));
           this._nodes.add({
             id: state.id,
             label: state.label,

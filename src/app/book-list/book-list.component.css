@@ -3,6 +3,5 @@
 }
 
 .book-item:hover {
-  color: white;
-  background-color: #8f99d6;
+  background-color: rgba(0, 0, 0, 0.1);
 }

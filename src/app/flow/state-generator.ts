@@ -2,9 +2,8 @@
 export class StateGenerator {
 
   // -----------------------------------------------------------------------------------------------------
-  static createEmpty(id: number, label: string) {
+  static createEmpty(label: string) {
     let state: any = {
-      id: id,
       label: label,
       type: "content",
       page: {
@@ -28,9 +27,8 @@ export class StateGenerator {
   }
 
   // -----------------------------------------------------------------------------------------------------
-  static createInput(id: number, label: string, varName: string) {
+  static createInput(label: string, varName: string) {
     let state: any = {
-      id: id,
       label: label,
       type: "intervention",
       page: {
@@ -69,9 +67,8 @@ export class StateGenerator {
   }
 
   // -----------------------------------------------------------------------------------------------------
-  static createChoice(id: number, label: string, varName: string) {
+  static createChoice(label: string, varName: string) {
     let state: any = {
-      id: id,
       label: label,
       type: "intervention",
       page: {

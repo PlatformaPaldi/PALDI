@@ -31,6 +31,17 @@ export class Choice extends Gadget {
     return this.options[index];
   }
 
+  get data() {
+    return {
+      options: this.options.map(option => {
+        return {
+          value: option.value,
+          text: option.text
+        }
+      })
+    }
+  }
+
   get isAnswered(): boolean {
     return this.value != undefined && this.value.length > 0;
   }

@@ -1,3 +1,5 @@
+import { IOutEdge } from './state';
+import { Section } from './section';
 import { Subject } from 'rxjs/Subject';
 import { Page } from './page';
 
@@ -54,7 +56,7 @@ export class State implements IState {
     onNext: doNothing
   };
 
-  constructor(state?: Partial<IState>) {
+  constructor(private section: Section, state?: Partial<IState>) {
     if (state) {
       for (let k in state) {
         this[k] = state[k];
@@ -65,6 +67,9 @@ export class State implements IState {
       if (state.behavior) {
         setTimeout(_ => this.updateBehavior());
       }
+    }
+    if (this.id > State._idCount) {
+      State._idCount = this.id + 1; // next state id should be always unique
     }
     State._states.push(this);
     State._idCount++;
@@ -92,29 +97,37 @@ export class State implements IState {
         })(this, State.globals);
         `;
       let codeEval = eval(code);  // TODO check security risks
+      // console.log(codeEval);
       this.behavior.onEnter = codeEval.onEnter;
       this.behavior.onNext = codeEval.onNext;
     }
   }
 
   next(edgeLabel?: string) {
+    let edge: IOutEdge;
     if (!edgeLabel && this.outedges.length > 0) {
       let len = this.outedges.length;
       let randomIndex = Math.floor(Math.random() * len);
-      edgeLabel = this.outedges[randomIndex].label;
+      edge = this.outedges[randomIndex];
     }
-    // let nextState = State.getStateByLabel(to);
-    let edge = this.outedges.find(edge => edge.label == edgeLabel);
+    else {
+      edge = this.outedges.find(edge => edge.label == edgeLabel);
+    }
+    
     if (edge) {
-      let nextState = State.getStateByLabel(edge.to);
-      if (nextState) {
-        this._next.next(nextState);
-        nextState.behavior.onEnter();
-        nextState.page.update();
-        return;
-      }
+      this._next.next(this.section.getStateByLabel(edge.to));
+      // let nextState = this.section.getStateByLabel(edge.to);
+      // if (nextState) {
+      //   this._next.next(nextState);
+      //   nextState.behavior.onEnter();
+      //   nextState.page.update();
+      //   return;
+      // }
     }
-    // TODO if get here, send error: there is no outedge with the given 'to' label
+    else {
+      // if get here, send error: there is no outedge with the given 'to' label
+      this._next.next(null);
+    }
   }
 
   addTransition(edge: IOutEdge) {
@@ -132,21 +145,36 @@ export class State implements IState {
     }
   }
 
-  static getStateByLabel(label: string) {
-    return State._states.find(s => s.label == label);
+  toJson() {
+    return JSON.stringify({
+      id: this.id,
+      type: this.type,
+      label: this.label,
+      outedges: JSON.stringify(this.outedges),
+      page: JSON.stringify(this.page),
+      behavior: {
+        type: this.behavior.type,
+        code: this.behavior.code,
+        block: this.behavior.block
+      }
+    });
   }
 
-  static updateBehaviors() {
-    for(let state of State._states) {
-      state.updateBehavior();
-    }
-  }
+  // static getStateByLabel(label: string) {
+  //   return State._states.find(s => s.label == label);
+  // }
 
-  static getInitialState(): State {
-    return State._states[0];
-  }
+  // static updateBehaviors() {
+  //   for(let state of State._states) {
+  //     state.updateBehavior();
+  //   }
+  // }
 
-  static getStates(): string[] {
-    return State._states.map(s => s.label);
-  }
+  // static getInitialState(): State {
+  //   return State._states[0];
+  // }
+
+  // static getStates(): string[] {
+  //   return State._states.map(s => s.label);
+  // }
 }

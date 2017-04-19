@@ -99,14 +99,12 @@ Blockly.JavaScript['onnext'] = function (block) {
 };
 
 Blockly.JavaScript['nextpage'] = function (block) {
-  // TODO: Assemble JavaScript into code variable.
   var code = 'state.next();\n';
   return code;
 };
 
 Blockly.JavaScript['nexttransition'] = function (block) {
   var transition = Blockly.JavaScript.valueToCode(block, 'TRANSITION', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
   var code = `state.next(${transition});\n`;
   return code;
 };
@@ -141,12 +139,16 @@ export default `
   </category>
   <category name="Lógica" colour="#5b5ba5">
     <block type="controls_if"></block>
-    <block type="isanswered">
-      <field name="gadgetType">choice</field>
+    <block type="logic_compare">
+      <field name="OP">EQ</field>
     </block>
-    <block type="isspecificgadgetanswered">
-      <field name="index">0</field>
+    <block type="controls_whileUntil">
+      <field name="MODE">WHILE</field>
     </block>
+    <block type="logic_operation">
+      <field name="OP">AND</field>
+    </block>
+    <block type="logic_negate"></block>
   </category>
   <category name="Valores" colour="#5ba593">
     <block type="text">
@@ -154,6 +156,28 @@ export default `
     </block>
     <block type="getgadgetvalue">
       <field name="gadgetType">choice</field>
+    </block>
+    <block type="isanswered">
+      <field name="gadgetType">choice</field>
+    </block>
+    <block type="isspecificgadgetanswered">
+      <field name="index">0</field>
+    </block>
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+    <block type="math_arithmetic">
+      <field name="OP">ADD</field>
+      <value name="A">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="B">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
     </block>
   </category>
   <category name="Variáveis" colour="#A65C81" custom="VARIABLE"></category>

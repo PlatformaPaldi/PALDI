@@ -97,10 +97,10 @@ export class SectionService {
     return this._currentState;
   }
 
-  createState(stateData: IState) {
-    let state = new State(stateData);
-    this._currentSection.addState(state);
+  createState(stateData: IState): State {
+    let state = this._currentSection.createState(stateData);
     this.setCurrentState(state);
+    return state;
   }
 
   nextState() {
@@ -109,6 +109,11 @@ export class SectionService {
     }
   }
 
+  save() {
+    let json = this._currentSection.toJson();
+    console.log(json);
+    
+  }
 
 
 }

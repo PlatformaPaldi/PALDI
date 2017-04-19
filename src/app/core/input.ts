@@ -12,4 +12,13 @@ export class Input extends Gadget {
   get isAnswered(): boolean {
     return this.value != undefined && this.value.length > 0;
   }
+
+  get data() {
+    return {
+      value: this.value,
+      info: this.info,
+      help: this.help
+    }
+  }
+  
 }

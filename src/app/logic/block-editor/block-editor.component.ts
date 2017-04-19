@@ -59,6 +59,3 @@ export class BlockEditorComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
 }
-
-
-// Blockly.JavaScript.workspaceToCode(workspace);

@@ -24,12 +24,6 @@ export class BookListComponent implements OnInit {
     },
     {
       id: 2,
-      title: 'História interativa',
-      author: 'Fulano',
-      coverage: ''
-    },
-    {
-      id: 3,
       title: 'Quiz',
       author: 'Fulano',
       coverage: ''
