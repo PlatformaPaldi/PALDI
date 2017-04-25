@@ -4,10 +4,11 @@
       <md-icon>{{ logo }}</md-icon>
     </button>
     <span class="title">{{ title }}</span>
-    <span class="subtitle">{{ subtitle }}</span>
+    <span *ngIf="subtitle" class="subtitle">{{ subtitle }}</span>
     <span class="fill"></span>
-    <button md-icon-button>
-      <md-icon>person</md-icon>
+    <button md-icon-button (click)="openContact()">
+      <md-icon>contact_mail</md-icon>
+      <!--<md-icon>person</md-icon>-->
     </button>
   </div>
 </md-toolbar>

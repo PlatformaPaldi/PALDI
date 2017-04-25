@@ -1,3 +1,5 @@
+import { ContactDialogComponent } from './../../ui/contact-dialog/contact-dialog.component';
+import { MdDialog } from '@angular/material';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -11,9 +13,13 @@ export class NavbarComponent implements OnInit {
   @Input() subtitle: string;
   @Output() select = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private dialog: MdDialog) { }
 
   ngOnInit() {
+  }
+
+  openContact() {
+    this.dialog.open(ContactDialogComponent);
   }
 
 }

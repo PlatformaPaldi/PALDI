@@ -9,6 +9,7 @@ import { PaneToolsComponent } from './pane/pane-tools.component';
 import { PaneComponent } from './pane/pane.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
 
 @NgModule({
   imports: [
@@ -22,10 +23,12 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     PaneContentComponent,
     ScrollDirective,
     ConfirmDialogComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ContactDialogComponent
 ],
   entryComponents: [
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ContactDialogComponent
   ],
   exports: [
     MobileFrameComponent,

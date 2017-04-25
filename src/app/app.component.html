@@ -3,7 +3,8 @@
     <app-book-list (select)="sidenav.close()"></app-book-list>
   </md-sidenav>
 <div fxLayout="column" fxFill>
-  <app-navbar logo="import_contacts" [title]="bookTitle" [subtitle]="sectionTitle" (select)="sidenav.toggle()"></app-navbar>
+  <app-navbar logo="import_contacts" [title]="bookTitle" (select)="sidenav.toggle()"></app-navbar>
+  <!--<app-navbar logo="import_contacts" [title]="bookTitle" [subtitle]="sectionTitle" (select)="sidenav.toggle()"></app-navbar>-->
   <div fxLayout="row" fxFlex="grow">
 
     <ui-pane fxFlex="1 1 auto" fxLayout="column" class="sequence-pane">
@@ -12,7 +13,7 @@
       </ui-pane-title>
       <ui-pane-content fxFlex="grow">
         <app-flow></app-flow>
-        <button md-fab class="play-button" (click)="openPlayer()">
+        <button md-fab class="play-button" (click)="openPlayer()" mdTooltip="Simula publicação" mdTooltipPosition="below">
           <md-icon>play_arrow</md-icon>
         </button>
       </ui-pane-content>
@@ -22,7 +23,7 @@
       <ui-pane-title class="light" fxFlex="48px">
         <div class="title">Página "{{ state?.label }}"</div>
         <ui-pane-tools>
-          <button md-icon-button (click)="logic.toggle()">
+          <button md-icon-button (click)="logic.toggle()"  mdTooltip="Código da página" mdTooltipPosition="left">
             <md-icon>code</md-icon>
           </button>
         </ui-pane-tools>
