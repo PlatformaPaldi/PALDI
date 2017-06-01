@@ -61,6 +61,8 @@ export class PageEditorComponent implements OnInit {
   }
 
   add(index: number, type: GadgetType) {
+    console.log(type);
+    
     this.state.page.add(index, type);
     this.hideItems();
     this.select(index);

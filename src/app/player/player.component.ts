@@ -42,6 +42,7 @@ export class PlayerComponent implements OnInit {
 
   private updateInternalState(state: State) {
     if (state) {
+      this.sectionServ.currentState = state;
       this.currentState = state; // save the reference to call 'onNext()'
 
       // call behavior and update page elements

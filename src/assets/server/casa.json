@@ -1,0 +1,111 @@
+{
+  "title": "Casa do ENEM",
+  "initialState": 0,
+  "states": [
+    {
+      "id": 0,
+      "type": "content",
+      "label": "capa",
+      "outedges": [
+        {
+          "label": "quarto1",
+          "to": "quarto 1"
+        },
+        {
+          "label": "quarto2",
+          "to": "quarto 2"
+        },
+        {
+          "label": "cozinha",
+          "to": "cozinha"
+        }
+      ],
+      "page": {
+        "gadgets": [
+          {
+            "content": "<p class=\"ql-align-center\">Casa do ENEM</p>",
+            "type": "text"
+          },
+          {
+            "file": "assets/server/casa.svg",
+            "type": "svg"
+          }
+        ]
+      },
+      "behavior": {
+        "type": "block",
+        "code": "function onTouch(identifier) {\n  state.next((identifier || ''));\n}\n",
+        "block": "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"ontouch\" id=\"3ib[zxT0#Lx$ZX[Xk(cR\" x=\"89\" y=\"63\"><statement name=\"COMMANDS\"><block type=\"nexttransition\" id=\"a_0AUo9$*({{3;AafKEb\"><value name=\"TRANSITION\"><block type=\"identifier\" id=\"Xw^{985_8{/f,hPivL,|\"></block></value></block></statement></block></xml>"
+      }
+    },
+    {
+      "id": 1,
+      "type": "content",
+      "label": "quarto 1",
+      "outedges": [
+        {
+          "to": "capa"
+        }
+      ],
+      "page": {
+        "gadgets": [
+          {
+            "content": "<p class=\"ql-align-center\">Quarto 1</p>",
+            "type": "text"
+          }
+        ]
+      },
+      "behavior": {
+        "type": "block",
+        "code": "function onNext() {\n  state.next();\n}\n",
+        "block": "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"onnext\" id=\"Uys$z-q|vd@Sp4McOjC8\" x=\"10\" y=\"10\"><statement name=\"COMMANDS\"><block type=\"nextpage\" id=\"pxy.[as1lrU@%KgV4Q^[\"></block></statement></block></xml>"
+      }
+    },
+    {
+      "id": 2,
+      "type": "content",
+      "label": "quarto 2",
+      "outedges": [
+        {
+          "to": "capa"
+        }
+      ],
+      "page": {
+        "gadgets": [
+          {
+            "content": "<p>Quarto 2</p>",
+            "type": "text"
+          }
+        ]
+      },
+      "behavior": {
+        "type": "block",
+        "code": "function onNext() {\n  state.next();\n}\n",
+        "block": "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"onnext\" id=\"Uys$z-q|vd@Sp4McOjC8\" x=\"10\" y=\"10\"><statement name=\"COMMANDS\"><block type=\"nextpage\" id=\"pxy.[as1lrU@%KgV4Q^[\"></block></statement></block></xml>"
+      }
+    },
+    {
+      "id": 3,
+      "type": "content",
+      "label": "cozinha",
+      "outedges": [
+        {
+          "to": "capa"
+        }
+      ],
+      "page": {
+        "gadgets": [
+          {
+            "content": "<p>Cozinha</p>",
+            "type": "text"
+          }
+        ]
+      },
+      "behavior": {
+        "type": "block",
+        "code": "function onNext() {\n  state.next();\n}\n",
+        "block": "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"onnext\" id=\"XYSa]tjWY)?8c3uFg?LT\" x=\"10\" y=\"10\"><statement name=\"COMMANDS\"><block type=\"nextpage\" id=\"}{fc/_f$CD-Yq9n%+Wrd\"></block></statement></block></xml>"
+      }
+    }
+  ]
+}

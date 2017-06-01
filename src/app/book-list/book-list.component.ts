@@ -13,24 +13,35 @@ export class BookListComponent implements OnInit {
     {
       id: 0,
       title: 'Novo livro',
+      filename: '',
       author: 'Fulano',
       coverage: ''
     },
     {
       id: 1,
       title: 'Instruções iniciais',
+      filename: 'section-01.json',
       author: 'Fulano',
       coverage: ''
     },
     {
       id: 2,
       title: 'História interativa',
+      filename: 'section-02.json',
       author: 'Fulano',
       coverage: ''
     },
     {
       id: 3,
       title: 'Quiz',
+      filename: 'section-03.json',
+      author: 'Fulano',
+      coverage: ''
+    },
+    {
+      id: 4,
+      title: 'Casa do ENEM',
+      filename: 'casa.json',
       author: 'Fulano',
       coverage: ''
     }
@@ -44,12 +55,15 @@ export class BookListComponent implements OnInit {
   open(id: number) {
     if (id == 0) {
       this.sectionServ.reset();
+      this.select.emit(0);
     }
     else {
-      let file = 'section-' + (id > 9 ? id : '0' + id ) + '.json';
-      this.sectionServ.load(file);
+      let obj = this.list.find(o => o.id == id);
+      if (obj) {
+        this.sectionServ.load(obj.filename);
+        this.select.emit(id);
+      }
     }
-    this.select.emit(id);
   }
 
 }

@@ -7,6 +7,8 @@ import { InputComponent } from './input/input.component';
 import { InputBoardComponent } from "app/gadgets/input/input-board.component";
 import { TextComponent } from './text/text.component';
 import { TextBoardComponent } from "./text/text-board.component";
+import { SvgComponent } from "./svg/svg.component";
+import { SvgBoardComponent } from "./svg/svg-board.component";
 
 @Injectable()
 export class GadgetService {
@@ -38,6 +40,10 @@ export class GadgetService {
       case 'input':
         componentType = InputComponent;
         boardType = InputBoardComponent;
+        break;
+      case 'svg':
+        componentType = SvgComponent;
+        boardType = SvgBoardComponent;
         break;
     }
     let component = this._createComponent(componentType, componentContainer, gadget);

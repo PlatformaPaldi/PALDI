@@ -192,6 +192,59 @@
         "type": "block",
         "block": "<xml><block type=\"onnext\" x=\"10\" y=\"10\"><statement name=\"COMMANDS\"><block type=\"nextpage\"></block></statement></block></xml>"
       }
+    },
+    {
+      "id": 8,
+      "type": "content",
+      "label": "mapa",
+      "page": {
+        "gadgets": [
+          {
+            "type": "touchImg",
+            "content": {
+              "background": "<svg> code </svg>",
+              "height": "100",
+              "width": "100",
+              "points": [
+                {
+                  "id": "q1",
+                  "x": "50",
+                  "y": "50"
+                },
+                {
+                  "id": "q2",
+                  "x": "75",
+                  "y": "25"
+                },
+                {
+                  "id": "q3",
+                  "x": "25",
+                  "y": "75"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "outedges": [
+        {
+          "label": "q1",
+          "to": "q1"
+        },
+        {
+          "label": "q2",
+          "to": "q2"
+        },
+        {
+          "label": "q3",
+          "to": "q3"
+        }
+      ],
+      "behavior": {
+        "type": "code",
+        "code": "function onEnter() { state.nextButton.hide(); } function onTouch(target) { state.next(target.id); }",
+        "block": ""
+      }
     }
     
   ]

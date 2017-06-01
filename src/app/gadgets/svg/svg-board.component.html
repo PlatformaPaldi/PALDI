@@ -1,0 +1,5 @@
+<div class="container">
+  <md-input-container class="full-width">
+    <input mdInput #filename [value]="gadget.file" placeholder="Arquivo SVG" (keyup.enter)="update(filename.value)">
+  </md-input-container>
+</div>

@@ -3,7 +3,8 @@ import { State } from 'app/core/state';
 import { Http } from '@angular/http';
 import { Section } from './section';
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
@@ -57,6 +58,12 @@ export class SectionService {
     );
   }
 
+  set currentState(state: State) {
+      this._currentState = state;
+      this._currentStateSource.next(this._currentState);
+  }
+
+  // TODO remove
   private setCurrentState(state: State) {
     // if (state) {
       this._currentState = state;
@@ -72,7 +79,8 @@ export class SectionService {
 
     if (this._currentSection.states.length > 0) {
       let initialState = this._currentSection.states.find(state => state.id == this._currentSection.initialState);
-      this.setCurrentState(initialState);
+      this.currentState = initialState;
+      // this.setCurrentState(initialState);
     }
 
     // remove the event subscription from the previous event and creates a new one with the new event.
@@ -112,7 +120,6 @@ export class SectionService {
   save() {
     let json = this._currentSection.toJson();
     console.log(json);
-    
   }
 
 

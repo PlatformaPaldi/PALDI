@@ -24,6 +24,31 @@ Blockly.Blocks['onnext'] = {
   }
 };
 
+Blockly.Blocks['ontouch'] = {
+  init: function () {
+    var varElm = new Blockly.FieldTextInput("identificador");
+    varElm.showEditor_ = function () { }
+    this.appendDummyInput()
+      .appendField("Quando o leitor tocar em um elemento com")
+      .appendField(varElm);
+    this.appendStatementInput("COMMANDS");
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['identifier'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("identificador");
+    this.setOutput(true, "String");
+    this.setColour(160);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
 Blockly.Blocks['nextpage'] = {
   init: function () {
     this.appendDummyInput()
@@ -98,6 +123,17 @@ Blockly.JavaScript['onnext'] = function (block) {
   return code;
 };
 
+Blockly.JavaScript['ontouch'] = function (block) {
+  var statements = Blockly.JavaScript.statementToCode(block, 'COMMANDS');
+  var code = `function onTouch(identifier) {\n${statements}}\n`;
+  return code;
+};
+
+Blockly.JavaScript['identifier'] = function (block) {
+  var code = "identifier || ''";
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
 Blockly.JavaScript['nextpage'] = function (block) {
   var code = 'state.next();\n';
   return code;
@@ -132,6 +168,7 @@ export default `
   <category name="Eventos" colour="#5ba55b">
     <block type="onenter"></block>
     <block type="onnext"></block>
+    <block type="ontouch"></block>
   </category>
   <category name="Transição" colour="#a5935b">
     <block type="nextpage"></block>
@@ -151,6 +188,7 @@ export default `
     <block type="logic_negate"></block>
   </category>
   <category name="Valores" colour="#5ba593">
+    <block type="identifier"></block>
     <block type="text">
       <field name="TEXT"></field>
     </block>

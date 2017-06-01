@@ -1,5 +1,5 @@
 
-export type GadgetType = 'input' | 'choice' | 'text' | 'svg';
+export type GadgetType = 'input' | 'choice' | 'text';
 
 export interface IGadget {
   type: GadgetType;
@@ -7,10 +7,10 @@ export interface IGadget {
 }
 
 export abstract class Gadget {
-  constructor(public type: GadgetType, public description?: string) {}
+  constructor(public type: GadgetType, public description?: string) { }
 
   // abstract update method
-  update() {}
+  update() { }
 
   abstract get data();
 

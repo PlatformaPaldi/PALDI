@@ -1,6 +1,7 @@
 import { Choice } from './choice';
 import { Input } from './input';
 import { Text } from './text';
+import { Svg } from './svg';
 import { Gadget, GadgetType } from './gadget';
 
 export class Page {
@@ -21,6 +22,10 @@ export class Page {
         case 'input':
           let input = gadget as Input;
           this.gadgets.push(new Input(input.value, input.info, input.help));
+          break;
+        case 'svg':
+          let svg = gadget as Svg;
+          this.gadgets.push(new Svg(svg.file));
           break;
       }
     }
@@ -69,6 +74,9 @@ export class Page {
         break;
       case 'text':
         this.gadgets.splice(index, 0, new Text());
+        break;
+      case 'svg':
+        this.gadgets.splice(index, 0, new Svg());
         break;
     }
   }

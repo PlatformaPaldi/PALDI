@@ -21,6 +21,7 @@ export interface IBehavior {
   block?: string;
   onEnter?: Function;
   onNext?: Function;
+  onTouch?: Function;
 }
 
 export interface IState {
@@ -53,7 +54,8 @@ export class State implements IState {
     type: 'block',
     code: '',
     onEnter: doNothing,
-    onNext: doNothing
+    onNext: doNothing,
+    onTouch: doNothing
   };
 
   constructor(private section: Section, state?: Partial<IState>) {
@@ -85,14 +87,16 @@ export class State implements IState {
       }
     }
     if (this.behavior.code) {
-      let code = `
+      let code =  `
         (function(state, globals) {
           function onEnter() {};
           function onNext() {};
+          function onTouch() {};
           ${ this.behavior.code }
           return {
             onEnter: onEnter,
-            onNext: onNext
+            onNext: onNext,
+            onTouch: onTouch,
           }
         })(this, State.globals);
         `;
@@ -100,10 +104,13 @@ export class State implements IState {
       // console.log(codeEval);
       this.behavior.onEnter = codeEval.onEnter;
       this.behavior.onNext = codeEval.onNext;
+      this.behavior.onTouch = codeEval.onTouch;
     }
   }
 
   next(edgeLabel?: string) {
+    console.log('state.next(): ', edgeLabel);
+    
     let edge: IOutEdge;
     if (!edgeLabel && this.outedges.length > 0) {
       let len = this.outedges.length;
