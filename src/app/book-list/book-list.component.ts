@@ -40,7 +40,7 @@ export class BookListComponent implements OnInit {
     },
     {
       id: 4,
-      title: 'Casa do ENEM',
+      title: 'Casa do Aprender',
       filename: 'casa.json',
       author: 'Fulano',
       coverage: ''
