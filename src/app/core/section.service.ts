@@ -1,7 +1,7 @@
 import { IState } from './state';
 import { State } from 'app/core/state';
 import { Http } from '@angular/http';
-import { Section } from './section';
+import { Section, ISection } from './section';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { HttpUtils } from '../common/http-utils';
+import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
 
 
 const urlPath = 'assets/server/';
@@ -29,9 +30,11 @@ export class SectionService {
   private _currentStateSource = new Subject<State>();        // source
   currentState$ = this._currentStateSource.asObservable();   // stream
 
+  private book: FirebaseObjectObservable<Partial<ISection>>;
 
 
-  constructor(private _http: Http) {
+
+  constructor(private _http: Http, private db: AngularFireDatabase) {
     this.reset();
   }
 
@@ -56,6 +59,19 @@ export class SectionService {
         console.log('error: ', error);
       }
     );
+  }
+
+  loadFromData(sectionData: Partial<ISection>) {
+    this.changeSection(new Section(sectionData));
+  }
+
+  loadFromFirebase() {
+    this.book = this.db.object('/book');
+    this.book.subscribe((data: Partial<ISection>) => {
+      const section = new Section(data);
+      section.origin = 'firebase';
+      this.changeSection(section);
+    });
   }
 
   set currentState(state: State) {
@@ -119,7 +135,12 @@ export class SectionService {
 
   save() {
     let json = this._currentSection.toJson();
-    console.log(json);
+    if (this._currentSection.origin == 'firebase') {
+      this.book.set(JSON.parse(json));
+    }
+    else {
+      console.log(json);
+    }
   }
 
 

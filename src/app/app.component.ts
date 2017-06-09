@@ -22,6 +22,9 @@ export class AppComponent implements OnInit {
   constructor(private sectionServ: SectionService, private dialog: MdDialog) {
     sectionServ.current$.subscribe(section => setTimeout(_ => this.bookTitle = section.title));
     sectionServ.currentState$.subscribe(state => setTimeout(_ => this.state = state));
+
+    // this.questions = db.list('/questions');
+    // this.questions.subscribe(data => console.log(data));
   }
 
   ngOnInit() {

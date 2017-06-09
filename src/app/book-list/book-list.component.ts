@@ -1,5 +1,7 @@
 import { SectionService } from 'app/core/section.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+// import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+// import { ISection } from "app/core/section";
 
 @Component({
   selector: 'app-book-list',
@@ -8,6 +10,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class BookListComponent implements OnInit {
   @Output() select = new EventEmitter<number>();
+
+  // book: FirebaseObjectObservable<Partial<ISection>>;
 
   private list = [
     {
@@ -48,6 +52,7 @@ export class BookListComponent implements OnInit {
   ];
 
   constructor(private sectionServ: SectionService) { }
+  // constructor(private sectionServ: SectionService, private db: AngularFireDatabase) { }
 
   ngOnInit() {
   }
@@ -60,7 +65,16 @@ export class BookListComponent implements OnInit {
     else {
       let obj = this.list.find(o => o.id == id);
       if (obj) {
-        this.sectionServ.load(obj.filename);
+        if (obj.title == 'Casa do Aprender') {
+          this.sectionServ.loadFromFirebase();
+          // this.book = this.db.object('/book');
+          // this.book.subscribe((data: Partial<ISection>) => {
+          //   this.sectionServ.loadFromData(data);
+          // });
+        }
+        else {
+          this.sectionServ.load(obj.filename);
+        }
         this.select.emit(id);
       }
     }

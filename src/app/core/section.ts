@@ -1,10 +1,13 @@
 import { State, IState } from './state';
 
+type OriginType = 'firebase' | 'json';
+
 export interface ISection {
   title: string;
   states: State[];
   initialState: number;
   properties: Object;
+  origin: OriginType;
 }
 
 export class Section implements ISection {
@@ -12,6 +15,7 @@ export class Section implements ISection {
   states: State[] = [];
   properties: Object = {};
   initialState: number = 0;
+  origin: OriginType = 'json';
 
   constructor(sectionData?: Partial<ISection>) {
     if (sectionData) {

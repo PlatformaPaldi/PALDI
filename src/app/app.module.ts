@@ -7,6 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+
 import { StateService } from './core/state.service';
 import { SharedModule } from './shared/shared.module';
 import { LogicModule } from './logic/logic.module';
@@ -37,7 +42,10 @@ import 'hammerjs';
     LogicModule,
     PlayerModule,
     FlowModule,
-    UiModule
+    UiModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   providers: [
     StateService,
