@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyDHjHXcD-Kyz-4x9qH0mXrIKCQf4kbo6OA",
-    authDomain: "casa-do-aprender.firebaseapp.com",
-    databaseURL: "https://casa-do-aprender.firebaseio.com",
-    projectId: "casa-do-aprender",
-    storageBucket: "casa-do-aprender.appspot.com",
-    messagingSenderId: "255770635966"
+    apiKey: "AIzaSyBvEF_U5E9YewJQVY-N04JcbeRUVxvr8SQ",
+    authDomain: "casa-do-aprender-d7556.firebaseapp.com",
+    databaseURL: "https://casa-do-aprender-d7556.firebaseio.com",
+    projectId: "casa-do-aprender-d7556",
+    storageBucket: "casa-do-aprender-d7556.appspot.com",
+    messagingSenderId: "245162409377"    
   }
 };
