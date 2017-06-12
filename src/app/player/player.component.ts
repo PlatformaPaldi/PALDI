@@ -84,7 +84,7 @@ export class PlayerComponent implements OnInit {
       if (start) {
         this.section.updateStateBehaviors(); // compile
         this.updateInternalState(start);
-        this.sectionServ.save();
+        // this.sectionServ.save();
       }
       else {
         this.error = 'Página inicial não definida';

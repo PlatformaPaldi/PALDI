@@ -1,3 +1,10 @@
+<md-menu #pageMenu="mdMenu">
+  <button md-menu-item (click)="save()">Salvar</button>
+  <button md-menu-item>Criar cópia</button>
+  <button md-menu-item>Exportar</button>
+  <button md-menu-item>Publicar</button>
+</md-menu>
+
 <md-sidenav-container fxFill>
   <md-sidenav class="books-sidenav" #sidenav>
     <app-book-list (select)="sidenav.close()"></app-book-list>
@@ -8,7 +15,12 @@
 
     <ui-pane fxFlex="1 1 auto" fxLayout="column" class="sequence-pane">
       <ui-pane-title fxFlex="48px">
-        <div class="title">Sequência de páginas</div>
+        <div class="title">
+          <button md-icon-button [mdMenuTriggerFor]="pageMenu">
+            <md-icon>more_vert</md-icon>
+          </button>
+          Sequência de páginas
+        </div>
       </ui-pane-title>
       <ui-pane-content fxFlex="grow">
         <app-flow></app-flow>

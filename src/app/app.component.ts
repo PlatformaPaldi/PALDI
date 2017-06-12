@@ -40,5 +40,8 @@ export class AppComponent implements OnInit {
     });
   }
 
+  save() {
+    this.sectionServ.save();
+  }
 
 }
