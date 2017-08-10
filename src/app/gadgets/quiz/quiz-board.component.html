@@ -1,0 +1,63 @@
+<!--div class="table">
+  <div class="row">
+    <div class="value">
+      <md-input-container floatPlaceholder="always">
+        <input #newValue mdInput placeholder="Questão" (blur)="onBlur()" [(ngModel)]="_newValue" (keydown)="onKeyDown($event)" (keyup)="onKeyPress($event)">
+      </md-input-container>
+    </div>
+    <div class="row">
+      <div class="value">
+        <md-input-container floatPlaceholder="always">
+          <input mdInput placeholder="Touchable" (blur)="onBlur()" (keydown)="onKeyDown($event)" (keyup)="onKeyPress($event)">
+        </md-input-container>
+      </div>
+
+  </div-->
+  <div class="container">
+
+      <div class="text">
+        <md-input-container floatPlaceholder="always">
+          <input #right mdInput placeholder="Certo (transição)" [(ngModel)]="gadget.transitionRight">
+        </md-input-container>
+        <md-input-container floatPlaceholder="always">
+          <input #wrong mdInput placeholder="Errado (transição)" [(ngModel)]="gadget.transitionWrong">
+        </md-input-container>
+      </div>
+
+      <div class="text" style="margin-top: 20px">
+        <md-input-container floatPlaceholder="always">
+          <input mdInput placeholder="Livro">
+        </md-input-container>
+        <md-input-container floatPlaceholder="always">
+          <input mdInput placeholder="Nível">
+        </md-input-container>
+      </div>
+
+    <div class="row">
+      <md-radio-group>
+        <table class="table">
+          <tr *ngFor="let question of gadget.questions">
+            <td>
+              <md-radio-button [value]="question.id" (click)=setSelectedQuestion(question.id)></md-radio-button>
+            </td>
+            <td class="mat-radio-button">
+              {{question.pergunta}}
+            </td>
+            <td class="mat-radio-button">
+              -
+            </td>
+            <td class="mat-radio-button">
+              {{question.livro}}
+            </td>
+            <td class="mat-radio-button">
+              -
+            </td>
+            <td class="mat-radio-button">
+              {{question.nivel}}
+            </td>
+            <br><br>
+          </tr>
+        </table>
+      </md-radio-group>
+    </div>
+  </div>

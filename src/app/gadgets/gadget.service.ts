@@ -9,6 +9,8 @@ import { TextComponent } from './text/text.component';
 import { TextBoardComponent } from "./text/text-board.component";
 import { SvgComponent } from "./svg/svg.component";
 import { SvgBoardComponent } from "./svg/svg-board.component";
+import { QuizComponent } from "./quiz/quiz.component";
+import { QuizBoardComponent } from "./quiz/quiz-board.component";
 
 @Injectable()
 export class GadgetService {
@@ -44,6 +46,10 @@ export class GadgetService {
       case 'svg':
         componentType = SvgComponent;
         boardType = SvgBoardComponent;
+        break;
+      case 'quiz':
+        componentType = QuizComponent;
+        boardType = QuizBoardComponent;
         break;
     }
     let component = this._createComponent(componentType, componentContainer, gadget);

@@ -26,7 +26,7 @@ function noise(size) {
 
 /**
  * Componente de sequência de estados.
- * 
+ *
  * Mecanismos de interação:
  * - Estados
  *   - criação: botão no canto do canvas abre um menu com as opções de páginas a serem criadas
@@ -35,7 +35,7 @@ function noise(size) {
  *   - criação: ao selecionar um estado, aparecerá um nó que pode ser deslocado sobre o destino da nova aresta
  *   - edição: ao selecionar uma aresta, ela entra em modo de edição e sairá se for clicado em qualquer outro canto da tela
  *   - remoção: se ao e
- * 
+ *
  *  mode_edit, trending_flat (arrow_forward), delete_forever
  */
 @Component({
@@ -122,7 +122,7 @@ export class FlowComponent implements OnInit {
       this.section = section;
       this.resetGraph();
     });
-    
+
   }
 
   ngOnInit() {
@@ -192,7 +192,7 @@ export class FlowComponent implements OnInit {
       this.mode = 'editNode';
       this.selected = params.nodes[0];
       this.showNodeButtons(this.selected);
-      
+
       let state = this.section.getStateById(this.selected);
       this.sectionServ.selectState(state.label);
     }
@@ -205,7 +205,7 @@ export class FlowComponent implements OnInit {
       let edge = this._edges.get(this.selected) as Edge;
       let positions = this._graph.getPositions([edge.from, edge.to]);
       console.log(edge.from, edge.to);
-      
+
       let domPos = this._graph.canvasToDOM({
         x: (positions[edge.from].x + positions[edge.to].x) / 2,
         y: (positions[edge.from].y + positions[edge.to].y) / 2
@@ -218,15 +218,15 @@ export class FlowComponent implements OnInit {
       if (edge) {
         this._graph.editEdgeMode();
       }
-    }    
+    }
   }
 
-  
+
 
   private dragStart(params) {
     if (params.nodes.length > 0) {
       this.selectNode(params);
-    }    
+    }
     this.mode = 'dragging';
   }
 
@@ -294,8 +294,8 @@ export class FlowComponent implements OnInit {
       else if (this.mode == 'editEdge') {
         this.renameEdge();
       }
-    }    
-  }  
+    }
+  }
 
   setAsStartNode() {
     if (this.selected) {
@@ -309,9 +309,9 @@ export class FlowComponent implements OnInit {
         this.section.initialState = this.selected;
         // TODO update section (spread event)
       }
-    }    
+    }
   }
-  
+
   removeNode() {
     if (this.selected) {
       let node = this._nodes.get(this.selected) as Node;
@@ -388,7 +388,7 @@ export class FlowComponent implements OnInit {
 
   private release(params) {
     console.log('release');
-    
+
     if (this.mode == 'editEdge') {
       let clickOverEdge = this._graph.getEdgeAt(params.pointer.DOM);
       // discart release events over the selected edge (when the edge is selected a release event is triggered, so let's discard it),
@@ -412,10 +412,10 @@ export class FlowComponent implements OnInit {
 
     // if (this.mode == 'editEdge' && !this.isOverNode(params.pointer.canvas)) {
       // this.cancelEdition();
-      
+
       // let edgeId = this._graph.getEdgeAt(params.pointer.DOM);
       // console.log(edgeId);
-      
+
       // // discart release events over the selected edge (when the edge is selected a release event is triggered, so let's discard it),
       // if (edgeId && edgeId == this.selected) {
       //   return;
@@ -424,7 +424,7 @@ export class FlowComponent implements OnInit {
       //   let edge = this._edges.get(this.selected) as Edge;
       //   if (edge) {
       //     console.log('release', this.selected);
-          
+
       //     let fromState = this.section.getStateById(edge.from as number);
       //     fromState.removeTransition(this.selected);
       //     this._edges.remove(this.selected);
@@ -512,12 +512,12 @@ export class FlowComponent implements OnInit {
       let edge = this._edges.get(this.selected) as Edge;
       if (edge) {
 
-        
+
         // if (!this.isOverNode(params.pointer.canvas)) {
 
         // }
         console.log('here');
-        
+
 
         let fromState = this.section.getStateById(edge.from as number);
         let toNode = this._nodes.get(edgeData.to) as Node;
@@ -596,9 +596,13 @@ export class FlowComponent implements OnInit {
       case 'choice':
         stateCreation('Página com pergunta e opções', StateGenerator.createChoice, true);
         break;
-        
+
       case 'input':
         stateCreation('Página com pergunta e entrada de texto', StateGenerator.createInput, true);
+        break;
+
+      case 'quiz':
+        stateCreation('Página com perguntas predefinidas', StateGenerator.createQuiz, true);
         break;
     }
   }
@@ -626,7 +630,7 @@ export class FlowComponent implements OnInit {
     // let posObj = this._graph.getPositions(node.id);
     // let pos = posObj[node.id];
     // console.log(pos);
-    
+
     // this._nodes.add([{ id: TEMP_ID, group: TERMINAL_GRP, x: pos.x, y: pos.y + 60, physics: false }]);
     // this._edges.add([{ id: TEMP_ID, from: node.id, to: TEMP_ID, dashes: true, physics: false }]);
   }
@@ -654,7 +658,7 @@ export class FlowComponent implements OnInit {
 
   enableEditMode() {
     console.log('dddd');
-    
+
     // this._graph.addEdgeMode();
     this._graph.editEdgeMode();
   }

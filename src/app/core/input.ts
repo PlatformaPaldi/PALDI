@@ -20,5 +20,5 @@ export class Input extends Gadget {
       help: this.help
     }
   }
-  
+
 }

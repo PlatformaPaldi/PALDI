@@ -76,7 +76,7 @@ Blockly.Blocks['isanswered'] = {
   init: function () {
     this.appendDummyInput()
       .appendField("A")
-      .appendField(new Blockly.FieldDropdown([["escolha", "choice"], ["entrada de texto", "input"], ["valor numérico", "range"]]), "GADGET_TYPE")
+      .appendField(new Blockly.FieldDropdown([["escolha", "choice"], ["entrada de texto", "input"], ["valor numérico", "range"], ["quiz", "quiz"]]), "GADGET_TYPE")
       .appendField("foi respondida");
     this.setOutput(true, "Boolean");
     this.setColour(230);
@@ -102,7 +102,7 @@ Blockly.Blocks['getgadgetvalue'] = {
   init: function () {
     this.appendDummyInput()
       .appendField("resposta do(a)")
-      .appendField(new Blockly.FieldDropdown([["escolha", "choice"], ["entrada de texto", "input"], ["valor numérico", "range"]]), "GADGET_TYPE");
+      .appendField(new Blockly.FieldDropdown([["escolha", "choice"], ["entrada de texto", "input"], ["valor numérico", "range"], ["quiz", "quiz"]]), "GADGET_TYPE");
     this.setOutput(true, ["Number", "String"]);
     this.setColour(160);
     this.setTooltip('');

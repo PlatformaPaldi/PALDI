@@ -2,6 +2,7 @@ import { Choice } from './choice';
 import { Input } from './input';
 import { Text } from './text';
 import { Svg } from './svg';
+import { Quiz } from './quiz';
 import { Gadget, GadgetType } from './gadget';
 
 export class Page {
@@ -27,6 +28,10 @@ export class Page {
           let svg = gadget as Svg;
           this.gadgets.push(new Svg(svg.file));
           break;
+        case 'quiz':
+          let quiz = gadget as Quiz;
+          this.gadgets.push(new Quiz(quiz.selectedQuestion, quiz.transitionRight, quiz.transitionWrong));
+          break;
       }
     }
   }
@@ -38,6 +43,7 @@ export class Page {
   }
 
   get(id: number | GadgetType): Gadget | Gadget[] {
+    console.log("id: " + id);
     if (typeof id == 'number') {
       // consider id as an index
       if (id >= 0 && id < this.gadgets.length) {
@@ -77,6 +83,9 @@ export class Page {
         break;
       case 'svg':
         this.gadgets.splice(index, 0, new Svg());
+        break;
+      case 'quiz':
+        this.gadgets.splice(index, 0, new Quiz());
         break;
     }
   }
