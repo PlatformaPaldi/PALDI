@@ -13,7 +13,6 @@ import 'rxjs/add/operator/catch';
 import { HttpUtils } from '../common/http-utils';
 import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
 
-
 const urlPath = 'assets/server/';
 
 @Injectable()
@@ -31,7 +30,6 @@ export class SectionService {
   currentState$ = this._currentStateSource.asObservable();   // stream
 
   private book: FirebaseObjectObservable<Partial<ISection>>;
-
 
 
   constructor(private _http: Http, private db: AngularFireDatabase) {

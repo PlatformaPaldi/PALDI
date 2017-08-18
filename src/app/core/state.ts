@@ -10,7 +10,7 @@ let doNothing = () => { }
 export type StateType = 'content' | 'content-add' | 'intervention';
 
 export interface IOutEdge {
-  id?: number;  
+  id?: number;
   label: string;
   to: string;
 }
@@ -35,7 +35,7 @@ export interface IState {
 
 export class State implements IState {
   private static _idCount = 0;
-  private static _states: State[] = [];  // array of existing states
+  public static _states: State[] = [];  // array of existing states
 
   static globals: Object = {
     // name: 'André'
@@ -110,7 +110,7 @@ export class State implements IState {
 
   next(edgeLabel?: string) {
     console.log('state.next(): ', edgeLabel);
-    
+
     let edge: IOutEdge;
     if (!edgeLabel && this.outedges.length > 0) {
       let len = this.outedges.length;
@@ -120,7 +120,7 @@ export class State implements IState {
     else {
       edge = this.outedges.find(edge => edge.label == edgeLabel);
     }
-    
+
     if (edge) {
       this._next.next(this.section.getStateByLabel(edge.to));
       // let nextState = this.section.getStateByLabel(edge.to);

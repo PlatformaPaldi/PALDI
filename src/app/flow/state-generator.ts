@@ -141,6 +141,7 @@ export class StateGenerator {
     let state: any = {
       label: label,
       type: "intervention",
+      //type: "content",
       page: {
         gadgets: [
           { type: "quiz" },

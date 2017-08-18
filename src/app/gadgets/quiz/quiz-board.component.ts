@@ -4,6 +4,7 @@ import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/data
 
 import { Gadget } from 'app/core/gadget';
 import { Quiz, IQuestion } from 'app/core/quiz';
+import { State } from 'app/core/state';
 
 @Component({
   selector: 'app-quiz-board',
@@ -15,6 +16,8 @@ export class QuizBoardComponent {
   public description: string = "";
   public element: any;
   private questions: IQuestion[] = [];
+  public pages: string[] = [];
+  public quiz: Quiz;
 
   @Input() gadget: Quiz;
 
@@ -26,13 +29,14 @@ export class QuizBoardComponent {
   }
 
   private loadQuestions() {
+    this.pages.length = 0;
     this._http
     .get('assets/server/questions2.json')
     .map(response => response.json())
     .subscribe(
       question => {
         this.gadget.clearQuestions();
-        question.forEach(q => this.gadget.add({
+        question.forEach(q =>  { this.gadget.add({
           id: q.id,
           livro: q.livro,
           nivel: q.nivel,
@@ -44,7 +48,9 @@ export class QuizBoardComponent {
           op_resp_4: q.op_resp_4,
           op_resp_5: q.op_resp_5,
           resp_certa: q.resp_certa
-        }))
+        });
+        this.addPageQuestions(q);
+       })
       },
       error => console.log("error " + error)
     );
@@ -97,6 +103,23 @@ export class QuizBoardComponent {
       console.log("data");
       console.log(data);
     });
+  }
+
+  private addPageQuestions(question) {
+
+    console.log("n states: " + State._states.length);
+    this.pages[question.id] = "";
+    State._states.forEach(state => {
+      state.page.gadgets.forEach(gadget => {
+        if(gadget.type == 'quiz') {
+          this.quiz = gadget as Quiz;
+          if(this.quiz.selectedQuestion.id == question.id) {
+             this.pages[question.id] += state.label + " ";
+          }
+        }
+      })
+    });
+
   }
 
   private remove() {

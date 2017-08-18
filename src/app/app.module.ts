@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 
 import { StateService } from './core/state.service';
 import { SharedModule } from './shared/shared.module';
+import { AuthService } from './core/auth.service';
 import { LogicModule } from './logic/logic.module';
 import { PageEditorModule } from './page-editor/page-editor.module';
 import { PlayerModule } from './player/player.module';
@@ -49,7 +50,8 @@ import 'hammerjs';
   ],
   providers: [
     StateService,
-    SectionService
+    SectionService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

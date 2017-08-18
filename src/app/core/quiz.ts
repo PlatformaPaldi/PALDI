@@ -17,7 +17,6 @@ export interface IQuestion {
 export class Quiz extends Gadget {
 
     public questions: IQuestion[];
-    public filterQuestions: IQuestion[];
     public selectedQuestion: IQuestion;
     public value: string;
     public transitionRight: string;

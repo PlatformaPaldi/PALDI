@@ -3,6 +3,7 @@ import { Input } from './input';
 import { Text } from './text';
 import { Svg } from './svg';
 import { Quiz } from './quiz';
+import { Login } from './login';
 import { Gadget, GadgetType } from './gadget';
 
 export class Page {
@@ -31,6 +32,10 @@ export class Page {
         case 'quiz':
           let quiz = gadget as Quiz;
           this.gadgets.push(new Quiz(quiz.selectedQuestion, quiz.transitionRight, quiz.transitionWrong));
+          break;
+        case 'login':
+          let login = gadget as Login;
+          this.gadgets.push(new Login());
           break;
       }
     }
@@ -86,6 +91,9 @@ export class Page {
         break;
       case 'quiz':
         this.gadgets.splice(index, 0, new Quiz());
+        break;
+      case 'login':
+        this.gadgets.splice(index, 0, new Login());
         break;
     }
   }
