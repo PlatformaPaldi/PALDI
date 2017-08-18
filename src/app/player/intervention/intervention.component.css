@@ -13,7 +13,7 @@
 
 .collapse {
   /*height: 100px;*/
-  overflow: hidden;
+  overflow: auto;
 }
 
 /*.collapse .tab {
