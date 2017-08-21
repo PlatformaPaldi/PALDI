@@ -4,6 +4,7 @@ import { AuthService } from 'app/core/auth.service';
 import { SectionService } from 'app/core/section.service';
 import { Gadget } from 'app/core/gadget';
 import { Login } from 'app/core/login';
+import { State } from 'app/core/state';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
         if(user) {
           this.user = user.displayName;
           this.isUserLoggedIn = true;
-          this.sectionService.nextState();
+          State.globals['user'] = user.displayName;
+          //this.sectionService.nextState();
         } else {
           this.user = "";
           this.isUserLoggedIn = false;
@@ -41,6 +43,7 @@ export class LoginComponent implements OnInit {
 
   logoutGoogle() {
     this.auth.logout();
+    State.globals['user'] = '';
   }
 
 }
