@@ -27,10 +27,10 @@ export class LoginComponent implements OnInit {
     this.auth.getUser().subscribe(
       user => {
         if(user) {
-          this.isUserLoggedIn = true;
+          this.gadget.isUserLoggedIn = true;
           //this.sectionService.nextState();
         } else {
-          this.isUserLoggedIn = false;
+          this.gadget.isUserLoggedIn = false;
         }
       }
     )

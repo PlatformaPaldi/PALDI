@@ -1,9 +1,9 @@
 <div *ngIf="gadget.isGoogleLoginOn" class="container">
-  <div *ngIf="isUserLoggedIn">
+  <div *ngIf="gadget.isUserLoggedIn">
     Bem Vindo!!!
     <button md-button color="primary" (click)="logoutGoogle()">Logout</button>
   </div>
-  <div *ngIf="!isUserLoggedIn">
+  <div *ngIf="!gadget.isUserLoggedIn">
     <button md-button color="primary" (click)="loginGoogle()">Login com Google</button>
   </div>
 </div>
