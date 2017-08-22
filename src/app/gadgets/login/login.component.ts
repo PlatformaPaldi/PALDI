@@ -14,11 +14,9 @@ import { State } from 'app/core/state';
 export class LoginComponent implements OnInit {
 
   @Input() gadget: Login;
-  public user: string;
   public isUserLoggedIn: boolean = false;
 
   constructor(private auth: AuthService, private sectionService: SectionService) {
-    this.user = "";
   }
 
   ngOnInit() {
@@ -29,12 +27,9 @@ export class LoginComponent implements OnInit {
     this.auth.getUser().subscribe(
       user => {
         if(user) {
-          this.user = user.displayName;
           this.isUserLoggedIn = true;
-          State.globals['user'] = user.displayName;
           //this.sectionService.nextState();
         } else {
-          this.user = "";
           this.isUserLoggedIn = false;
         }
       }
@@ -43,7 +38,6 @@ export class LoginComponent implements OnInit {
 
   logoutGoogle() {
     this.auth.logout();
-    State.globals['user'] = '';
   }
 
 }
