@@ -29,14 +29,14 @@
           <input mdInput placeholder="Livro">
         </md-input-container>
         <md-input-container floatPlaceholder="always">
-          <input mdInput placeholder="Nível">
+          <input mdInput [(ngModel)]="nivel" (keyup)="onKeyPress($event)" placeholder="Nível">
         </md-input-container>
       </div>
 
     <div class="row">
       <md-radio-group>
         <table class="table">
-          <tr *ngFor="let question of gadget.questions">
+          <tr *ngFor="let question of gadget.filterQuestions">
             <td>
               <md-radio-button [value]="question.id" (click)=setSelectedQuestion(question.id)></md-radio-button>
             </td>

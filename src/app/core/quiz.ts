@@ -17,6 +17,7 @@ export interface IQuestion {
 export class Quiz extends Gadget {
 
     public questions: IQuestion[];
+    public filterQuestions: IQuestion[];
     public selectedQuestion: IQuestion;
     public value: string;
     public transitionRight: string;
@@ -65,6 +66,16 @@ export class Quiz extends Gadget {
 
     clearQuestions() {
       this.questions = [];
+      this.filterQuestions = [];
+    }
+
+    setFilter(nivel) {
+
+      if(nivel.length > 0) {
+        this.filterQuestions = this.questions.filter(question => question.nivel == nivel);
+      } else {
+        this.filterQuestions = this.questions;
+      }
     }
 
     get data() {
