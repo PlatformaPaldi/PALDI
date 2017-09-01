@@ -20,6 +20,9 @@ export class QuizComponent implements OnInit {
     this.isHelpOn = false;
   }
 
+  ngAfterViewInit() {
+    this.gadget.setReady();
+  }
 
   setGadgetValue(option: string) {
     if(option == this.gadget.selectedQuestion.resp_certa) {

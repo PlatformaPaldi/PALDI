@@ -22,6 +22,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+    this.gadget.setReady();
+  }
+
   loginGoogle() {
     this.auth.login();
     this.auth.getUser().subscribe(

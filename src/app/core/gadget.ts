@@ -1,3 +1,4 @@
+import { Page } from './page'
 
 export type GadgetType = 'input' | 'choice' | 'text' | 'svg' | 'quiz' | 'login';
 
@@ -7,11 +8,34 @@ export interface IGadget {
 }
 
 export abstract class Gadget {
-  constructor(public type: GadgetType, public description?: string) {}
+
+  ready: boolean;
+
+  constructor(public type: GadgetType, public description?: string) {
+    this.ready = false;
+  }
 
   // abstract update method
   update() {}
 
   abstract get data();
 
+  setReady() {
+    this.ready = true;
+  }
+
+  isReady(page: Page, index: number) {
+
+    if(index == 0 && page.gadgets[0].ready) {
+       return true;
+    }
+
+    for(var i = 0; i < index; i++) {
+      if(!page.gadgets[i].ready) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }

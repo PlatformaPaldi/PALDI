@@ -9,7 +9,7 @@
 
           <div class="container">
             <div class="gadget-items" *ngFor="let gadget of contentState?.page.gadgets; index as i">
-              <app-controls
+              <app-controls *ngIf="gadget.isReady(contentState.page, i)"
                 [gadget]="gadget"
                 [show]="false"
                 >

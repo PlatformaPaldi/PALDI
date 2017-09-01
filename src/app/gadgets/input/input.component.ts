@@ -14,4 +14,7 @@ export class InputComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+    this.gadget.setReady();
+  }
 }

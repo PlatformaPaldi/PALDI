@@ -22,6 +22,7 @@ export class SvgComponent implements OnInit {
   }
 
   prepare(svgElm: SVGElement) {
+    this.gadget.setReady();
     const touchables = svgElm.getElementsByClassName('touchable');
     for(let i = 0; i < touchables.length; i++) {
       let touchable = touchables[i];

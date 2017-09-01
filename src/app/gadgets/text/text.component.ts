@@ -44,6 +44,8 @@ export class TextComponent implements OnInit, AfterViewInit {
     if (!this.edition) {
       this.gadget.content = this.varToContent(this.gadget.content);
     }
+
+    this.gadget.setReady();
   }
 
   setBoard(boardRef: ComponentRef<any>) {
@@ -67,7 +69,7 @@ export class TextComponent implements OnInit, AfterViewInit {
   private varToContent(html: string = '') {
     var varRegex = /<var>[\w]+<\/var>/g;
     var matches = html.match(varRegex);
-    
+
     if (matches) {
       var vars = matches.map(match => match.substring(5, match.length - 6));
       var varsObj = {};
