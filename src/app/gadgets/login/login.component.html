@@ -4,6 +4,7 @@
     <button md-button color="primary" (click)="logoutGoogle()">Logout</button>
   </div>
   <div *ngIf="!gadget.isUserLoggedIn">
+    Faça Login para continuar <br><br>
     <button md-button color="primary" (click)="loginGoogle()">Login com Google</button>
   </div>
 </div>

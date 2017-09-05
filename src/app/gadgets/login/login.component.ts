@@ -27,17 +27,17 @@ export class LoginComponent implements OnInit {
   }
 
   loginGoogle() {
-    this.auth.login();
-    this.auth.getUser().subscribe(
-      user => {
-        if(user) {
-          this.gadget.isUserLoggedIn = true;
-          //this.sectionService.nextState();
-        } else {
-          this.gadget.isUserLoggedIn = false;
+    this.auth.loginWithGoogle().then(_ => {
+
+      this.auth.getUser().subscribe(
+        user => {
+          if(user) {
+            this.gadget.isUserLoggedIn = true;
+          } else {
+            this.gadget.isUserLoggedIn = false;
+          }
         }
-      }
-    )
+    )})
   }
 
   logoutGoogle() {

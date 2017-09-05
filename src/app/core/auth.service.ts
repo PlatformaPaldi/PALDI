@@ -19,21 +19,32 @@ export class AuthService {
     return this.user$;
   }
 
-  login() {
+  private login(provider) {
+
+    return this.firebaseAuth.auth.signInWithPopup(provider).then(_ => {
+        this.updateUser();
+    }).catch (err =>
+      console.log("auth error: " + err)
+    );
+
+  }
+
+  loginWithGoogle() {
     var provider = new firebase.auth.GoogleAuthProvider()
     provider.setCustomParameters({
       prompt: 'select_account'
     });
-    this.firebaseAuth.auth.signInWithPopup(provider).then(_ =>{
-        State.globals['user'] = this.firebaseAuth.auth.currentUser.displayName;
-    }).catch (err =>
-      console.log("auth error")
-    );
+
+    return this.login(provider);
   }
 
   logout() {
     this.firebaseAuth.auth.signOut();
     State.globals['user'] = '';
+  }
+
+  updateUser() {
+    State.globals['user'] = this.firebaseAuth.auth.currentUser.displayName;
   }
 
 }
