@@ -21,7 +21,7 @@
 
         <app-intervention>
           <div class="gadget-items" *ngFor="let gadget of interventionState?.page.gadgets; index as i">
-            <app-controls
+            <app-controls *ngIf="gadget.isReady(contentState.page, i)"
               [gadget]="gadget"
               [show]="false"
               >

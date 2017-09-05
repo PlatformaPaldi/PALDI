@@ -25,8 +25,8 @@ export class QuizBoardComponent {
   @ViewChild('newValue') private _newValueRef: ElementRef;
 
   constructor(private _http: Http, private db: AngularFireDatabase) {
-    //this.loadQuestionsFromDB();
-    this.loadQuestionsFromFile();
+    this.loadQuestionsFromDB();
+    //this.loadQuestionsFromFile();
   }
 
   private loadQuestionsFromFile() {
@@ -60,7 +60,7 @@ export class QuizBoardComponent {
 
   private loadQuestionsFromDB() {
     this.pages.length = 0;
-    this.db.object('/questions')
+    this.db.object('/questions').take(1) //gadget goes undefined without take(1)
     .subscribe(question => {
           this.gadget.clearQuestions();
           question.forEach(q =>  { this.gadget.add({
@@ -78,6 +78,7 @@ export class QuizBoardComponent {
           });
           this.addPageQuestions(q);
         })
+        this.gadget.filterQuestions = this.gadget.questions;
       },
       error => console.log("error " + error)
     );
