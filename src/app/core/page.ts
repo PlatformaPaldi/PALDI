@@ -35,7 +35,7 @@ export class Page {
           break;
         case 'login':
           let login = gadget as Login;
-          this.gadgets.push(new Login());
+          this.gadgets.push(new Login(login.isGoogleLoginOn));
           break;
       }
     }

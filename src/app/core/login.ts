@@ -5,8 +5,13 @@ export class Login extends Gadget {
   public isGoogleLoginOn: boolean = false;
   public isUserLoggedIn: boolean = false;
 
-  constructor() {
+  constructor(isGoogleLoginOn ?: boolean) {
     super('login', 'Adicionar login');
+
+    if(isGoogleLoginOn) {
+      this.isGoogleLoginOn = true;
+    }
+
   }
 
   get isAnswered(): boolean {
@@ -14,7 +19,9 @@ export class Login extends Gadget {
   }
 
   get data() {
-    return '';
+    return {
+      isGoogleLoginOn: this.isGoogleLoginOn
+    };
   }
 
 }

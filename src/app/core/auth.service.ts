@@ -44,7 +44,10 @@ export class AuthService {
   }
 
   updateUser() {
-    State.globals['user'] = this.firebaseAuth.auth.currentUser.displayName;
+    //State.globals['user'] = this.firebaseAuth.auth.currentUser.displayName;
+    this.user$.subscribe(user => {
+      State.globals['user'] = user.displayName;
+    });
   }
 
 }
