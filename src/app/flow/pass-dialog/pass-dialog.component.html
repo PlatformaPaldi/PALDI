@@ -1,0 +1,9 @@
+<md-dialog-content>
+  <h2 md-dialog-title>Digite a Senha para {{ book }}</h2>
+  <md-input-container>
+    <input type="password" mdInput [(ngModel)]="pass" (keyup.enter)="dialogRef.close(pass)">
+  </md-input-container>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-raised-button color="primary" (click)="dialogRef.close(pass)">Ok</button>
+</md-dialog-actions>

@@ -4,6 +4,8 @@ import { FlowComponent } from './flow.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { UiModule } from 'app/ui/ui.module';
 import { TextPageDialogComponent } from './textpage-dialog/textpage-dialog.component';
+import { PassDialog } from '../flow/pass-dialog/pass-dialog.component';
+import { ErrorPassDialog } from '../flow/pass-dialog/error-pass-dialog.component';
 
 @NgModule({
   imports: [
@@ -13,14 +15,18 @@ import { TextPageDialogComponent } from './textpage-dialog/textpage-dialog.compo
   declarations: [
     FlowComponent,
     RenameDialog,
-    TextPageDialogComponent
+    TextPageDialogComponent,
+    PassDialog,
+    ErrorPassDialog
 ],
   exports: [
     FlowComponent
   ],
   entryComponents: [
     RenameDialog,
-    TextPageDialogComponent
+    TextPageDialogComponent,
+    PassDialog,
+    ErrorPassDialog
   ]
 })
 export class FlowModule { }

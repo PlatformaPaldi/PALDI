@@ -12,6 +12,10 @@ import 'rxjs/add/operator/catch';
 
 import { HttpUtils } from '../common/http-utils';
 import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
+import { MdMenuTrigger, MdMenu, MdDialog } from "@angular/material";
+
+import { PassDialog } from '../flow/pass-dialog/pass-dialog.component';
+import { ErrorPassDialog } from '../flow/pass-dialog/error-pass-dialog.component';
 
 const urlPath = 'assets/server/';
 
@@ -32,7 +36,7 @@ export class SectionService {
   private book: FirebaseObjectObservable<Partial<ISection>>;
 
 
-  constructor(private _http: Http, private db: AngularFireDatabase) {
+  constructor(private _http: Http, private db: AngularFireDatabase, public dialog: MdDialog) {
     this.reset();
   }
 
@@ -134,7 +138,28 @@ export class SectionService {
   save() {
     let json = this._currentSection.toJson();
     if (this._currentSection.origin == 'firebase') {
-      this.book.set(JSON.parse(json));
+
+      let passDlg = this.dialog.open(PassDialog);
+
+      passDlg.componentInstance.book = this._currentSection.title;
+      passDlg.afterClosed().subscribe(pass => {
+
+        switch(passDlg.componentInstance.book) {
+          case "Casa do Aprender":
+            if(pass === "casaAprenderUern2017") {
+                this.book.set(JSON.parse(json));
+            } else {
+                console.log("senha errada");
+                this.dialog.open(ErrorPassDialog);
+            }
+            break;
+
+          default:
+            console.log("livro sem senha");
+            break;
+        }
+      });
+
     }
     else {
       console.log(json);
