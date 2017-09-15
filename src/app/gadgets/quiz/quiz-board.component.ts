@@ -5,6 +5,7 @@ import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/data
 import { Gadget } from 'app/core/gadget';
 import { Quiz, IQuestion } from 'app/core/quiz';
 import { State } from 'app/core/state';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-quiz-board',
@@ -23,6 +24,8 @@ export class QuizBoardComponent {
   @Input() gadget: Quiz;
 
   @ViewChild('newValue') private _newValueRef: ElementRef;
+
+  private app;
 
   constructor(private _http: Http, private db: AngularFireDatabase) {
     this.loadQuestionsFromDB();
@@ -59,29 +62,31 @@ export class QuizBoardComponent {
   }
 
   private loadQuestionsFromDB() {
+
     this.pages.length = 0;
-    this.db.object('/questions').take(1) //gadget goes undefined without take(1)
-    .subscribe(question => {
-          this.gadget.clearQuestions();
-          question.forEach(q =>  { this.gadget.add({
-            id: q.id,
-            livro: q.livro,
-            nivel: q.nivel,
-            pergunta: q.pergunta,
-            ajuda_pergunta: q.ajuda_pergunta,
-            op_resp_1: q.op_resp_1,
-            op_resp_2: q.op_resp_2,
-            op_resp_3: q.op_resp_3,
-            op_resp_4: q.op_resp_4,
-            op_resp_5: q.op_resp_5,
-            resp_certa: q.resp_certa
-          });
-          this.addPageQuestions(q);
-        })
-        this.gadget.filterQuestions = this.gadget.questions;
-      },
-      error => console.log("error " + error)
-    );
+    this.app = firebase.app('casa');
+
+    this.app.database().ref('/questions').once('value').then(question => {
+
+            this.gadget.clearQuestions();
+            question.val().forEach(q =>  { this.gadget.add({
+              id: q.id,
+              livro: q.livro,
+              nivel: q.nivel,
+              pergunta: q.pergunta,
+              ajuda_pergunta: q.ajuda_pergunta,
+              op_resp_1: q.op_resp_1,
+              op_resp_2: q.op_resp_2,
+              op_resp_3: q.op_resp_3,
+              op_resp_4: q.op_resp_4,
+              op_resp_5: q.op_resp_5,
+              resp_certa: q.resp_certa
+            });
+            this.addPageQuestions(q);
+          })
+          this.gadget.filterQuestions = this.gadget.questions;
+    });
+
   }
 
   private setSelectedQuestion(id) {

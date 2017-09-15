@@ -196,8 +196,8 @@ export class SectionService {
 
   saveCasaDoAprender(json, pass) {
     if(pass === "casaAprenderUern2017") {
-      this.app = firebase.app(this.CASA);
-      this.app.database().ref('/book').set(JSON.parse(json));
+        this.app = firebase.app(this.CASA);
+        this.app.database().ref('/book').set(JSON.parse(json));
     } else {
         console.log("senha errada");
         this.dialog.open(ErrorPassDialog);
@@ -206,10 +206,13 @@ export class SectionService {
 
   saveCSTUR(json, pass) {
 
-    this.app = firebase.app(this.CSTUR);
-    console.log("saving app " + this.app.name);
-
-    this.app.database().ref('/book').set(JSON.parse(json));
+    if(pass === "csturuern-2017") {
+        this.app = firebase.app(this.CSTUR);
+        this.app.database().ref('/book').set(JSON.parse(json));
+    } else {
+        console.log("senha errada");
+        this.dialog.open(ErrorPassDialog);
+    }
 
   }
 
