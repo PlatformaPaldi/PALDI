@@ -13,11 +13,12 @@ import 'rxjs/add/operator/catch';
 import { HttpUtils } from '../common/http-utils';
 import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
 import * as firebase from 'firebase/app';
-import { environmentCstur } from '../../environments/environment-cstur';
 import { MdMenuTrigger, MdMenu, MdDialog } from "@angular/material";
 
 import { PassDialog } from '../flow/pass-dialog/pass-dialog.component';
 import { ErrorPassDialog } from '../flow/pass-dialog/error-pass-dialog.component';
+import { environmentCstur } from '../../environments/environment-cstur';
+import { environmentCasa } from '../../environments/environment-casa';
 
 const urlPath = 'assets/server/';
 
@@ -36,11 +37,14 @@ export class SectionService {
   currentState$ = this._currentStateSource.asObservable();   // stream
 
   private book: FirebaseObjectObservable<Partial<ISection>>;
-  private app;
 
+  private app;
+  private CASA: string = 'casa';
+  private CSTUR: string = 'cstur';
 
   constructor(private _http: Http, private db: AngularFireDatabase, public dialog: MdDialog) {
-    firebase.initializeApp(environmentCstur.firebase, 'cstur');
+    firebase.initializeApp(environmentCasa.firebase, this.CASA);
+    firebase.initializeApp(environmentCstur.firebase, this.CSTUR);
     this.reset();
   }
 
@@ -71,10 +75,19 @@ export class SectionService {
     this.changeSection(new Section(sectionData));
   }
 
-  loadFromFirebase() {
-    this.book = this.db.object('/book');
-    this.book.subscribe((data: Partial<ISection>) => {
-      const section = new Section(data);
+  loadCasaFromFirebase() {
+    // this.book = this.db.object('/book');
+    // this.book.subscribe((data: Partial<ISection>) => {
+    //   const section = new Section(data);
+    //   section.origin = 'firebase';
+    //   this.changeSection(section);
+    // });
+
+    this.app = firebase.app(this.CASA);
+    console.log("app " + this.app.name);
+
+    this.app.database().ref('/book').once('value').then(data => {
+      const section = new Section(data.val());
       section.origin = 'firebase';
       this.changeSection(section);
     });
@@ -82,7 +95,7 @@ export class SectionService {
 
   loadCSTURFromFirebase() {
 
-    this.app = firebase.app('cstur');
+    this.app = firebase.app(this.CSTUR);
     console.log("app " + this.app.name);
 
     this.app.database().ref('/book').once('value').then(data => {
@@ -183,7 +196,8 @@ export class SectionService {
 
   saveCasaDoAprender(json, pass) {
     if(pass === "casaAprenderUern2017") {
-        this.book.set(JSON.parse(json));
+      this.app = firebase.app(this.CASA);
+      this.app.database().ref('/book').set(JSON.parse(json));
     } else {
         console.log("senha errada");
         this.dialog.open(ErrorPassDialog);
@@ -192,7 +206,7 @@ export class SectionService {
 
   saveCSTUR(json, pass) {
 
-    this.app = firebase.app('cstur');
+    this.app = firebase.app(this.CSTUR);
     console.log("saving app " + this.app.name);
 
     this.app.database().ref('/book').set(JSON.parse(json));

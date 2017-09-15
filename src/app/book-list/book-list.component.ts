@@ -73,7 +73,7 @@ export class BookListComponent implements OnInit {
       let obj = this.list.find(o => o.id == id);
       if (obj) {
         if (obj.title == 'Casa do Aprender') {
-          this.sectionServ.loadFromFirebase();
+          this.sectionServ.loadCasaFromFirebase();
           // this.book = this.db.object('/book');
           // this.book.subscribe((data: Partial<ISection>) => {
           //   this.sectionServ.loadFromData(data);
