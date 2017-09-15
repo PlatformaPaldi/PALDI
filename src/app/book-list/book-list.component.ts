@@ -48,6 +48,13 @@ export class BookListComponent implements OnInit {
       filename: 'casa.json',
       author: 'Fulano',
       coverage: ''
+    },
+    {
+      id: 5,
+      title: 'CSTUR',
+      filename: 'section-01.json',
+      author: 'Fulano',
+      coverage: ''
     }
   ];
 
@@ -72,7 +79,9 @@ export class BookListComponent implements OnInit {
           //   this.sectionServ.loadFromData(data);
           // });
         }
-        else {
+        else if(obj.title == 'CSTUR') {
+          this.sectionServ.loadCSTURFromFirebase();
+        } else {
           this.sectionServ.load(obj.filename);
         }
         this.select.emit(id);

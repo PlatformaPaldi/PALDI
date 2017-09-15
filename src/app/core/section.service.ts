@@ -12,6 +12,8 @@ import 'rxjs/add/operator/catch';
 
 import { HttpUtils } from '../common/http-utils';
 import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
+import * as firebase from 'firebase/app';
+import { environmentCstur } from '../../environments/environment-cstur';
 import { MdMenuTrigger, MdMenu, MdDialog } from "@angular/material";
 
 import { PassDialog } from '../flow/pass-dialog/pass-dialog.component';
@@ -34,9 +36,11 @@ export class SectionService {
   currentState$ = this._currentStateSource.asObservable();   // stream
 
   private book: FirebaseObjectObservable<Partial<ISection>>;
+  private app;
 
 
   constructor(private _http: Http, private db: AngularFireDatabase, public dialog: MdDialog) {
+    firebase.initializeApp(environmentCstur.firebase, 'cstur');
     this.reset();
   }
 
@@ -71,6 +75,18 @@ export class SectionService {
     this.book = this.db.object('/book');
     this.book.subscribe((data: Partial<ISection>) => {
       const section = new Section(data);
+      section.origin = 'firebase';
+      this.changeSection(section);
+    });
+  }
+
+  loadCSTURFromFirebase() {
+
+    this.app = firebase.app('cstur');
+    console.log("app " + this.app.name);
+
+    this.app.database().ref('/book').once('value').then(data => {
+      const section = new Section(data.val());
       section.origin = 'firebase';
       this.changeSection(section);
     });
@@ -137,7 +153,7 @@ export class SectionService {
 
   save() {
     let json = this._currentSection.toJson();
-    if (this._currentSection.origin == 'firebase') {
+    //if (this._currentSection.origin == 'firebase') {
 
       let passDlg = this.dialog.open(PassDialog);
 
@@ -146,12 +162,11 @@ export class SectionService {
 
         switch(passDlg.componentInstance.book) {
           case "Casa do Aprender":
-            if(pass === "casaAprenderUern2017") {
-                this.book.set(JSON.parse(json));
-            } else {
-                console.log("senha errada");
-                this.dialog.open(ErrorPassDialog);
-            }
+            this.saveCasaDoAprender(json, pass);
+            break;
+
+          case "CSTUR":
+            this.saveCSTUR(json, pass);
             break;
 
           default:
@@ -160,11 +175,28 @@ export class SectionService {
         }
       });
 
-    }
-    else {
-      console.log(json);
+    // }
+    // else {
+    //   console.log(json);
+    // }
+  }
+
+  saveCasaDoAprender(json, pass) {
+    if(pass === "casaAprenderUern2017") {
+        this.book.set(JSON.parse(json));
+    } else {
+        console.log("senha errada");
+        this.dialog.open(ErrorPassDialog);
     }
   }
 
+  saveCSTUR(json, pass) {
+
+    this.app = firebase.app('cstur');
+    console.log("saving app " + this.app.name);
+
+    this.app.database().ref('/book').set(JSON.parse(json));
+
+  }
 
 }
