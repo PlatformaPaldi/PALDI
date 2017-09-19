@@ -19,6 +19,7 @@ import { PassDialog } from '../flow/pass-dialog/pass-dialog.component';
 import { ErrorPassDialog } from '../flow/pass-dialog/error-pass-dialog.component';
 import { environmentCstur } from '../../environments/environment-cstur';
 import { environmentCasa } from '../../environments/environment-casa';
+import { environmentLivroTeste } from '../../environments/environment-livroteste';
 
 const urlPath = 'assets/server/';
 
@@ -41,10 +42,12 @@ export class SectionService {
   private app;
   private CASA: string = 'casa';
   private CSTUR: string = 'cstur';
+  private LIVRO_TESTE: string = 'livroteste';
 
   constructor(private _http: Http, private db: AngularFireDatabase, public dialog: MdDialog) {
     firebase.initializeApp(environmentCasa.firebase, this.CASA);
     firebase.initializeApp(environmentCstur.firebase, this.CSTUR);
+    firebase.initializeApp(environmentLivroTeste.firebase, this.LIVRO_TESTE);
     this.reset();
   }
 
@@ -96,6 +99,18 @@ export class SectionService {
   loadCSTURFromFirebase() {
 
     this.app = firebase.app(this.CSTUR);
+    console.log("app " + this.app.name);
+
+    this.app.database().ref('/book').once('value').then(data => {
+      const section = new Section(data.val());
+      section.origin = 'firebase';
+      this.changeSection(section);
+    });
+  }
+
+  loadLivroTesteFromFirebase() {
+
+    this.app = firebase.app(this.LIVRO_TESTE);
     console.log("app " + this.app.name);
 
     this.app.database().ref('/book').once('value').then(data => {
@@ -182,6 +197,10 @@ export class SectionService {
             this.saveCSTUR(json, pass);
             break;
 
+          case "Livro Teste":
+            this.saveLivroTeste(json, pass);
+            break;
+
           default:
             console.log("livro sem senha");
             break;
@@ -208,6 +227,18 @@ export class SectionService {
 
     if(pass === "csturuern-2017") {
         this.app = firebase.app(this.CSTUR);
+        this.app.database().ref('/book').set(JSON.parse(json));
+    } else {
+        console.log("senha errada");
+        this.dialog.open(ErrorPassDialog);
+    }
+
+  }
+
+  saveLivroTeste(json, pass) {
+
+    if(pass === "livroteste") {
+        this.app = firebase.app(this.LIVRO_TESTE);
         this.app.database().ref('/book').set(JSON.parse(json));
     } else {
         console.log("senha errada");

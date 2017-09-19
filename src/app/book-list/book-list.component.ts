@@ -55,6 +55,13 @@ export class BookListComponent implements OnInit {
       filename: 'section-01.json',
       author: 'Fulano',
       coverage: ''
+    },
+    {
+      id: 6,
+      title: 'Livro Teste',
+      filename: 'section-01.json',
+      author: 'Fulano',
+      coverage: ''
     }
   ];
 
@@ -70,23 +77,26 @@ export class BookListComponent implements OnInit {
       this.select.emit(0);
     }
     else {
+
       let obj = this.list.find(o => o.id == id);
-      if (obj) {
-        if (obj.title == 'Casa do Aprender') {
+      switch (obj.title) {
+        case  'Casa do Aprender':
           this.sectionServ.loadCasaFromFirebase();
-          // this.book = this.db.object('/book');
-          // this.book.subscribe((data: Partial<ISection>) => {
-          //   this.sectionServ.loadFromData(data);
-          // });
-        }
-        else if(obj.title == 'CSTUR') {
+        break;
+
+        case 'CSTUR':
           this.sectionServ.loadCSTURFromFirebase();
-        } else {
+        break;
+
+        case 'Livro Teste':
+          this.sectionServ.loadLivroTesteFromFirebase();
+        break;
+
+        default:
           this.sectionServ.load(obj.filename);
-        }
+      }
+
         this.select.emit(id);
       }
     }
-  }
-
 }
