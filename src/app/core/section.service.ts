@@ -179,6 +179,29 @@ export class SectionService {
     }
   }
 
+  getApp() {
+
+    switch(this._currentSection.title) {
+      case "Casa do Aprender":
+        this.app = firebase.app(this.CASA);
+        break;
+
+      case "CSTUR":
+        this.app = firebase.app(this.CSTUR);
+        break;
+
+      case "Livro Teste":
+        this.app = firebase.app(this.LIVRO_TESTE);
+        break;
+
+      default:
+        this.app = undefined;
+        break;
+    }
+
+    return this.app;
+  }
+
   save() {
     let json = this._currentSection.toJson();
     //if (this._currentSection.origin == 'firebase') {

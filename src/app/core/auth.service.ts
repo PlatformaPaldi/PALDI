@@ -4,14 +4,16 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 import { State } from 'app/core/state';
+import { SectionService } from 'app/core/section.service';
 
 @Injectable()
 export class AuthService {
 
-  private user$: Observable<firebase.User>;
+  //private user$: Observable<firebase.User>;
+  private user$;
+  private app;
 
-  constructor(private firebaseAuth: AngularFireAuth) {
-    this.user$ = firebaseAuth.authState;
+  constructor(private firebaseAuth: AngularFireAuth, private sectionService: SectionService) {
     //this.firebaseAuth.auth.onAuthStateChanged(_ => '');
   }
 
@@ -21,7 +23,10 @@ export class AuthService {
 
   private login(provider) {
 
-    return this.firebaseAuth.auth.signInWithPopup(provider).then(_ => {
+    this.app = this.sectionService.getApp();
+    this.user$ = this.app.auth();
+
+    return this.app.auth().signInWithPopup(provider).then(_ => {
         this.updateUser();
     }).catch (err =>
       console.log("auth error: " + err)
@@ -39,15 +44,15 @@ export class AuthService {
   }
 
   logout() {
-    this.firebaseAuth.auth.signOut();
+    this.app.auth().signOut();
     State.globals['user'] = '';
+    this.user$ = null;
   }
 
   updateUser() {
     //State.globals['user'] = this.firebaseAuth.auth.currentUser.displayName;
-    this.user$.subscribe(user => {
-      State.globals['user'] = user.displayName;
-    });
+    State.globals['user'] = this.user$.currentUser.displayName;
+
   }
 
 }
