@@ -26,6 +26,8 @@ export class PlayerComponent implements OnInit {
   interventionState: Readonly<State>;
   private subscription: Subscription;  // to listen to state transitions (onNext())
 
+  menu: boolean;
+
   constructor(private sectionServ: SectionService) {
   }
 
@@ -37,7 +39,7 @@ export class PlayerComponent implements OnInit {
   nextState() {
     if (this.currentState && this.currentState.behavior.onNext) {
       this.currentState.behavior.onNext();
-    }    
+    }
   }
 
   private updateInternalState(state: State) {
@@ -52,8 +54,8 @@ export class PlayerComponent implements OnInit {
       state.page.update();
 
       console.log(State.globals);
-      
-      
+
+
       // set up the correct var to in the player
       if (state.type == 'content') {
         this.contentState = state;
@@ -68,12 +70,14 @@ export class PlayerComponent implements OnInit {
         this.subscription.unsubscribe();
       }
       this.subscription = state.next$.subscribe(s => this.updateInternalState(s));
+
+      this.menu = (state.label == 'menu' ? true : false);
     }
     else {
       // TODO the book end up in a final state
       // what to do: close the player? or show a pre-defined page
       console.log('book finished');
-      
+
     }
   }
 

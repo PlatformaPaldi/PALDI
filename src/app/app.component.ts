@@ -4,6 +4,7 @@ import { StateService } from './core/state.service';
 import { Component, OnInit } from '@angular/core';
 import { MdDialogRef, MdDialog } from "@angular/material";
 import { PlayerComponent } from "app/player/player.component";
+import { PlatformLocation } from '@angular/common'
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,24 @@ export class AppComponent implements OnInit {
   private state: State;
   private states: string[] = [];
 
-  constructor(private sectionServ: SectionService, private dialog: MdDialog) {
+  menuCallState: string;
+
+  constructor(private sectionServ: SectionService, private dialog: MdDialog, location: PlatformLocation) {
     sectionServ.current$.subscribe(section => setTimeout(_ => this.bookTitle = section.title));
     sectionServ.currentState$.subscribe(state => setTimeout(_ => this.state = state));
 
-    // this.questions = db.list('/questions');
-    // this.questions.subscribe(data => console.log(data));
+    location.onPopState(() => {
+
+      if(sectionServ.currentState.label != 'menu') {
+        this.menuCallState = sectionServ.currentState.label;
+        sectionServ.currentState.callMenu();
+        sectionServ.currentState.menuCallState = this.menuCallState;
+        location.pushState(null, null, '');
+      } else {
+        location.back();
+      }
+
+    });
   }
 
   ngOnInit() {

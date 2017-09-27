@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Gadget } from 'app/core/gadget';
+import { SectionService } from 'app/core/section.service';
 import { Quiz } from 'app/core/quiz';
 
 @Component({
@@ -13,7 +14,7 @@ export class QuizComponent implements OnInit {
   @Input() gadget: Quiz;
   private isHelpOn: boolean;
 
-  constructor() {
+  constructor(private sectionService: SectionService) {
   }
 
   ngOnInit() {

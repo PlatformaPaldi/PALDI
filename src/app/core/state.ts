@@ -58,6 +58,8 @@ export class State implements IState {
     onTouch: doNothing
   };
 
+  menuCallState: string;
+
   constructor(private section: Section, state?: Partial<IState>) {
     if (state) {
       for (let k in state) {
@@ -167,6 +169,13 @@ export class State implements IState {
     });
   }
 
+  callMenu() {
+    this.goToPage("menu");
+  }
+
+  goToPage(pageName) {
+    this._next.next(this.section.getStateByLabel(pageName));
+  }
   // static getStateByLabel(label: string) {
   //   return State._states.find(s => s.label == label);
   // }

@@ -7,6 +7,7 @@ import { SharedModule } from './../shared/shared.module';
 import { PlayerComponent } from './player.component';
 import { NextButtonComponent } from './next-button/next-button.component';
 import { InterventionComponent } from './intervention/intervention.component';
+import { OpcoesMenuComponent } from './opcoes-menu/opcoes-menu.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { InterventionComponent } from './intervention/intervention.component';
   declarations: [
     PlayerComponent,
     NextButtonComponent,
-    InterventionComponent
+    InterventionComponent,
+    OpcoesMenuComponent
 ],
   exports: [
     PlayerComponent

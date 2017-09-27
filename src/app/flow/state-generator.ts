@@ -199,4 +199,78 @@ export class StateGenerator {
     };
     return state;
   }
+
+  static createMenu(label: string, varName: string) {
+    let state: any = {
+      label: label,
+      type: "content",
+      page: {
+        gadgets: [
+          { type: "text", content: "Ir para" },
+          { type: 'choice',
+            options: [
+              { value: "inicio", text: "Inicio" },
+              { value: "capa", text: "Casa" },
+              { value: "historia 1", text: "Início da Historia" }
+            ]
+          }
+        ]
+      }
+    };
+    let block: string;
+    if (varName) {
+      block = `
+        <block type=\"variables_set\">
+          <field name=\"VAR\">${varName}</field>
+          <value name=\"VALUE\">
+            <block type=\"getgadgetvalue\">
+              <field name=\"GADGET_TYPE\">choice</field>
+            </block>
+          </value>
+          <next>
+            <block type=\"nexttransition\">
+              <value name=\"TRANSITION\">
+                <block type=\"variables_get\">
+                  <field name=\"VAR\">${varName}</field>
+                </block>
+              </value>
+            </block>
+          </next>
+        </block>`;
+    }
+    else {
+      block = `
+        <block type=\"nexttransition\">
+          <value name=\"TRANSITION\">
+            <block type=\"getgadgetvalue\">
+              <field name=\"GADGET_TYPE\">choice</field>
+            </block>
+          </value>
+        </block>`;
+    }
+    block = `
+      <xml>
+        <block type=\"onnext\" x=\"10\" y=\"10\">
+          <statement name=\"COMMANDS\">
+            <block type=\"controls_if\">
+              <value name=\"IF0\">
+                <block type=\"isanswered\">
+                  <field name=\"GADGET_TYPE\">choice</field>
+                </block>
+              </value>
+              <statement name=\"DO0\">${block}</statement>
+            </block>
+          </statement>
+        </block>
+      </xml>`;
+    state.behavior = {
+      type: 'code',
+      code: `
+        function onNext() {
+          state.goToPage((state.page.get('choice').value));
+        }
+      `
+    };
+    return state;
+  }
 }

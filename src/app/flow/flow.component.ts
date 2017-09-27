@@ -604,6 +604,10 @@ export class FlowComponent implements OnInit {
       case 'quiz':
         stateCreation('Página com perguntas predefinidas', StateGenerator.createQuiz, true);
         break;
+
+      case 'menu':
+        stateCreation('Página de menu', StateGenerator.createMenu);
+        break;
     }
   }
 
