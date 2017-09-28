@@ -7,7 +7,7 @@ declare const Blockly: any;
 
 let doNothing = () => { }
 
-export type StateType = 'content' | 'content-add' | 'intervention';
+export type StateType = 'content' | 'content-add' | 'intervention' | 'menu';
 
 export interface IOutEdge {
   id?: number;

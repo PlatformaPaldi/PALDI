@@ -606,13 +606,27 @@ export class FlowComponent implements OnInit {
         break;
 
       case 'menu':
-        stateCreation('Página de menu', StateGenerator.createMenu);
+        this.createMenuSummary();
         break;
     }
   }
 
 
+  private createMenuSummary() {
+    let state = this.sectionServ.createState(StateGenerator.createMenu("menu", ""));
+    this._nodes.add({
+      id: state.id,
+      label: state.label,
+      group: state.type
+    });
 
+    state = this.sectionServ.createState(StateGenerator.createSummary("summary", ""));
+    this._nodes.add({
+      id: state.id,
+      label: state.label,
+      group: state.type
+    });
+  }
 
 
 
