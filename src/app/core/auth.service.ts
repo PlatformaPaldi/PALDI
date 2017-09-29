@@ -27,7 +27,9 @@ export class AuthService {
     this.user$ = this.app.auth();
 
     return this.app.auth().signInWithPopup(provider).then(_ => {
-        this.updateUser();
+        this.app.auth().onAuthStateChanged(user => {
+          this.updateUser(user);
+        });
     }).catch (err =>
       console.log("auth error: " + err)
     );
@@ -44,14 +46,24 @@ export class AuthService {
   }
 
   logout() {
-    this.app.auth().signOut();
-    State.globals['user'] = '';
-    this.user$ = null;
+    this.app = this.sectionService.getApp();
+    this.app.auth().signOut().then(_ => {
+        this.app.auth().onAuthStateChanged(user => {
+          this.updateUser(user);
+        });
+    }).catch (err =>
+      console.log("logout error: " + err)
+    );
   }
 
-  updateUser() {
-    //State.globals['user'] = this.firebaseAuth.auth.currentUser.displayName;
-    State.globals['user'] = this.user$.currentUser.displayName;
+  updateUser(user) {
+    if(user) {
+      //State.globals['user'] = this.user$.currentUser.displayName;
+      State.globals['user'] = user.displayName;
+    } else {
+      State.globals['user'] = '';
+      this.user$ = null;
+    }
 
   }
 

@@ -45,9 +45,6 @@ export class SectionService {
   private LIVRO_TESTE: string = 'livroteste';
 
   constructor(private _http: Http, private db: AngularFireDatabase, public dialog: MdDialog) {
-    firebase.initializeApp(environmentCasa.firebase, this.CASA);
-    firebase.initializeApp(environmentCstur.firebase, this.CSTUR);
-    firebase.initializeApp(environmentLivroTeste.firebase, this.LIVRO_TESTE);
     this.reset();
   }
 
@@ -86,7 +83,7 @@ export class SectionService {
     //   this.changeSection(section);
     // });
 
-    this.app = firebase.app(this.CASA);
+    this.initApp(this.CASA, environmentCasa.firebase);
     console.log("app " + this.app.name);
 
     this.app.database().ref('/book').once('value').then(data => {
@@ -98,7 +95,7 @@ export class SectionService {
 
   loadCSTURFromFirebase() {
 
-    this.app = firebase.app(this.CSTUR);
+    this.initApp(this.CSTUR, environmentCstur.firebase);
     console.log("app " + this.app.name);
 
     this.app.database().ref('/book').once('value').then(data => {
@@ -110,7 +107,7 @@ export class SectionService {
 
   loadLivroTesteFromFirebase() {
 
-    this.app = firebase.app(this.LIVRO_TESTE);
+    this.initApp(this.LIVRO_TESTE, environmentLivroTeste.firebase);
     console.log("app " + this.app.name);
 
     this.app.database().ref('/book').once('value').then(data => {
@@ -180,26 +177,16 @@ export class SectionService {
   }
 
   getApp() {
+    return this.app;
+  }
 
-    switch(this._currentSection.title) {
-      case "Casa do Aprender":
-        this.app = firebase.app(this.CASA);
-        break;
+  initApp(appName, config) {
 
-      case "CSTUR":
-        this.app = firebase.app(this.CSTUR);
-        break;
-
-      case "Livro Teste":
-        this.app = firebase.app(this.LIVRO_TESTE);
-        break;
-
-      default:
-        this.app = undefined;
-        break;
+    if(firebase.apps.find(app => app.name == appName) == undefined) {
+      firebase.initializeApp(config, appName);
     }
 
-    return this.app;
+    this.app = firebase.app(appName);
   }
 
   save() {
@@ -238,7 +225,6 @@ export class SectionService {
 
   saveCasaDoAprender(json, pass) {
     if(pass === "casaAprenderUern2017") {
-        this.app = firebase.app(this.CASA);
         this.app.database().ref('/book').set(JSON.parse(json));
     } else {
         console.log("senha errada");
@@ -249,7 +235,6 @@ export class SectionService {
   saveCSTUR(json, pass) {
 
     if(pass === "csturuern-2017") {
-        this.app = firebase.app(this.CSTUR);
         this.app.database().ref('/book').set(JSON.parse(json));
     } else {
         console.log("senha errada");
@@ -261,7 +246,6 @@ export class SectionService {
   saveLivroTeste(json, pass) {
 
     if(pass === "livroteste") {
-        this.app = firebase.app(this.LIVRO_TESTE);
         this.app.database().ref('/book').set(JSON.parse(json));
     } else {
         console.log("senha errada");
