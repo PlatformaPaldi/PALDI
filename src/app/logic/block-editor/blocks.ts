@@ -47,6 +47,18 @@ Blockly.Blocks['nexttransition'] = {
   }
 };
 
+Blockly.Blocks['gotopage'] = {
+  init: function () {
+    this.appendValueInput("NAME")
+      .setCheck(null)
+      .appendField("Segue para página identificada por");
+    this.setPreviousStatement(true, null);
+    this.setColour(65);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
 Blockly.Blocks['isanswered'] = {
   init: function () {
     this.appendDummyInput()

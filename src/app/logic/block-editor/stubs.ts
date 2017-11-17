@@ -26,6 +26,13 @@ Blockly.JavaScript['nexttransition'] = function (block) {
   return code;
 };
 
+Blockly.JavaScript['gotopage'] = function (block) {
+  var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
 Blockly.JavaScript['isanswered'] = function (block) {
   var dropdown_gadgettype = block.getFieldValue('gadgetType');
   // TODO: Assemble JavaScript into code variable.

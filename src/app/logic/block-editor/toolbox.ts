@@ -72,6 +72,18 @@ Blockly.Blocks['nexttransition'] = {
   }
 };
 
+Blockly.Blocks['gotopage'] = {
+  init: function () {
+    this.appendValueInput("NAME")
+      .setCheck(null)
+      .appendField("Segue para página identificada por");
+    this.setPreviousStatement(true, null);
+    this.setColour(65);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
 Blockly.Blocks['isanswered'] = {
   init: function () {
     this.appendDummyInput()
@@ -145,6 +157,12 @@ Blockly.JavaScript['nexttransition'] = function (block) {
   return code;
 };
 
+Blockly.JavaScript['gotopage'] = function (block) {
+  var name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = `state.goToPage(${name});\n`;
+  return code;
+};
+
 Blockly.JavaScript['isanswered'] = function (block) {
   var gadgettype = block.getFieldValue('GADGET_TYPE');
   var code = `state.page.get('${gadgettype}').isAnswered`;
@@ -173,6 +191,7 @@ export default `
   <category name="Transição" colour="#a5935b">
     <block type="nextpage"></block>
     <block type="nexttransition"></block>
+    <block type="gotopage"></block>
   </category>
   <category name="Lógica" colour="#5b5ba5">
     <block type="controls_if"></block>

@@ -17,6 +17,8 @@ import { QuizComponent } from './quiz/quiz.component';
 import { QuizBoardComponent } from './quiz/quiz-board.component';
 import { LoginComponent } from './login/login.component';
 import { LoginBoardComponent } from './login/login-board.component';
+import { ButtonComponent } from './button/button.component';
+import { ButtonBoardComponent } from './button/button-board.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { LoginBoardComponent } from './login/login-board.component';
     QuizComponent,
     QuizBoardComponent,
     LoginComponent,
-    LoginBoardComponent
+    LoginBoardComponent,
+    ButtonComponent,
+    ButtonBoardComponent
 ],
   entryComponents: [
     ChoiceComponent,
@@ -52,7 +56,9 @@ import { LoginBoardComponent } from './login/login-board.component';
     QuizComponent,
     QuizBoardComponent,
     LoginComponent,
-    LoginBoardComponent
+    LoginBoardComponent,
+    ButtonComponent,
+    ButtonBoardComponent
   ],
   providers: [
     GadgetService

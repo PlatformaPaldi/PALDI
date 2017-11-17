@@ -1,5 +1,5 @@
 
-export type GadgetType = 'input' | 'choice' | 'text' | 'quiz' | 'login';
+export type GadgetType = 'input' | 'choice' | 'text' | 'quiz' | 'login' | 'button';
 
 export interface IGadget {
   type: GadgetType;

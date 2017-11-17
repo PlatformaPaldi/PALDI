@@ -13,6 +13,8 @@ import { QuizComponent } from "./quiz/quiz.component";
 import { QuizBoardComponent } from "./quiz/quiz-board.component";
 import { LoginComponent } from "./login/login.component";
 import { LoginBoardComponent } from "./login/login-board.component";
+import { ButtonComponent } from "./button/button.component";
+import { ButtonBoardComponent } from "./button/button-board.component";
 
 @Injectable()
 export class GadgetService {
@@ -56,6 +58,10 @@ export class GadgetService {
       case 'login':
         componentType = LoginComponent;
         boardType = LoginBoardComponent;
+        break;
+      case 'button':
+        componentType = ButtonComponent;
+        boardType = ButtonBoardComponent;
         break;
     }
     let component = this._createComponent(componentType, componentContainer, gadget);
