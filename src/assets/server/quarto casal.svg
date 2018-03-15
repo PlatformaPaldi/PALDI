@@ -97,43 +97,43 @@
     </g>
      <ellipse
         class="touchable"
-        ry="3.562803"
-        rx="3.5139973"
-        cy="63.41521"
+        ry="20.5354519"
+        rx="24.9193153"
+        cy="73.41521"
         cx="306.638057"
         id="abajour"
-        style="clip-rule:evenodd;fill:#ffb380;fill-opacity:1;fill-rule:evenodd;stroke-width:0.34421694;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision" />
+        style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
       <ellipse
          class="touchable"
-         ry="3.562803"
-         rx="3.5139973"
+         ry="20.5354519"
+         rx="24.9193153"
          cy="266.95071"
          cx="159.619003"
          id="cama"
-         style="clip-rule:evenodd;fill:#ffb380;fill-opacity:1;fill-rule:evenodd;stroke-width:0.34421694;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision" />
+         style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221"/>
      <ellipse
         class="touchable"
-        ry="3.562803"
-        rx="3.5139973"
+        ry="20.5354519"
+        rx="24.9193153"
         cy="453.44043"
         cx="313.77592"
         id="bancada"
-        style="clip-rule:evenodd;fill:#ffb380;fill-opacity:1;fill-rule:evenodd;stroke-width:0.34421694;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision" />
+        style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
      <ellipse
         class="touchable"
-        ry="3.562803"
-        rx="3.5139973"
+        ry="20.5354519"
+        rx="24.9193153"
         cy="455.21777"
         cx="-242.45511"
         id="porta"
-        style="clip-rule:evenodd;fill:#ffb380;fill-opacity:1;fill-rule:evenodd;stroke-width:0.34421694;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision" />
+        style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
       <ellipse
          class="touchable"
-         ry="3.562803"
-         rx="3.5139973"
+         ry="20.5354519"
+         rx="24.9193153"
          cy="245.0412"
          cx="-232.45511"
          id="guarda-roupa"
-         style="clip-rule:evenodd;fill:#ffb380;fill-opacity:1;fill-rule:evenodd;stroke-width:0.34421694;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision" />
+         style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
   </g>
 </svg>

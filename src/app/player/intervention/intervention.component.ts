@@ -7,7 +7,7 @@ import { trigger, state, animate, transition, style } from '@angular/animations'
   styleUrls: ['./intervention.component.css'],
   animations: [
     trigger('visibilityState', [
-      state('shown', style({ minHeight: '80px', maxHeight: '570px' })),
+      state('shown', style({ minHeight: '80px', maxHeight: '500px' })),
       state('hidden', style({ minHeight: '0px', maxHeight: '0px' })),
       state('collapsed', style({ minHeight: '0px', maxHeight: '80px' })),
       transition('* => shown', animate('400ms ease-in')),

@@ -67,40 +67,40 @@
     </g>
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="7.5354519"
+      rx="9.9193153"
       cy="180.0412"
       cx="-120.55847"
       id="pia"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="7.5354519"
+      rx="9.9193153"
       cy="230.0412"
       cx="-131.55847"
       id="sanitario"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="7.5354519"
+      rx="9.9193153"
       cy="190.0412"
       cx="-24.55847"
       id="chuveiro"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="7.5354519"
+      rx="9.9193153"
       cy="210.0412"
       cx="22.55847"
       id="banheira"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="7.5354519"
+      rx="9.9193153"
       cy="238.0412"
       cx="-191.55847"
       id="porta"

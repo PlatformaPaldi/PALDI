@@ -67,56 +67,56 @@
     </g>
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="6.0"
+      rx="7.9193153"
       cy="181.0412"
       cx="-129.55847"
       id="fogao"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="6.0"
+      rx="7.9193153"
       cy="40.0412"
       cx="-186.55847"
       id="geladeira"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="6.0"
+      rx="7.9193153"
       cy="33.0412"
       cx="-100.55847"
       id="mesa"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="6.0"
+      rx="7.9193153"
       cy="-20.0412"
       cx="-48.55847"
       id="porta"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="6.0"
+      rx="7.9193153"
       cy="139.0412"
       cx="-28.55847"
       id="parede"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="6.0"
+      rx="7.9193153"
       cy="99.0412"
       cx="-78.55847"
       id="chao"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="6.0"
+      rx="7.9193153"
       cy="130.0412"
       cx="-193.55847"
       id="bancada"

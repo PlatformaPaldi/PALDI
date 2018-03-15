@@ -40,7 +40,7 @@ export class Page {
           break;
         case 'button':
           let button = gadget as Button;
-          this.gadgets.push(new Button(button.label, button.identifier));
+          this.gadgets.push(new Button(button.label, button.identifier, button.align));
           break;
       }
     }

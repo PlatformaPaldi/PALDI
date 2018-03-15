@@ -62,40 +62,40 @@
     </g>
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="16.5354519"
+      rx="20.9193153"
       cy="30.0412"
       cx="-343.55847"
       id="lavanderia"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="16.5354519"
+      rx="20.9193153"
       cy="-8.0412"
       cx="-228.55847"
       id="maquinadelavar"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="16.5354519"
+      rx="20.9193153"
       cy="-20.0412"
       cx="55.55847"
       id="bancada"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="16.5354519"
+      rx="20.9193153"
       cy="81.0412"
       cx="-50.55847"
       id="tabuaferro"
       style="fill:#ffb399;fill-opacity:1;stroke-width:0.47222221" />
     <ellipse
       class="touchable"
-      ry="3.562803"
-      rx="3.5139973"
+      ry="16.5354519"
+      rx="20.9193153"
       cy="235.0412"
       cx="100.55847"
       id="armario"
