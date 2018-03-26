@@ -1,0 +1,56 @@
+<md-menu #pageMenu="mdMenu">
+  <button md-menu-item (click)="save()">Salvar</button>
+  <button md-menu-item>Criar cópia</button>
+  <button md-menu-item>Exportar</button>
+  <button md-menu-item>Publicar</button>
+</md-menu>
+
+<md-sidenav-container fxFill>
+  <md-sidenav class="books-sidenav" #sidenav>
+    <app-book-list (select)="sidenav.close()"></app-book-list>
+  </md-sidenav>
+<div fxLayout="column" fxFill>
+  <app-navbar logo="import_contacts" [title]="bookTitle" (select)="sidenav.toggle()"></app-navbar>
+  <div fxLayout="row" fxFlex="grow">
+
+    <ui-pane fxFlex="1 1 auto" fxLayout="column" class="sequence-pane">
+      <ui-pane-title fxFlex="48px">
+        <div class="title">
+          <button md-icon-button [mdMenuTriggerFor]="pageMenu">
+            <md-icon>more_vert</md-icon>
+          </button>
+          Sequência de páginas
+        </div>
+      </ui-pane-title>
+      <ui-pane-content fxFlex="grow">
+        <app-flow></app-flow>
+        <button md-fab class="play-button" (click)="openPlayer()" mdTooltip="Simula publicação" mdTooltipPosition="below">
+          <md-icon>play_arrow</md-icon>
+        </button>
+      </ui-pane-content>
+    </ui-pane>
+
+    <ui-pane fxFlex="2 1 auto" fxLayout="column">
+      <ui-pane-title class="light" fxFlex="48px">
+        <div class="title">Página "{{ state?.label }}"</div>
+        <ui-pane-tools>
+          <button md-icon-button (click)="logic.toggle()"  mdTooltip="Código da página" mdTooltipPosition="left">
+            <md-icon>code</md-icon>
+          </button>
+        </ui-pane-tools>
+      </ui-pane-title>
+      <ui-pane-content fxFlex="grow">
+        <md-sidenav-container fxFill>
+          <md-sidenav #logic mode="side" align="end" style="width: 60%">
+            <app-logic fxFill></app-logic>
+          </md-sidenav>
+          <app-page-editor></app-page-editor>
+        </md-sidenav-container>          
+      </ui-pane-content>
+    </ui-pane>
+  </div>
+
+</div>
+
+
+</md-sidenav-container>

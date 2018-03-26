@@ -1,0 +1,80 @@
+
+var {
+  font-family: Courier New, Courier, monospace;
+  font-style: normal;
+  background-color: #ff0;
+  border-radius: 5px;
+  padding: 0 4px;
+}
+
+var.player {
+  font-family: inherit;
+  font-style: inherit;
+  background-color: inherit;
+  border-radius: inherit;
+  padding: inherit;
+}
+
+.ql-container.ql-snow {
+  border: 0 !important;
+}
+
+.ql-editor p {
+    font-size: 1.3em;
+}
+
+.ql-editor .ql-size-large {
+    font-size: 1.3em;
+}
+
+.ql-snow .ql-editor h1 {
+    font-size: 2.5em;
+    text-align: center;
+}
+
+
+.ql-toolbar {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;  
+}
+
+
+.ql-font-satisfy {
+  font-family: "Satisfy", cursive;
+}
+.ql-font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+.ql-font-josefin {
+  font-family: "Josefin Sans", sans-serif;
+}
+.ql-font-arvo {
+  font-family: "Arvo", serif;
+}
+.ql-font-macondo {
+  font-family: "Macondo", cursive;
+}
+
+.ql-toolbar .ql-font span[data-value="satisfy"]::before {
+  font-family: "Satisfy";
+  content: "Satisfy" !important;
+}
+
+.ql-toolbar .ql-font span[data-value="roboto"]::before {
+  font-family: "Roboto";
+  content: "Roboto" !important;
+}
+
+.ql-toolbar .ql-font span[data-value="josefin"]::before {
+  font-family: "Josefin Sans";
+  content: "Josefin Sans" !important;
+}
+
+.ql-toolbar .ql-font span[data-value="arvo"]::before {
+  font-family: "Arvo";
+  content: "Arvo" !important;
+}
+.ql-toolbar .ql-font span[data-value="macondo"]::before {
+  font-family: "Macondo";
+  content: "Macondo" !important;
+}

@@ -1,0 +1,97 @@
+[
+  {
+    "id": 1,
+    "type": "content",
+    "label": "s0",
+    "page": {
+      "gadgets": [
+        {
+          "type": "text",
+          "content": "<h1><span class=\"ql-font-macondo\">Instruções iniciais</span></h1><p><br></p><p>Nesse teste, há 4 estados: s0, s1 s2 e s3. Esse é o estado inicial, s0.</p><p><br></p><p>Cada estado possui uma página, na qual há elementos de interação (como este texto), e um código, que define o comportamento do estado.</p><p><br></p><p>É possível criar novos elementos na página e alterar o código do estado. Porém, para as alterações no código terem efeito, é necessário clicar no botão de 'compilação' (ícone de play).</p><p><br></p><p>Mas antes de continuarmos, preciso saber quem é você.</p>"
+        }
+      ]
+    },
+    "outedges": [
+      { "label": "s1", "to": "s1" }
+    ],
+    "behavior": {
+      "type": "block",
+      "block": "<xml><block type=\"onnext\" x=\"15\" y=\"38\"><statement name=\"COMMANDS\"><block type=\"nextpage\"></block></statement></block></xml>"
+    }
+  },
+  {
+    "id": 2,
+    "type": "intervention",
+    "label": "s1",
+    "page": {
+      "gadgets": [
+        {
+          "type": "text",
+          "content": "<p>Qual o seu nome?</p>"
+        },
+        {
+          "type": "input",
+          "info": "Nome"
+        }
+      ]
+    },
+    "outedges": [
+      {
+        "label": "s2",
+        "to": "s2"
+      }
+    ],
+    "behavior": {
+      "type": "block",
+      "block": "<xml><block type=\"onnext\" x=\"33\" y=\"63\"><statement name=\"COMMANDS\"><block type=\"variables_set\"><field name=\"VAR\">name</field><value name=\"VALUE\"><block type=\"getgadgetvalue\"><field name=\"GADGET_TYPE\">input</field></block></value><next><block type=\"nextpage\"></block></next></block></statement></block></xml>"
+    }
+  },
+  {
+    "id": 3,
+    "type": "content",
+    "label": "s2",
+    "page": {
+      "gadgets": [
+        {
+          "type": "text",
+          "content": "<h1><span class=\"ql-font-macondo\">Variáveis</span></h1><p><br></p><p>Olá <var>name</var>,</p><p><br></p><p>Um texto pode ter marcações que definem onde valores de variáveis serão inseridas. O presente texto, por exemplo, irá substituir <strong class=\"ql-size-large\">name</strong> pelo valor inserido na intervenção anterior.</p><p><br></p><p>Para criar uma marcação de variável no texto, clique no botão 'V' da barra de ferramentas e digite o nome da variável desejada.</p><p><br></p><p>Novamente, pode ir para o próximo estado clicando no botão 'next'.</p>"
+        }
+      ]
+    },
+    "outedges": [
+      { "label": "s3", "to": "s3" }
+    ],
+    "behavior": {
+      "type": "block",
+      "block": "<xml><block type=\"onnext\" x=\"15\" y=\"38\"><statement name=\"COMMANDS\"><block type=\"nextpage\"></block></statement></block></xml>"
+    }
+  },
+  {
+    "id": 4,
+    "type": "intervention",
+    "label": "s3",
+    "page": {
+      "gadgets": [
+        {
+          "type": "text",
+          "content": "<p>Agora, diga-me o que deseja fazer.</p>"
+        },
+        {
+          "type": "choice",
+          "options": [
+            { "value": "s0", "text": "Voltar para o estado inicial." },
+            { "value": "s1", "text": "Digitar um novo nome." }
+          ]
+        }
+      ]
+    },
+    "outedges": [
+      { "label": "s0",  "to": "s0" },
+      { "label": "s1",  "to": "s1" }
+    ],
+    "behavior": {
+      "type": "block",
+      "block": "<xml><block type=\"onnext\" x=\"15\" y=\"24\"><statement name=\"COMMANDS\"><block type=\"controls_if\"><value name=\"IF0\"><block type=\"isanswered\"><field name=\"GADGET_TYPE\">choice</field></block></value><statement name=\"DO0\"><block type=\"nexttransition\"><value name=\"TRANSITION\"><block type=\"getgadgetvalue\"><field name=\"GADGET_TYPE\">choice</field></block></value></block></statement></block></statement></block></xml>"
+    }
+  }
+]

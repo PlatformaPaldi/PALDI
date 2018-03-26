@@ -1,0 +1,29 @@
+
+:host {
+  height: 64px;
+  font-size: 20px;
+  padding: 0 16px;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #928f7e;
+  color: rgba(255,255,255,.87);
+  align-items: center;
+}
+
+:host /deep/ .subtitle {
+  font-size: small;
+  margin-bottom: -4px;
+}
+
+:host /deep/ .subtitle:before {
+  content: "»";
+  margin: 0 8px;
+}
+
+:host /deep/ .separator {
+  margin-left: 15px;
+  margin-right: 15px;
+  border: 1px solid rgba(255,255,255, 0.3);
+  height: 100%;
+}

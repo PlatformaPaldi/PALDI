@@ -1,0 +1,9 @@
+.option-value {
+  color: #ccc;
+  text-align: right;
+  padding-right: 5px;
+}
+
+td {
+  vertical-align: top;
+}

@@ -1,0 +1,9 @@
+<md-dialog-content>
+  <h2 md-dialog-title>{{ message }}</h2>
+  <md-input-container>
+    <input mdInput [(ngModel)]="label" (keyup.enter)="dialogRef.close(label)">
+  </md-input-container>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-raised-button color="primary" (click)="dialogRef.close(label)">Ok</button>
+</md-dialog-actions>

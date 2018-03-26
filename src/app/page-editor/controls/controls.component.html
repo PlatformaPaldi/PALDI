@@ -1,0 +1,21 @@
+<div>
+  <div #gadgetHolder class="gadget-label" [hidden]="!edition">{{ gadget.description }}</div>
+  <div class="controls" [hidden]="!show">
+    <div class="left">
+      <button class="bg btn-up" md-icon-button (click)="onUp.emit()">
+        <md-icon>keyboard_arrow_up</md-icon>
+      </button>
+      <button class="bg btn-down" md-icon-button (click)="onDown.emit()">
+        <md-icon>keyboard_arrow_down</md-icon>
+      </button>    
+    </div>
+    <div class="right">
+      <button class="bg btn-delete" md-icon-button (click)="onDelete.emit()">
+        <md-icon>clear</md-icon>
+      </button>    
+    </div>
+    <div class="bg down">
+      <div #boardHolder></div>
+    </div>
+  </div>
+</div>

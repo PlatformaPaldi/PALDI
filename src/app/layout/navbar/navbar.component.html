@@ -1,0 +1,14 @@
+<md-toolbar color="primary">
+  <div fxLayout="row" fxFlex fxLayoutAlign="start center">
+    <button mdTooltip="Livros" md-icon-button (click)="select.emit('logo')">
+      <md-icon>{{ logo }}</md-icon>
+    </button>
+    <span class="title">{{ title }}</span>
+    <span *ngIf="subtitle" class="subtitle">{{ subtitle }}</span>
+    <span class="fill"></span>
+    <button md-icon-button (click)="openContact()">
+      <md-icon>contact_mail</md-icon>
+      <!--<md-icon>person</md-icon>-->
+    </button>
+  </div>
+</md-toolbar>

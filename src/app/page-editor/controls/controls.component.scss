@@ -1,0 +1,76 @@
+@import 'src/app/shared/styles/theme';
+
+$bar-size: 8px;
+$button-size: 40px;
+
+:host {
+  position: relative;
+
+}
+
+.gadget-label {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 10px;
+  color: #ccc;
+}
+
+.controls {
+  position: absolute;
+  pointer-events: none;
+  top: -$bar-size;
+  left: -$bar-size;
+  right: -$bar-size;
+  bottom: -$bar-size;
+  border: $bar-size solid $purple-light;
+  z-index: 3;
+
+  .bg {
+    background-color: $purple-light;
+  }
+
+  .left {
+    position: absolute;
+    pointer-events: auto;
+    top: -$bar-size;
+    left: -$button-size;
+    width: $button-size;
+
+    .btn-up {
+      border-radius: 0%;
+      border-top-left-radius: 50%;    
+    }
+
+    .btn-down {
+      border-radius: 0%;
+      border-bottom-left-radius: 50%;    
+    }
+  }
+
+  .right {
+    position: absolute;
+    pointer-events: auto;
+    top: -$bar-size;
+    right: -$button-size;
+    width: $button-size;
+
+    .btn-delete {
+      border-top-left-radius: 0%;
+      border-bottom-left-radius: 0%;
+    }
+  }
+
+  .down {
+    position: absolute;
+    pointer-events: auto;
+    top: 100%;
+    left: -$bar-size;
+    right: -$bar-size;
+    padding: $bar-size;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+}
+
+

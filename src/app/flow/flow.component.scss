@@ -1,0 +1,59 @@
+#graph {
+  background-color: #fff;
+}
+
+.controls {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 40px;
+  color: #ccc;
+}
+
+.disabled {
+  color: #eee !important;
+  cursor: default;
+}
+/*
+.controls .mat-icon-button[disabled][disabled] {
+}*/
+
+.message {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #ccc;
+}
+
+.separator {
+  border-top: 1px solid #ccc;
+}
+
+.node-controls {
+  position: absolute;
+
+  .tools {
+    top: 0px;
+    left: 26px;
+    position: absolute;
+    white-space: nowrap;
+  }
+
+  button {
+    height: 24px;
+    width: 24px;
+    line-height: inherit;
+    background-color: #daddf1;
+    border: 1px solid #aaa;
+    color: #aaa;
+
+    md-icon {
+      font-size: 14px;
+    }
+
+    &.arrow {
+      top: 26px;
+    }
+  }
+  
+}

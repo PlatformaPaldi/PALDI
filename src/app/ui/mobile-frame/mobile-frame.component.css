@@ -1,0 +1,29 @@
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;  
+  flex-grow: 1;
+}
+
+.frame {
+  padding: 7vh 1.2vw;
+  border-radius: 25px;
+  background-color: black;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;  
+}
+
+.inner {
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  /*overflow-y: auto;*/
+}

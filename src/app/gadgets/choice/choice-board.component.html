@@ -1,0 +1,27 @@
+<h1>Preencha as opções</h1>
+<div class="table">
+  <div class="row" *ngFor="let option of gadget.options; index as i">
+    <div class="value">
+      <md-input-container floatPlaceholder="always">
+        <input mdInput placeholder="Valor" [(ngModel)]="option.value" (blur)="onBlur(i)">
+      </md-input-container>      
+    </div>
+    <div class="text">
+      <md-input-container class="full-width" floatPlaceholder="always">
+        <input mdInput placeholder="Texto da opção" [(ngModel)]="option.text" (blur)="onBlur(i)">
+      </md-input-container>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="value">
+      <md-input-container floatPlaceholder="always">
+        <input #newValue mdInput placeholder="Valor" (blur)="onBlur()" [(ngModel)]="_newValue">
+      </md-input-container>      
+    </div>
+    <div class="text">
+      <md-input-container class="full-width" floatPlaceholder="always">
+        <input mdInput placeholder="Texto da opção" [(ngModel)]="_newText" (blur)="onBlur()" (keydown)="onKeyDown($event)" (keyup)="onKeyPress($event)">
+      </md-input-container>      
+    </div>
+  </div>
+</div>

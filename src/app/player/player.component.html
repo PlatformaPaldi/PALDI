@@ -1,0 +1,43 @@
+<div class="full-container">
+  <!--<div class="full-content">-->
+    <ui-mobile-frame class="full-height player">
+      <div *ngIf="error">
+        {{ error }}
+      </div>
+      <!--<div [hidden]="error">-->
+        <div class="scroll">
+
+          <div class="container">
+
+            <div class="gadget-items" *ngFor="let gadget of contentState?.page.gadgets; index as i">
+              <app-controls *ngIf="gadget.isReady(contentState.page, i)"
+                [gadget]="gadget"
+                [show]="false"
+                >
+              </app-controls>
+            </div>
+          </div>
+
+        </div>
+
+        <app-intervention>
+          <div class="gadget-items" *ngFor="let gadget of interventionState?.page.gadgets; index as i">
+            <app-controls *ngIf="gadget.isReady(contentState.page, i)"
+              [gadget]="gadget"
+              [show]="false"
+              >
+            </app-controls>
+          </div>
+        </app-intervention>
+
+        <div *ngIf="menu">
+          <opcoes-menu></opcoes-menu>
+        </div>
+
+        <app-next-button (onNext)="nextState()"></app-next-button>
+      <!--</div>-->
+
+
+    </ui-mobile-frame>
+  <!--</div>-->
+</div>

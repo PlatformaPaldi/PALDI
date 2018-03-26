@@ -1,0 +1,19 @@
+<!--<div class="full-container" #container (window:resize)="height = container.getBoundingClientRect().height">-->
+
+
+<div class="full-container" #container>
+  <!--<div class="full-content">-->
+    <ace-editor #editor
+      [style.height.px]="height || container.getBoundingClientRect().height"
+      [text]="_code"
+      [mode]="'javascript'"
+      [options]="options">
+    </ace-editor>
+    <!--<div #droplet
+    >
+    </div>-->
+    <!--<button class="toggle" md-mini-fab (click)="toggleCodeMode()">
+      <md-icon>code</md-icon>
+    </button>-->
+  <!--</div>-->
+</div>

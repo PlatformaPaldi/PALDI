@@ -1,0 +1,62 @@
+
+.books-sidenav {
+  background-color: #ff7f00;
+}
+
+.sequence-pane {
+  position: relative;
+}
+
+.play-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 5;
+}
+
+.title {
+  position: absolute;
+  white-space: nowrap;
+}
+
+
+.fullheight {
+  min-height: 100vh;
+}
+
+.columns {
+  flex-grow: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.column {
+  flex-grow: 1;
+}
+
+.content + .content {
+  margin-left: 0px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /*margin: 25px;*/
+}
+
+.centered {
+  justify-content: center;
+}
+
+.code-button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 5;
+}
+
+
+.main-container {
+  display: flex;
+}

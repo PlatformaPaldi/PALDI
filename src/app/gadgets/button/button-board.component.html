@@ -1,0 +1,39 @@
+<div class="container">
+  <md-input-container class="full-width">
+    <input mdInput #texto [value]="gadget.label" placeholder="Texto do botão" (blur)="updateLabel(texto.value)" (keyup.enter)="updateLabel(texto.value)">
+  </md-input-container>
+  <md-input-container class="full-width">
+    <input mdInput #identificador [value]="gadget.identifier" placeholder="Identificador" (blur)="updateIdentifier(identificador.value)" (keyup.enter)="updateIdentifier(identificador.value)">
+  </md-input-container>
+
+  <div class="row">
+    <table>
+      <md-radio-group [(ngModel)]="gadget.align">
+      <tr>
+        <td>
+          <md-radio-button value="left"></md-radio-button>
+        </td>
+        <td class="mat-radio-button">
+          Esquerda
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <md-radio-button value="right"></md-radio-button>
+        </td>
+        <td class="mat-radio-button">
+          Direta
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <md-radio-button value="center"></md-radio-button>
+        </td>
+        <td class="mat-radio-button">
+          Centro
+        </td>
+      </tr>
+    </md-radio-group>
+    </table>
+  </div>
+</div>

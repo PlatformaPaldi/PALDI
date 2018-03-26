@@ -1,0 +1,17 @@
+<div class="container">
+  <md-radio-group [(ngModel)]="gadget.value">
+    <table>
+      <tr *ngFor="let option of gadget.options">
+        <td class="option-value">
+          {{option.value}}
+        </td>
+        <td>
+          <md-radio-button [value]="option.value"></md-radio-button>
+        </td>
+        <td class="mat-radio-button">
+          {{option.text}}
+        </td>
+      </tr>
+    </table>
+  </md-radio-group>
+</div>

@@ -1,0 +1,24 @@
+:host {
+  /*height: 300px;*/
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #95b9d8;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  /*border-top: 24px solid #4051b5;*/
+  /*border-radius: 10px;*/
+}
+
+.collapse {
+  /*height: 100px;*/
+  overflow: auto;
+}
+
+/*.collapse .tab {
+  border-top: 24px solid #4051b5;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  text-align: center;
+}*/

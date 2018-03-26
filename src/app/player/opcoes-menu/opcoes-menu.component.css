@@ -1,0 +1,21 @@
+h2 {
+    text-align: center;
+}
+
+:host {
+  /*height: 300px;*/
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #F66565;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  /*border-top: 24px solid #4051b5;*/
+  /*border-radius: 10px;*/
+}
+
+.collapse {
+  /*height: 100px;*/
+  overflow: auto;
+}

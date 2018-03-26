@@ -1,0 +1,27 @@
+h1 {
+  margin-bottom: 8px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.row {
+  display: flex;
+
+  .mat-input-wrapper {
+    margin-bottom: 0.5em;
+  }
+}
+
+.value {
+  flex-basis: 10%;
+}
+
+.text {
+  flex-basis: 90%;
+  width: 100%;
+  margin-left: 10px;
+}
