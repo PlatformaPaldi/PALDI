@@ -17,9 +17,7 @@ import { MdMenuTrigger, MdMenu, MdDialog } from "@angular/material";
 
 import { PassDialog } from '../flow/pass-dialog/pass-dialog.component';
 import { ErrorPassDialog } from '../flow/pass-dialog/error-pass-dialog.component';
-import { environmentCstur } from '../../environments/environment-cstur';
 import { environmentCasa } from '../../environments/environment-casa';
-import { environmentLivroTeste } from '../../environments/environment-livroteste';
 
 const urlPath = 'assets/server/';
 
@@ -41,8 +39,6 @@ export class SectionService {
 
   private app;
   private CASA: string = 'casa';
-  private CSTUR: string = 'cstur';
-  private LIVRO_TESTE: string = 'livroteste';
 
   constructor(private _http: Http, private db: AngularFireDatabase, public dialog: MdDialog) {
     this.reset();
@@ -93,29 +89,6 @@ export class SectionService {
     });
   }
 
-  loadCSTURFromFirebase() {
-
-    this.initApp(this.CSTUR, environmentCstur.firebase);
-    console.log("app " + this.app.name);
-
-    this.app.database().ref('/book').once('value').then(data => {
-      const section = new Section(data.val());
-      section.origin = 'firebase';
-      this.changeSection(section);
-    });
-  }
-
-  loadLivroTesteFromFirebase() {
-
-    this.initApp(this.LIVRO_TESTE, environmentLivroTeste.firebase);
-    console.log("app " + this.app.name);
-
-    this.app.database().ref('/book').once('value').then(data => {
-      const section = new Section(data.val());
-      section.origin = 'firebase';
-      this.changeSection(section);
-    });
-  }
 
   set currentState(state: State) {
       this._currentState = state;
@@ -203,14 +176,6 @@ export class SectionService {
             this.saveCasaDoAprender(json, pass);
             break;
 
-          case "CSTUR":
-            this.saveCSTUR(json, pass);
-            break;
-
-          case "Livro Teste":
-            this.saveLivroTeste(json, pass);
-            break;
-
           default:
             console.log("livro sem senha");
             break;
@@ -230,28 +195,6 @@ export class SectionService {
         console.log("senha errada");
         this.dialog.open(ErrorPassDialog);
     }
-  }
-
-  saveCSTUR(json, pass) {
-
-    if(pass === "csturuern-2017") {
-        this.app.database().ref('/book').set(JSON.parse(json));
-    } else {
-        console.log("senha errada");
-        this.dialog.open(ErrorPassDialog);
-    }
-
-  }
-
-  saveLivroTeste(json, pass) {
-
-    if(pass === "livroteste") {
-        this.app.database().ref('/book').set(JSON.parse(json));
-    } else {
-        console.log("senha errada");
-        this.dialog.open(ErrorPassDialog);
-    }
-
   }
 
 }

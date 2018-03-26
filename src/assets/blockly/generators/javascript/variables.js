@@ -31,7 +31,7 @@ goog.require('Blockly.JavaScript');
 
 Blockly.JavaScript['variables_get'] = function(block) {
   // Variable getter.
-  // piBook hack
+  // PALDI hack
   var code = 'globals.' + Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'),
       Blockly.Variables.NAME_TYPE);
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
@@ -43,6 +43,6 @@ Blockly.JavaScript['variables_set'] = function(block) {
       Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   var varName = Blockly.JavaScript.variableDB_.getName(
       block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-  // piBook hack
+  // PALDI hack
   return 'globals.' + varName + ' = ' + argument0 + ';\n';
 };

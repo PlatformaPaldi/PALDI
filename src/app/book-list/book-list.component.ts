@@ -48,20 +48,6 @@ export class BookListComponent implements OnInit {
       filename: 'casa.json',
       author: 'Fulano',
       coverage: ''
-    },
-    {
-      id: 5,
-      title: 'CSTUR',
-      filename: 'section-01.json',
-      author: 'Fulano',
-      coverage: ''
-    },
-    {
-      id: 6,
-      title: 'Livro Teste',
-      filename: 'section-01.json',
-      author: 'Fulano',
-      coverage: ''
     }
   ];
 
@@ -83,15 +69,7 @@ export class BookListComponent implements OnInit {
         case  'Casa do Aprender':
           this.sectionServ.loadCasaFromFirebase();
         break;
-
-        case 'CSTUR':
-          this.sectionServ.loadCSTURFromFirebase();
-        break;
-
-        case 'Livro Teste':
-          this.sectionServ.loadLivroTesteFromFirebase();
-        break;
-
+        
         default:
           this.sectionServ.load(obj.filename);
       }

@@ -43,7 +43,7 @@ Blockly.JavaScript = new Blockly.Generator('JavaScript');
  * @private
  */
 
-// piBook hack
+// PALDI hack
 /*
 Blockly.JavaScript.addReservedWords(
     'Blockly,' +  // In case JS is evaled in the current window.
@@ -163,7 +163,7 @@ Blockly.JavaScript.init = function(workspace) {
       defvars[i] = Blockly.JavaScript.variableDB_.getName(variables[i],
           Blockly.Variables.NAME_TYPE);
     }
-    // piBook hack
+    // PALDI hack
     // Blockly.JavaScript.definitions_['variables'] =
     //     'var ' + defvars.join(', ') + ';';
   }

@@ -6,11 +6,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyAKjy3pEbZGSCcXFZUlKQYU-2A-Lr9KXDM",
-    authDomain: "pibook-uern.firebaseapp.com",
-    databaseURL: "https://pibook-uern.firebaseio.com",
-    projectId: "pibook-uern",
-    storageBucket: "pibook-uern.appspot.com",
-    messagingSenderId: "510525356497"
+    apiKey: "AIzaSyD2OH7ybpyAd7MZkQXr082RlCNNKTw8qTY",
+    authDomain: "paldi-bffe7.firebaseapp.com",
+    databaseURL: "https://paldi-bffe7.firebaseio.com",
+    projectId: "paldi-bffe7",
+    storageBucket: "paldi-bffe7.appspot.com",
+    messagingSenderId: "609088803852"
   }
 };
