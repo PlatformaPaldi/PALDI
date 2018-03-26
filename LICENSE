@@ -1,6 +1,21 @@
 MIT License
 
-Copyright (c) 2018 PlatformaPaldi
+Copyright (c) 2018 PlataformaPaldi
+
+PALDI is an interactive digital book authoring system that helps the creation of non-linear
+stories and other similar activities. Its main goal is to provide a learning environment where 
+teachers and students can produce interactive content and have their first contact with programming 
+logic. The latter is used to define the behavior of the book's interactive elements. The platform
+was developed in a partnership between the universities Federal University of RN (BR), the State 
+University of RN (BR), and the University of Aveiro (PT).
+Author:
+
+- Prof. Dr. André Maurício Cunha Campos (UFRN)
+
+Contributors:
+
+- Prof. Dr. Alberto Signoretti (UERN)
+- Prof. Dr. Mário Rodrigues (UA)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
