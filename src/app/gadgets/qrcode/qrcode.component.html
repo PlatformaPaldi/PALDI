@@ -1,0 +1,21 @@
+<div *ngIf="avaliableDevices">
+  <md-select [ngModel]="selectedDevice" placeholder="Selecionar camera" (ngModelChange)="selectDevice($event)">
+      <md-option [value]="device.deviceId" *ngFor="let device of avaliableDevices">
+      {{ device.label }}
+      </md-option>
+  </md-select>
+</div>
+
+
+<div class="con">
+  <zxing-scanner #scanner class="scanner"
+      [scannerEnabled]="true"
+      [autofocusEnabled]="autofocusEnabled"
+      [device]="selectedDevice"
+      (camerasFound)="camerasFoundHandler($event)"
+      (scanSuccess)="scanSuccessHandler($event)"
+      (scanError)="scanErrorHandler($event)"
+      (scanFailure)="scanFailureHandler($event)"
+      (scanComplete)="scanCompleteHandler($event)"
+  ></zxing-scanner>
+</div>

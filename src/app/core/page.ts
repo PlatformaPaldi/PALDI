@@ -5,6 +5,7 @@ import { Svg } from './svg';
 import { Quiz } from './quiz';
 import { Login } from './login';
 import { Button } from './button';
+import { Qrcode } from './qrcode';
 import { Gadget, GadgetType } from './gadget';
 
 export class Page {
@@ -41,6 +42,10 @@ export class Page {
         case 'button':
           let button = gadget as Button;
           this.gadgets.push(new Button(button.label, button.identifier, button.align));
+          break;
+        case 'button':
+          let qrcode = gadget as Qrcode;
+          this.gadgets.push(new Qrcode());
           break;
       }
     }
@@ -102,6 +107,9 @@ export class Page {
         break;
       case 'button':
         this.gadgets.splice(index, 0, new Button());
+        break;
+      case 'qrcode':
+        this.gadgets.splice(index, 0, new Qrcode());
         break;
     }
   }

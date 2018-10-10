@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'app/shared/shared.module';
 import { InlineSVGModule } from 'ng-inline-svg';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 import { GadgetService } from './gadget.service';
 import { GadgetsComponent } from './gadgets.component';
@@ -19,12 +20,15 @@ import { LoginComponent } from './login/login.component';
 import { LoginBoardComponent } from './login/login-board.component';
 import { ButtonComponent } from './button/button.component';
 import { ButtonBoardComponent } from './button/button-board.component';
+import { QrcodeComponent } from './qrcode/qrcode.component';
+import { QrcodeBoardComponent } from './qrcode/qrcode-board.component';
 
 
 @NgModule({
   imports: [
     SharedModule,
-    InlineSVGModule
+    InlineSVGModule,
+    ZXingScannerModule
   ],
   declarations: [
     GadgetsComponent,
@@ -42,7 +46,9 @@ import { ButtonBoardComponent } from './button/button-board.component';
     LoginComponent,
     LoginBoardComponent,
     ButtonComponent,
-    ButtonBoardComponent
+    ButtonBoardComponent,
+    QrcodeComponent,
+    QrcodeBoardComponent
 ],
   entryComponents: [
     ChoiceComponent,
@@ -58,7 +64,9 @@ import { ButtonBoardComponent } from './button/button-board.component';
     LoginComponent,
     LoginBoardComponent,
     ButtonComponent,
-    ButtonBoardComponent
+    ButtonBoardComponent,
+    QrcodeComponent,
+    QrcodeBoardComponent
   ],
   providers: [
     GadgetService

@@ -15,6 +15,8 @@ import { LoginComponent } from "./login/login.component";
 import { LoginBoardComponent } from "./login/login-board.component";
 import { ButtonComponent } from "./button/button.component";
 import { ButtonBoardComponent } from "./button/button-board.component";
+import { QrcodeComponent } from "./qrcode/qrcode.component";
+import { QrcodeBoardComponent } from "./qrcode/qrcode-board.component";
 
 @Injectable()
 export class GadgetService {
@@ -62,6 +64,10 @@ export class GadgetService {
       case 'button':
         componentType = ButtonComponent;
         boardType = ButtonBoardComponent;
+        break;
+      case 'qrcode':
+        componentType = QrcodeComponent;
+        boardType = QrcodeBoardComponent;
         break;
     }
     let component = this._createComponent(componentType, componentContainer, gadget);
