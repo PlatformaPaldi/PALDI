@@ -67,7 +67,8 @@ export class BookListComponent implements OnInit {
       let obj = this.list.find(o => o.id == id);
       switch (obj.title) {
         case  'Casa do Aprender':
-          this.sectionServ.loadCasaFromFirebase();
+          //this.sectionServ.loadCasaFromFirebase();
+          this.sectionServ.loadLivroTesteFromFirebase();
         break;
         
         default:

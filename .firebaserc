@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "paldi"
+    "default": "paldi",
+    "paldi": "paldi-bffe7"
   }
 }

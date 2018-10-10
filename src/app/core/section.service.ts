@@ -18,6 +18,7 @@ import { MdMenuTrigger, MdMenu, MdDialog } from "@angular/material";
 import { PassDialog } from '../flow/pass-dialog/pass-dialog.component';
 import { ErrorPassDialog } from '../flow/pass-dialog/error-pass-dialog.component';
 import { environmentCasa } from '../../environments/environment-casa';
+import { environmentLivroTeste } from 'environments/environment-livroteste';
 
 const urlPath = 'assets/server/';
 
@@ -39,6 +40,7 @@ export class SectionService {
 
   private app;
   private CASA: string = 'casa';
+  private LIVRO_TESTE: string = 'livroteste';
 
   constructor(private _http: Http, private db: AngularFireDatabase, public dialog: MdDialog) {
     this.reset();
@@ -80,6 +82,18 @@ export class SectionService {
     // });
 
     this.initApp(this.CASA, environmentCasa.firebase);
+    console.log("app " + this.app.name);
+
+    this.app.database().ref('/book').once('value').then(data => {
+      const section = new Section(data.val());
+      section.origin = 'firebase';
+      this.changeSection(section);
+    });
+  }
+
+  loadLivroTesteFromFirebase() {
+
+    this.initApp(this.LIVRO_TESTE, environmentLivroTeste.firebase);
     console.log("app " + this.app.name);
 
     this.app.database().ref('/book').once('value').then(data => {
@@ -173,7 +187,11 @@ export class SectionService {
 
         switch(passDlg.componentInstance.book) {
           case "Casa do Aprender":
-            this.saveCasaDoAprender(json, pass);
+            this.saveLivroTeste(json, pass);
+            break;
+
+          case "Livro Teste":
+            this.saveLivroTeste(json, pass);
             break;
 
           default:
@@ -190,6 +208,15 @@ export class SectionService {
 
   saveCasaDoAprender(json, pass) {
     if(pass === "casaAprenderUern2017") {
+        this.app.database().ref('/book').set(JSON.parse(json));
+    } else {
+        console.log("senha errada");
+        this.dialog.open(ErrorPassDialog);
+    }
+  }
+
+  saveLivroTeste(json, pass) {
+    if(pass === "livroteste") {
         this.app.database().ref('/book').set(JSON.parse(json));
     } else {
         console.log("senha errada");
